@@ -1,0 +1,15 @@
+@import './variables';
+.home {
+    text-align: center;
+    padding: 2rem;
+  
+    h1 {
+      color: $primary-color;
+    }
+  
+    p {
+      color: $text-color;
+      font-size: 1.2rem;
+    }
+  }
+  
