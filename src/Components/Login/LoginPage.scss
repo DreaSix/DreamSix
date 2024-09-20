@@ -1,0 +1,55 @@
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #071c3a; /* Light grey background to match Ant Design */
+    
+    .logo {
+      margin-bottom: 20px;
+      img {
+        max-width: 150px; /* Adjust logo size */
+      }
+    }
+  
+    h2 {
+      color: #fff; /* Dark text color for better contrast */
+      font-weight: 600;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+  
+    .login-form {
+  
+      .ant-form-item {
+        margin-bottom: 16px;
+      }
+  
+      .forgot-password {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 20px;
+  
+        a {
+          color: #1890ff;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+  
+      .login-button {
+        width: 100%;
+        background-color: #fadb14; /* Button color to match previous page */
+        border-color: #fadb14;
+        color: #000;
+  
+        &:hover {
+          background-color: #d4b106;
+          border-color: #d4b106;
+        }
+      }
+    }
+  }
+  
