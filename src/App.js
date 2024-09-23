@@ -4,6 +4,9 @@ import { useAuth } from './Context/AuthContext';
 import LoginPage from './Components/Login/LoginPage';
 import HomePage from './Components/HomePage/HomePage';
 import MainHomePage from './Components/MainHomePage/MainHomePage';
+import DepositPage from './Components/DepositPage/DepositPage';
+import USerAuctionPage from './Components/UserAuction/UserAuctionPage';
+import AdminAuctionPage from './Components/AdminAuctionPage/AdminAuctionPage';
 
 function App() {
   const { isAuthenticated } = useAuth();
@@ -17,6 +20,9 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/loginpage" element={<LoginPage />} />
           <Route path="/main-homepage" element={<MainHomePage />} />
+          <Route path="/depositpage" element={<DepositPage />} />
+          <Route path="/user-auctionpage" element={<USerAuctionPage />} />
+          <Route path="/admin-auctionpage" element={<AdminAuctionPage />} /> 
         </Routes>
       </Router>
     </div>

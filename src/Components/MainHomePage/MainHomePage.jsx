@@ -1,10 +1,17 @@
 import React from 'react';
 import { Button, Card } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { HomeOutlined, TrophyOutlined, TeamOutlined, BookOutlined, DollarCircleOutlined, WhatsAppOutlined, UserOutlined } from '@ant-design/icons';
 import "./MainHomePage.scss";
 
 const MainHomePage = () => {
+
+  const navigate = useNavigate();
+
+    const handleLoginClick = () => {
+      navigate('/depositpage');  // Navigates to the login page
+    };
+
   return (
     <div className="home-page">
       {/* Header */}
@@ -14,7 +21,7 @@ const MainHomePage = () => {
           <div className="user-profile">
            <UserOutlined/>
           </div>
-          <Button className="deposit-button">Deposit</Button>
+          <Button className="deposit-button" onClick={handleLoginClick} >Deposit</Button>
           <div className="balance">0.00</div>
         </div>
       </div>
@@ -87,7 +94,7 @@ const MainHomePage = () => {
           </Link>
         </div>
         <div className="nav-item">
-          <Link to="/bets">
+          <Link to="/mybets">
             <DollarCircleOutlined style={{ fontSize: '24px' }} />
             <p>My Bets</p>
           </Link>
