@@ -6,6 +6,9 @@ import HomePage from './Components/HomePage/HomePage';
 import MainHomePage from './Components/MainHomePage/MainHomePage';
 import Rules from './Components/Rules/Rules';
 import MatchDetails from './Components/MatchDeatils/MatchDetails';
+import DepositPage from './Components/DepositPage/DepositPage';
+import USerAuctionPage from './Components/UserAuction/UserAuctionPage';
+import AdminAuctionPage from './Components/AdminAuctionPage/AdminAuctionPage';
 
 function App() {
   const { isAuthenticated } = useAuth();
@@ -21,6 +24,9 @@ function App() {
           <Route path="/main-homepage" element={<MainHomePage />} />
           <Route path="/rules" element={<Rules/>}/>
           <Route path="/matchDetails" element={<MatchDetails/>} />
+          <Route path="/depositpage" element={<DepositPage />} />
+          <Route path="/user-auctionpage" element={<USerAuctionPage />} />
+          <Route path="/admin-auctionpage" element={<AdminAuctionPage />} /> 
         </Routes>
       </Router>
     </div>

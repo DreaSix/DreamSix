@@ -1,12 +1,19 @@
 import React from 'react';
 import { Button, Card } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { HomeOutlined, TrophyOutlined, TeamOutlined, BookOutlined, DollarCircleOutlined, WhatsAppOutlined, UserOutlined } from '@ant-design/icons';
 import "./MainHomePage.scss";
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
 const MainHomePage = () => {
+
+  const navigate = useNavigate();
+
+    const handleLoginClick = () => {
+      navigate('/depositpage');  // Navigates to the login page
+    };
+
   return (
     <div className="home-page">
       {/* Header */}
