@@ -5,10 +5,15 @@ import LoginPage from './Components/Login/LoginPage';
 import HomePage from './Components/HomePage/HomePage';
 import MainHomePage from './Components/MainHomePage/MainHomePage';
 import Rules from './Components/Rules/Rules';
-import MatchDetails from './Components/MatchDeatils/MatchDetails';
 import DepositPage from './Components/DepositPage/DepositPage';
 import USerAuctionPage from './Components/UserAuction/UserAuctionPage';
 import AdminAuctionPage from './Components/AdminAuctionPage/AdminAuctionPage';
+import AuctionTypePage from './Components/AuctionType/AuctionType';
+import CountdownPage from './Components/MatchCountDownPage/MatchCountDown';
+import PaymentsProcess from './Components/PaymentsProcess/PaymentsProcess';
+import ChangePassword from './Components/ChangePassword/ChangePassword';
+import TransactionPage from './Components/Transactions/Transactions';
+import PaymentStatus from './Components/PaymentStatus/PaymentStatus';
 
 function App() {
   const { isAuthenticated } = useAuth();
@@ -23,10 +28,15 @@ function App() {
           <Route path="/loginpage" element={<LoginPage />} />
           <Route path="/main-homepage" element={<MainHomePage />} />
           <Route path="/rules" element={<Rules/>}/>
-          <Route path="/matchDetails" element={<MatchDetails/>} />
+          <Route path="/auction-type" element={<AuctionTypePage />} />
           <Route path="/depositpage" element={<DepositPage />} />
           <Route path="/user-auctionpage" element={<USerAuctionPage />} />
           <Route path="/admin-auctionpage" element={<AdminAuctionPage />} /> 
+          <Route path="/match-countdown" element={<CountdownPage />} /> 
+          <Route path="/payments-process" element={<PaymentsProcess />} /> 
+          <Route path="/bets" element={<ChangePassword />} /> 
+          <Route path="/players" element={<TransactionPage />} /> 
+          <Route path="/payment-status" element={<PaymentStatus/>} /> 
         </Routes>
       </Router>
     </div>

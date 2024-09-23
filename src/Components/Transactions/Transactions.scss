@@ -1,0 +1,70 @@
+.transaction-page-container {
+   
+  
+    .ant-tabs-nav {
+      display: flex;
+      justify-content: center;
+  
+      .ant-btn {
+        width: 120px;
+        height: 40px;
+        font-size: 16px;
+        font-weight: bold;
+        background-color: #fff;
+        border: none;
+        border-radius: 10px;
+  
+        &.active-tab {
+          background-color: #ffc107;
+        }
+      }
+    }
+  
+    .transaction-list {
+      margin-top: 20px;
+  
+      .ant-list-item-meta {
+        align-items: center;
+  
+        .ant-list-item-meta-title {
+          font-weight: bold;
+        }
+  
+        .ant-list-item-meta-description {
+          font-size: 12px;
+          color: #888;
+        }
+      }
+  
+      .transaction-amount {
+        font-weight: bold;
+        font-size: 18px;
+        color: #000;
+      }
+  
+      .ant-list-item {
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 16px;
+        margin-bottom: 12px;
+      }
+    }
+  }
+  
+  // Mobile responsiveness
+  @media (max-width: 576px) {
+    .transaction-page-container {
+      padding: 15px;
+  
+      .ant-btn {
+        width: 100px;
+        height: 36px;
+        font-size: 14px;
+      }
+  
+      .transaction-amount {
+        font-size: 16px;
+      }
+    }
+  }
+  

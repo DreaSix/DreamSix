@@ -1,0 +1,39 @@
+.payment-details-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #f0f2f5;
+    height: 100vh;
+  
+    .payment-card {
+      width: 100%;
+      max-width: 500px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+  
+    .payment-value {
+      display: block;
+      font-size: 16px;
+      margin-top: 4px;
+    }
+  
+    .pending {
+      color: red;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .payment-card {
+      padding: 15px;
+      max-width: 100%;
+    }
+  
+    .payment-value {
+      font-size: 14px;
+    }
+  }
+  

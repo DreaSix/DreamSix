@@ -2,11 +2,20 @@ import React, { useState } from "react";
 import { Button, Input, Upload, Radio, message } from "antd";
 import { CopyOutlined, UploadOutlined } from "@ant-design/icons";
 import './DepositPage.scss'
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
+import { useNavigate } from "react-router-dom";
 
 const DepositPage = () => {
   const [amount, setAmount] = useState("");
   const [utrNumber, setUtrNumber] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("Paytm");
+
+  const navigate = useNavigate();
+
+  const OnchangePayment = () =>{   
+      navigate("/payments-process");
+  }
 
   const handleAmountChange = (value) => {
     setAmount(value);
@@ -33,14 +42,9 @@ const DepositPage = () => {
   };
 
   return (
+    <div>
+      <Header/>
     <div className="deposit-page">
-      <header className="deposit-header">
-        <div className="logo">DreamSix</div>
-        <div className="header-buttons">
-          <Button type="primary">Deposit</Button>
-          <div className="balance">0.00</div>
-        </div>
-      </header>
 
       <div className="deposit-form">
         <h3>Amount*</h3>
@@ -116,10 +120,14 @@ const DepositPage = () => {
           Kindly Enter UTR Number Manually For Fast Deposit
         </p>
 
-        <Button type="primary" className="proceed-button">
+        <Button onClick={OnchangePayment} type="primary" className="proceed-button" >
           Proceed
         </Button>
       </div>
+    </div>
+    <div>
+      <Footer/>
+    </div>
     </div>
   );
 };
