@@ -3,6 +3,8 @@ import { Button, Card } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import { HomeOutlined, TrophyOutlined, TeamOutlined, BookOutlined, DollarCircleOutlined, WhatsAppOutlined, UserOutlined } from '@ant-design/icons';
 import "./MainHomePage.scss";
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
 const MainHomePage = () => {
 
@@ -15,16 +17,7 @@ const MainHomePage = () => {
   return (
     <div className="home-page">
       {/* Header */}
-      <div className="header">
-        <img src="/path-to-logo.png" alt="DreamSix Logo" className="logo" />
-        <div className="header-actions">
-          <div className="user-profile">
-           <UserOutlined/>
-          </div>
-          <Button className="deposit-button" onClick={handleLoginClick} >Deposit</Button>
-          <div className="balance">0.00</div>
-        </div>
-      </div>
+      <Header/>
 
       {/* Today Matches */}
       <div className="section matches-section">
@@ -68,38 +61,7 @@ const MainHomePage = () => {
 
 
        {/* Bottom Navigation */}
-       <div className="bottom-nav">
-        <div className="nav-item">
-          <Link to="/home">
-            <HomeOutlined style={{ fontSize: '24px' }} />
-            <p>Home</p>
-          </Link>
-        </div>
-        <div className="nav-item">
-          <Link to="/matches">
-            <TrophyOutlined style={{ fontSize: '24px' }} />
-            <p>Matches</p>
-          </Link>
-        </div>
-        <div className="nav-item">
-          <Link to="/players">
-            <TeamOutlined style={{ fontSize: '24px' }} />
-            <p>Players List</p>
-          </Link>
-        </div>
-        <div className="nav-item">
-          <Link to="/rules">
-            <BookOutlined style={{ fontSize: '24px' }} />
-            <p>Rules</p>
-          </Link>
-        </div>
-        <div className="nav-item">
-          <Link to="/mybets">
-            <DollarCircleOutlined style={{ fontSize: '24px' }} />
-            <p>My Bets</p>
-          </Link>
-        </div>
-      </div>
+       <Footer/>
     </div>
   );
 };
