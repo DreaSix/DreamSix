@@ -1,0 +1,142 @@
+.landing-page {
+    
+    background-color: #f8f8f8;
+    
+    .header {
+        background-color: #0a2a59;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0; /* This makes the header stick to the top */
+        z-index: 1000;
+  
+      .logo {
+        width: 150px;
+      }
+  
+      .header-buttons {
+        display: flex;
+        gap: 10px;
+  
+        .signup-button, .login-button {
+          border-radius: 5px;
+        }
+  
+        .login-button {
+          background-color: #ffcc00;
+          color: black;
+          border: none;
+        }
+      }
+    }
+  
+    .section {
+        padding: 20px;
+        h3 {
+          font-size: 18px;
+          color: #0a2a59;
+        }
+      }
+    
+      .matches-section {
+        .match-card {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px;
+    
+          .match-image {
+            width: 100%;
+            height: auto;
+            max-width: 300px;
+          }
+    
+          .match-details {
+            text-align: center;
+            .countdown {
+              color: red;
+            }
+          }
+        }
+      }
+  
+    .whatsapp-cta {
+      margin-top: 20px;
+      
+      .whatsapp-button {
+        display: flex;
+        align-items: center;
+        background-color: #25d366;
+        color: white;
+        border: none;
+        margin-top: 10px;
+      }
+  
+      img {
+        width: 24px;
+        margin-right: 10px;
+      }
+    }
+  
+    .recent-winners {
+      margin-top: 20px;
+  
+      h3 {
+        font-size: 18px;
+      }
+  
+      .winners-list {
+        display: flex;
+        gap: 10px;
+  
+        .winner-card {
+          text-align: center;
+          padding: 10px;
+          
+          .winner-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+          }
+  
+          h4 {
+            font-size: 16px;
+            margin-top: 10px;
+          }
+  
+          p {
+            font-size: 14px;
+            color: #666;
+          }
+        }
+      }
+    }
+  
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #001529;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+  
+      .nav-item {
+        text-align: center;
+        color: white;
+  
+        p {
+          margin: 0;
+          font-size: 12px;
+        }
+  
+        a {
+          color: white;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  
