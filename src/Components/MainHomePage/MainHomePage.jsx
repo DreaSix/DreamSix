@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Card } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
-import { HomeOutlined, TrophyOutlined, TeamOutlined, BookOutlined, DollarCircleOutlined, WhatsAppOutlined, UserOutlined } from '@ant-design/icons';
+import { WhatsAppOutlined } from '@ant-design/icons';
 import "./MainHomePage.scss";
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
