@@ -4,6 +4,8 @@ import { useAuth } from './Context/AuthContext';
 import LoginPage from './Components/Login/LoginPage';
 import HomePage from './Components/HomePage/HomePage';
 import MainHomePage from './Components/MainHomePage/MainHomePage';
+import Rules from './Components/Rules/Rules';
+import MatchDetails from './Components/MatchDeatils/MatchDetails';
 
 function App() {
   const { isAuthenticated } = useAuth();
@@ -17,6 +19,8 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/loginpage" element={<LoginPage />} />
           <Route path="/main-homepage" element={<MainHomePage />} />
+          <Route path="/rules" element={<Rules/>}/>
+          <Route path="/matchDetails" element={<MatchDetails/>} />
         </Routes>
       </Router>
     </div>

@@ -1,142 +1,115 @@
 .landing-page {
-    
-    background-color: #f8f8f8;
-    
-    .header {
-        background-color: #0a2a59;
-        padding: 10px 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: sticky;
-        top: 0; /* This makes the header stick to the top */
-        z-index: 1000;
-  
-      .logo {
-        width: 150px;
-      }
-  
-      .header-buttons {
-        display: flex;
-        gap: 10px;
-  
-        .signup-button, .login-button {
-          border-radius: 5px;
-        }
-  
-        .login-button {
-          background-color: #ffcc00;
-          color: black;
-          border: none;
-        }
-      }
+
+  background-color: #f8f8f8;
+
+  .section {
+    padding-left: 10px;
+
+    h3 {
+      font-size: 18px;
+      color: #0a2a59;
     }
+  }
+
+  .matches-section {
+    width: 100%;
+    max-width: 600px; /* Adjust as necessary */
+    margin: auto;
+  }
+
+  .match-details{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
   
-    .section {
-        padding: 20px;
-        h3 {
-          font-size: 18px;
-          color: #0a2a59;
-        }
-      }
-    
-      .matches-section {
-        .match-card {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 10px;
-    
-          .match-image {
-            width: 100%;
-            height: auto;
-            max-width: 300px;
-          }
-    
-          .match-details {
-            text-align: center;
-            .countdown {
-              color: red;
-            }
-          }
-        }
-      }
+  .match-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
   
-    .whatsapp-cta {
-      margin-top: 20px;
-      
-      .whatsapp-button {
-        display: flex;
-        align-items: center;
-        background-color: #25d366;
-        color: white;
-        border: none;
-        margin-top: 10px;
-      }
+  .match-image {
+    width: 100%; /* Make image responsive */
+    height: auto;
+  }
   
-      img {
-        width: 24px;
-        margin-right: 10px;
-      }
-    }
+  .countdown {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: rgb(228, 60, 60);
+  }
   
-    .recent-winners {
-      margin-top: 20px;
+
+  .whatsapp-cta {
+    margin: 10px;
   
-      h3 {
-        font-size: 18px;
-      }
-  
-      .winners-list {
-        display: flex;
-        gap: 10px;
-  
-        .winner-card {
-          text-align: center;
-          padding: 10px;
-          
-          .winner-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-          }
-  
-          h4 {
-            font-size: 16px;
-            margin-top: 10px;
-          }
-  
-          p {
-            font-size: 14px;
-            color: #666;
-          }
-        }
-      }
-    }
-  
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background-color: #001529;
+    .whatsapp-container {
       display: flex;
-      justify-content: space-around;
-      padding: 10px 0;
+      flex-direction: row; 
+      align-items: center; 
+      justify-content: space-between; 
+      background-color: white;
+      padding:10px;
+      border-radius: 10px;
+    }
   
-      .nav-item {
+    .whatsapp-details {
+      width: 300px; 
+    }
+  
+    .whatsapp-button {
+      background-color: #25d366;
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      color: white;
+      border: none;
+      margin-left: 10px; /* Space between text and button */
+    }
+  
+    img {
+      width: 24px;
+      margin-right: 10px;
+    }
+  }
+  
+
+  .recent-winners {
+    margin-top: 20px;
+    margin-bottom: 50px;
+
+    h3 {
+      font-size: 18px;
+      margin-left: 10px;
+    }
+
+    .winners-list {
+      display: flex;
+      margin: 10px;
+      gap: 10px;
+
+      .winner-card {
         text-align: center;
-        color: white;
-  
-        p {
-          margin: 0;
-          font-size: 12px;
+        // padding: 10 px;
+
+        .winner-avatar {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
         }
-  
-        a {
-          color: white;
-          text-decoration: none;
+
+        h4 {
+          font-size: 16px;
+          margin-top: 10px;
+        }
+
+        p {
+          font-size: 14px;
+          color: #666;
         }
       }
     }
   }
-  
+}
