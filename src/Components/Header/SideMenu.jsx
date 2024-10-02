@@ -29,22 +29,30 @@ const SideMenu = () => {
       </Button>
       <Drawer placement="left" width="70%" onClose={onClose} open={visible}>
         {/* User Info */}
-        <div className="user-info">
-          <Avatar icon={<UserOutlined />} size={32} />
-          <div className="username">Kabali59</div>
+        <div className="user-info" style={{display:"flex", alignItems:"center"}}>
+          <Avatar style={{marginRight:"15px"}} icon={<UserOutlined />} size={32} />
+          <div className="username" style={{color:"#0a2a59",fontWeight:"bold"}}>Kabali59</div>
         </div>
+
+        <hr/>
 
         {/* Balance Information */}
         <div className="balance-info">
-          <div className="balance-title">
-            <BankOutlined /> Balance Information
+          <div style={{marginTop:"10px", marginBottom:"10px",color:"#0a2a59",fontWeight:"bold"}} className="balance-title">
+            <BankOutlined style={{fontSize:"25px", marginRight:"15px"}} className="icon" /> Balance Information
           </div>
-          <div className="balance-amount">Available Balance: ₹ 0.00</div>
-          <div className="balance-actions">
-            <Button type="primary" onClick={() => handleNavigation("/deposit")}>Deposit</Button>
+          <div style={{display:"flex", alignItems:"center", justifyContent:"space-between"}}>
+            <p>Available Balance: </p>
+            <p>₹ 0.00</p>
+          </div>
+          <hr/>
+          <div style={{marginTop:"10px", marginBottom:"10px"}} className="balance-actions">
+            <Button type="primary" style={{marginRight:"10px", backgroundColor:"#0a2a59"}} onClick={() => handleNavigation("/deposit")}>Deposit</Button>
             <Button onClick={() => handleNavigation("/withdraw")}>Withdrawal</Button>
           </div>
         </div>
+
+        <hr/>
 
         {/* Menu List */}
         <List>
