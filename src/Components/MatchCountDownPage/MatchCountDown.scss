@@ -1,126 +1,110 @@
-.countdown-page {
-    padding: 20px;
-    background-color: #f8f8f8;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  
-    .team-section {
-      margin-bottom: 20px;
-  
-      .team-image {
-        max-width: 100%;
-        border-radius: 8px;
-      }
-    }
-  
-    .countdown-section {
-      background-color: #fff;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      max-width: 400px;
+.cricket-page-container {
+  .match-info {
+    text-align: center;
+
+    .match-banner {
       width: 100%;
-  
-      .lock-icon {
-        font-size: 40px;
-        margin-bottom: 10px;
-        color: #888;
-      }
-  
-      .countdown-message {
-        font-size: 16px;
-        margin-bottom: 10px;
-      }
-  
-      .countdown-timer {
-        font-size: 28px;
-        color: red;
-        font-weight: bold;
-  
-        span {
-          display: inline-block;
-          min-width: 40px;
-        }
-      }
+      max-width: 500px;
+      border-radius: 10px;
+      object-fit: cover;
     }
-  
-    .whatsapp-button {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #25d366;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
+
+    .bid-info {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      font-size: 24px;
-      color: #fff;
-      cursor: pointer;
-    }
-  
-    // Mobile responsiveness
-    @media only screen and (max-width: 768px) {
-      .team-section {
-        margin-bottom: 15px;
-        
-        .team-image {
-          width: 100%;
-          height: auto;
-        }
-      }
-  
-      .countdown-section {
-        padding: 15px;
-        
-        .countdown-message {
-          font-size: 14px;
-        }
-  
-        .countdown-timer {
-          font-size: 24px;
-  
-          span {
-            min-width: 35px;
-          }
-        }
-      }
-  
-      .whatsapp-button {
-        width: 45px;
-        height: 45px;
-        font-size: 20px;
-      }
-    }
-  
-    @media only screen and (max-width: 480px) {
       padding: 10px;
-  
-      .countdown-section {
-        padding: 10px;
-  
-        .countdown-message {
-          font-size: 12px;
-        }
-  
-        .countdown-timer {
-          font-size: 20px;
-  
-          span {
-            min-width: 30px;
-          }
-        }
+      font-size: 16px;
+
+      .top-sixer {
+        font-weight: bold;
+        color: #FF4500;
       }
-  
-      .whatsapp-button {
-        width: 40px;
-        height: 40px;
-        font-size: 18px;
+
+      .countdown {
+        font-size: 20px;
+        font-weight: bold;
       }
     }
   }
-  
+
+  .player-list-container {
+    text-align: center;
+    margin-top: 20px;
+
+    .player-list-header {
+      font-weight: bold;
+      padding: 10px 0;
+      font-size: 18px;
+    }
+
+    .player-list {
+      margin-top: 20px;
+
+      .player-item {
+        display: flex;
+        align-items: center;
+        padding: 10px 0;
+        justify-content: center;
+
+        .player-icon {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          margin-right: 10px;
+        }
+
+        span {
+          font-size: 16px;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .cricket-page-container {
+
+    .match-info {
+      .match-banner {
+        width: 100%;
+        height: auto;
+      }
+
+      .bid-info {
+        flex-direction: column;
+        font-size: 14px;
+
+        .countdown {
+          margin-top: 10px;
+          font-size: 18px;
+        }
+      }
+    }
+
+    .player-list-container {
+
+      .player-list-header {
+        font-size: 16px;
+        padding: 5px 0;
+      }
+
+      .player-list {
+        .player-item {
+          padding: 5px 0;
+
+          .player-icon {
+            width: 40px;
+            height: 40px;
+          }
+
+          span {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import '../UserAuction/UserAuctionPage.scss'
+import Footer from '../Footer/Footer';
 
 const USerAuctionPage = () => {
   const nextPlayers = [
@@ -65,6 +66,7 @@ const USerAuctionPage = () => {
           </div>
         ))}
       </div>
+      <Footer/>
     </div>
   );
 };
