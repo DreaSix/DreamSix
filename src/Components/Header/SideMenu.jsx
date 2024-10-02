@@ -27,10 +27,10 @@ const SideMenu = () => {
       <Button type="text" onClick={showDrawer} className="menu-icon-button">
         <MenuOutlined className="menu-icon" />
       </Button>
-      <Drawer placement="left" onClose={onClose} open={visible}>
+      <Drawer placement="left" width="70%" onClose={onClose} open={visible}>
         {/* User Info */}
         <div className="user-info">
-          <Avatar icon={<UserOutlined />} size={64} />
+          <Avatar icon={<UserOutlined />} size={32} />
           <div className="username">Kabali59</div>
         </div>
 

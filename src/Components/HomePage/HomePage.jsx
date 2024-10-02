@@ -40,61 +40,64 @@ const HomePage = () => {
       {/* Header */}
       <Header />
 
-      {/* Today Matches Carousel */}
-      <div className="section matches-section">
-        <h3>Today Matches</h3>
-        <Carousel autoplay dots infinite>
-          {matches.map(match => (
-            <div key={match.id}>
-              <Card className="match-card" hoverable>
-                <img 
-                  src={match.image} 
-                  alt={`Match ${match.id}`} 
-                  onClick={onClickMatchImage} 
-                  className="match-image" 
-                  style={{ width: '100%', height: '200px', objectFit: 'cover' }}
-                />
-                <div className="match-details">
-                  <p>{match.details}</p>
-                  <p className="countdown">{match.countdown}</p>
-                </div>
-              </Card>
+      {/* Main Content Area */}
+      <div className="content-area">
+        {/* Today Matches Carousel */}
+        <div className="section matches-section">
+          <h3>Today Matches</h3>
+          <Carousel autoplay dots infinite>
+            {matches.map(match => (
+              <div key={match.id}>
+                <Card className="match-card" hoverable>
+                  <img 
+                    src={match.image} 
+                    alt={`Match ${match.id}`} 
+                    onClick={onClickMatchImage} 
+                    className="match-image" 
+                    style={{ width: '100%', height: '200px', objectFit: 'cover' }}
+                  />
+                  <div className="match-details">
+                    <p>{match.details}</p>
+                    <p className="countdown">{match.countdown}</p>
+                  </div>
+                </Card>
+              </div>
+            ))}
+          </Carousel>
+        </div>
+
+        {/* WhatsApp Call to Action */}
+        <div className="whatsapp-cta">
+          <div className='whatsapp-container'>
+            <div className='whatsapp-details'>
+              <h3>Customer Support</h3>
+              <p>"One Click Is All It Takes To Win More, Dream Bigger, And Turn Your Ambitions Into Reality."</p>
             </div>
-          ))}
-        </Carousel>
-      </div>
-
-      {/* WhatsApp Call to Action */}
-      <div className="whatsapp-cta">
-        <div className='whatsapp-container'>
-          <div className='whatsapp-details'>
-            <h3>Customer Support</h3>
-            <p>"One Click Is All It Takes To Win More, Dream Bigger, And Turn Your Ambitions Into Reality."</p>
+            <Button className="whatsapp-button">
+              <WhatsAppOutlined />
+            </Button>
           </div>
-          <Button className="whatsapp-button">
-            <WhatsAppOutlined />
-          </Button>
+        </div>
+
+        {/* Recent Winners */}
+        <div className="recent-winners">
+          <h3>Recent Winners</h3>
+          <div className="winners-list">
+            <Card className="winner-card">
+              <img src="https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg" alt="Aditya Chatterjee" className="winner-avatar" />
+              <h4>Aditya Chatterjee</h4>
+              <p>₹ 45,000</p>
+            </Card>
+            <Card className="winner-card">
+              <img src="https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg" alt="Manish Kapoor" className="winner-avatar" />
+              <h4>Manish Kapoor</h4>
+              <p>₹ 56,000</p>
+            </Card>
+          </div>
         </div>
       </div>
 
-      {/* Recent Winners */}
-      <div className="recent-winners">
-        <h3>Recent Winners</h3>
-        <div className="winners-list">
-          <Card className="winner-card">
-            <img src="https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg" alt="Aditya Chatterjee" className="winner-avatar" />
-            <h4>Aditya Chatterjee</h4>
-            <p>₹ 45,000</p>
-          </Card>
-          <Card className="winner-card">
-            <img src="https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg" alt="Manish Kapoor" className="winner-avatar" />
-            <h4>Manish Kapoor</h4>
-            <p>₹ 56,000</p>
-          </Card>
-        </div>
-      </div>
-
-      {/* Bottom Navigation */}
+      {/* Footer */}
       <Footer />
     </div>
   );
