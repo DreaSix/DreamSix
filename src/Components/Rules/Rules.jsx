@@ -95,6 +95,7 @@ const Rules = () => {
     <div className='rules-container'>
 
       <Header/>
+      <div className='rules'>
       <div>
         <h1>Select Languages:</h1>
       </div>
@@ -129,6 +130,7 @@ const Rules = () => {
         ))}
       </div>
 
+      </div>
       <Footer/>
     </div>
   );

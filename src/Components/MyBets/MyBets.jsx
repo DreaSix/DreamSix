@@ -3,6 +3,7 @@ import { List, Card, Avatar, Row, Col } from 'antd';
 import './MyBets.scss';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import { useNavigate } from 'react-router-dom';
 
 const Betcards = [
   {
@@ -22,67 +23,46 @@ const Betcards = [
 ];
 
 const MyBets = () => {
-  const [selectedPlayer, setSelectedPlayer] = useState(null);
+  const navigate = useNavigate(); // Correctly get the navigate function
 
-  const handlePlayerClick = (player) => {
-    setSelectedPlayer(player);
+  const handlePlayerClick = (selectedPlayer) => {
+    navigate("/player-details", { state: { player: selectedPlayer } }); // Use navigate here
   };
 
   return (
     <div>
-        <Header/>
-    <div className="player-page">
-      {/* Player List */}
-      <List
-        dataSource={Betcards}
-        renderItem={(player) => (
-          <Card
-            className="player-card"
-            onClick={() => handlePlayerClick(player)}
-          >
-            <Row align="middle">
-              <Col>
-                <Avatar src={player.avatar} size={64} />
-              </Col>
-              <Col flex="auto" style={{ marginLeft: '10px' }}>
-                <h3 className="player-name">{player.name}</h3>
-                <p className="date">{player.date}</p>
-              </Col>
-              <Col>
-                <div className="amount">₹ {player.amount}</div>
-                <div className={`status ${player.status === 'Loss' ? 'loss' : 'win'}`}>
-                  {player.status}
-                </div>
-              </Col>
-            </Row>
-          </Card>
-        )}
-        split={false}
-        className="player-list"
-      />
-
-      {/* Player Details */}
-      {selectedPlayer && (
-        <div className="player-details">
-          <Card className="player-detail-card">
-            <Row align="middle">
-              <Col>
-                <Avatar src={selectedPlayer.avatar} size={64} />
-              </Col>
-              <Col flex="auto" style={{ marginLeft: '10px' }}>
-                <h3 className="player-name">{selectedPlayer.name}</h3>
-                <p className="date">{selectedPlayer.date}</p>
-                <div className="amount">₹ {selectedPlayer.amount}</div>
-                <div className={`status ${selectedPlayer.status === 'Loss' ? 'loss' : 'win'}`}>
-                  {selectedPlayer.status}
-                </div>
-              </Col>
-            </Row>
-          </Card>
-        </div>
-      )}
-    </div>
-    <Footer/>
+      <Header />
+      <div className="player-page">
+        {/* Player List */}
+        <List
+          dataSource={Betcards}
+          renderItem={(player) => (
+            <Card
+              className="player-card"
+              onClick={() => handlePlayerClick(player)}
+            >
+              <Row align="middle">
+                <Col>
+                  <Avatar src={player.avatar} size={64} />
+                </Col>
+                <Col flex="auto" style={{ marginLeft: '10px' }}>
+                  <h3 className="player-name">{player.name}</h3>
+                  <p className="date">{player.date}</p>
+                </Col>
+                <Col>
+                  <div className="amount">₹ {player.amount}</div>
+                  <div className={`status ${player.status === 'Loss' ? 'loss' : 'win'}`}>
+                    {player.status}
+                  </div>
+                </Col>
+              </Row>
+            </Card>
+          )}
+          split={false}
+          className="player-list"
+        />
+      </div>
+      <Footer />
     </div>
   );
 };

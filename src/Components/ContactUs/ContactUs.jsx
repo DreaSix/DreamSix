@@ -3,6 +3,7 @@ import { MailOutlined, PhoneOutlined, WhatsAppOutlined, InstagramOutlined } from
 import { Row, Col, Card } from 'antd';
 import Icon from '@ant-design/icons';
 import './ContactUs.scss';
+import { Footer, Header } from 'antd/es/layout/layout';
 
 // SVG for Telegram Icon
 const TelegramSVG = () => (
@@ -22,7 +23,9 @@ const TelegramIcon = props => <Icon component={TelegramSVG} {...props} />;
 
 const ContactUs = () => {
   return (
-    <div className="contact-page">
+    <div>
+      <Header/>
+      <div className="contact-page">
       {/* Contact Information Section */}
       <Row justify="center" className="contact-info">
         <Col span={24} style={{ textAlign: 'center' }}>
@@ -55,6 +58,8 @@ const ContactUs = () => {
           </Card>
         </Col>
       </Row>
+    </div>
+    <Footer/>
     </div>
   );
 };

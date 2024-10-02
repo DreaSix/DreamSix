@@ -6,6 +6,9 @@
     display: flex;
     justify-content: space-around;
     padding: 10px 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
 
     .nav-item {
       text-align: center;

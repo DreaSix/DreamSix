@@ -1,113 +1,120 @@
 .landing-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures it takes full height of the viewport */
 
-  background-color: #f8f8f8;
+  .content-area {
+    flex: 1; /* Allows content area to grow and take available space */
+    padding-top: 90px; /* Space for fixed header */
+    padding-bottom: 60px; /* Space for fixed footer */
+    overflow-y: auto; /* Enables vertical scrolling for the content */
+    background-color: #f8f8f8;
 
-  .section {
-    padding-left: 10px;
+    .section {
+      padding-left: 10px;
 
-    h3 {
-      font-size: 18px;
-      color: #0a2a59;
+      h3 {
+        font-size: 18px;
+        color: #0a2a59;
+      }
     }
-  }
 
-  .matches-section {
-    width: 100%;
-    max-width: 600px; /* Adjust as necessary */
-    margin: auto;
-  }
+    .matches-section {
+      width: 100%;
+      max-width: 600px; /* Adjust as necessary */
+      margin: auto;
+      overflow: auto;
+    }
 
-  .match-details{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .match-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .match-image {
-    width: 100%; /* Make image responsive */
-    height: auto;
-  }
-  
-  .countdown {
-    font-weight: bold;
-    font-size: 1.2em;
-    color: rgb(228, 60, 60);
-  }
-  
-
-  .whatsapp-cta {
-    margin: 10px;
-  
-    .whatsapp-container {
+    .match-details {
       display: flex;
-      flex-direction: row; 
-      align-items: center; 
-      justify-content: space-between; 
-      background-color: white;
-      padding:10px;
-      border-radius: 10px;
+      align-items: center;
+      justify-content: space-between;
     }
-  
-    .whatsapp-details {
-      width: 300px; 
-    }
-  
-    .whatsapp-button {
-      background-color: #25d366;
-      height: 40px;
-      width: 40px;
-      border-radius: 50%;
-      color: white;
-      border: none;
-      margin-left: 10px; /* Space between text and button */
-    }
-  
-    img {
-      width: 24px;
-      margin-right: 10px;
-    }
-  }
-  
-
-  .recent-winners {
-    margin-top: 20px;
-    margin-bottom: 50px;
-
-    h3 {
-      font-size: 18px;
-      margin-left: 10px;
-    }
-
-    .winners-list {
+    
+    .match-card {
       display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .match-image {
+      width: 100%; /* Make image responsive */
+      height: auto;
+    }
+    
+    .countdown {
+      font-weight: bold;
+      font-size: 1.2em;
+      color: rgb(228, 60, 60);
+    }
+
+    .whatsapp-cta {
       margin: 10px;
-      gap: 10px;
 
-      .winner-card {
-        text-align: center;
-        // padding: 10 px;
+      .whatsapp-container {
+        display: flex;
+        flex-direction: row; 
+        align-items: center; 
+        justify-content: space-between; 
+        background-color: white;
+        padding: 10px;
+        border-radius: 10px;
+      }
 
-        .winner-avatar {
-          width: 60px;
-          height: 60px;
-          border-radius: 50%;
-        }
+      .whatsapp-details {
+        width: 300px; 
+      }
 
-        h4 {
-          font-size: 16px;
-          margin-top: 10px;
-        }
+      .whatsapp-button {
+        background-color: #25d366;
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        color: white;
+        border: none;
+        margin-left: 10px; /* Space between text and button */
+      }
 
-        p {
-          font-size: 14px;
-          color: #666;
+      img {
+        width: 24px;
+        margin-right: 10px;
+      }
+    }
+
+    .recent-winners {
+      margin-top: 20px;
+      margin-bottom: 50px;
+
+      h3 {
+        font-size: 18px;
+        margin-left: 10px;
+      }
+
+      .winners-list {
+        display: flex;
+        margin: 10px;
+        gap: 10px;
+
+        .winner-card {
+          text-align: center;
+
+          .winner-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+          }
+
+          h4 {
+            font-size: 16px;
+            margin-top: 10px;
+          }
+
+          p {
+            font-size: 14px;
+            color: #666;
+          }
         }
       }
     }
