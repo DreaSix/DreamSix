@@ -17,6 +17,8 @@ import PaymentStatus from './Components/PaymentStatus/PaymentStatus';
 import MyBets from './Components/MyBets/MyBets';
 import ContactUs from './Components/ContactUs/ContactUs';
 import PlayerDetails from './Components/MyBets/PlayerDetails';
+import MatchPage from './Components/MatchDeatils/MatchDetails';
+import PlayersList from './Components/PlayersList/PlayersList';
 
 function App() {
   const { isAuthenticated } = useAuth();
@@ -43,6 +45,9 @@ function App() {
           <Route path="/payment-status" element={<PaymentStatus/>} /> 
           <Route path="/bets" element={<MyBets/>} /> 
           <Route path="/contact-us" element={<ContactUs/>} /> 
+          <Route path="/matchs-page" element={<MatchPage/>} /> 
+          <Route path="/players-list" element={<PlayersList/>} /> 
+          <Route path="/players-final-list" element={<PlayersList/>} /> 
         </Routes>
       </Router>
     </div>

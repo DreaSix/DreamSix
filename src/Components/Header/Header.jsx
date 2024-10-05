@@ -20,9 +20,6 @@ const Header = () => {
       </div>
       <img src={Logo} alt="DreamSix Logo" className="logo" />
       <div className="header-actions">
-        <div className="user-profile">
-          <UserOutlined />
-        </div>
         <Button onClick={onDeposit} className="deposit-button">
           Deposit
         </Button>

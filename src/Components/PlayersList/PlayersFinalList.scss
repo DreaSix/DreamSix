@@ -1,0 +1,56 @@
+.player-stats {
+    .ant-tabs-nav {
+      .ant-tabs-tab {
+        font-size: 16px; // Tab font size
+      }
+    }
+  
+    .match-name {
+      font-size: 18px; // Match name font size
+      font-weight: bold;
+    }
+  
+    .total-amount {
+      margin-top: 16px;
+      font-size: 18px; // Total amount font size
+      font-weight: bold;
+      text-align: right; // Align total amount to the right
+    }
+  
+    .ant-list-item-meta-avatar img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+  
+    @media (max-width: 768px) {
+      .ant-list-item-meta-avatar img {
+        width: 30px;
+        height: 30px;
+      }
+  
+      .match-name {
+        font-size: 16px; // Smaller font size for mobile
+      }
+  
+      .total-amount {
+        font-size: 16px; // Smaller total amount font size for mobile
+      }
+    }
+  
+    @media (max-width: 576px) {
+      .ant-list-item-meta-avatar img {
+        width: 24px;
+        height: 24px;
+      }
+  
+      .match-name {
+        font-size: 14px; // Smaller font size for mobile
+      }
+  
+      .total-amount {
+        font-size: 14px; // Smaller total amount font size for mobile
+      }
+    }
+  }
+  
