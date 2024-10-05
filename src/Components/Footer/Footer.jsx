@@ -13,13 +13,13 @@ const Footer = () => {
           </Link>
         </div>
         <div className="nav-item">
-          <Link to="/matches">
+          <Link to="/matchs-page">
             <TrophyOutlined style={{ fontSize: '24px' }} />
             <p>Matches</p>
           </Link>
         </div>
         <div className="nav-item">
-          <Link to="/players">
+          <Link to="/players-list">
             <TeamOutlined style={{ fontSize: '24px' }} />
             <p>Players List</p>
           </Link>

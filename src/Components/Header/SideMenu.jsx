@@ -47,7 +47,7 @@ const SideMenu = () => {
           </div>
           <hr/>
           <div style={{marginTop:"10px", marginBottom:"10px"}} className="balance-actions">
-            <Button type="primary" style={{marginRight:"10px", backgroundColor:"#0a2a59"}} onClick={() => handleNavigation("/deposit")}>Deposit</Button>
+            <Button  style={{marginRight:"10px", backgroundColor:"#ffd700",}} onClick={() => handleNavigation("/depositpage")}>Deposit</Button>
             <Button onClick={() => handleNavigation("/withdraw")}>Withdrawal</Button>
           </div>
         </div>

@@ -4,8 +4,15 @@ import './PaymentsProcess.scss';
 import ProcessImage from '../../assets/paymentprocess.jpeg'
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import { useNavigate } from 'react-router-dom';
 
 const PaymentsProcess = () => {
+  const navigate = useNavigate(); // Initialize useNavigate for routing
+
+  const handleDone = () => {
+    navigate('/main-homepage'); // Navigate to the desired route
+  };
+
   return (
     <div>
       <Header/>
@@ -23,7 +30,7 @@ const PaymentsProcess = () => {
         <p className="redirect-info">
           Page will automatically be redirected to the main page (or) Click the button below
         </p>
-        <Button type="primary" className="done-button">
+        <Button onClick={handleDone}  className="done-button">
           Done
         </Button>
         <p className="thank-you">
