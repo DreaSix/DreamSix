@@ -11,7 +11,7 @@
   z-index: 1000; /* Ensure it's above other content */
 
   .logo {
-    width: 150px;
+    width: 120px;
   }
 
   .header-actions {
@@ -28,6 +28,7 @@
       border: none;
       color: #000;
       margin-right: 10px;
+      border-radius: 15px;
     }
 
     .balance {

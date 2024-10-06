@@ -46,35 +46,51 @@ const CountdownPage = () => {
           />
           <div className="bid-info">
             <div className="top-sixer">Top Sixer</div>
+            <h4>Get Ready Bid Will</h4>
             <div className="countdown">03 : 34 : 23</div>
           </div>
         </div>
 
         {/* Player Lists */}
         <div className="player-list-container">
-          <h2>LSG vs RCB</h2>
-          <Row className="player-list-header">
-            <Col span={12}>Team-1</Col>
-            <Col span={12}>Team-2</Col>
-          </Row>
-          <Row className="player-list">
-            <Col span={12}>
-              {playersTeam1.map((player, index) => (
-                <div key={index} className="player-item">
-                  <img src={player.image} alt={player.name} className="player-icon" />
-                  <span>{player.name}</span>
-                </div>
-              ))}
-            </Col>
-            <Col span={12}>
-              {playersTeam2.map((player, index) => (
-                <div key={index} className="player-item">
-                  <img src={player.image} alt={player.name} className="player-icon" />
-                  <span>{player.name}</span>
-                </div>
-              ))}
-            </Col>
-          </Row>
+          <div className='heading-container'>
+            <h4>LSG vs RCB</h4>
+            <p>Expected Players</p>
+          </div>
+          <table className="player-list-table">
+            <thead>
+              <tr>
+                <th className='header-name'>Team-1</th>
+                <th className='header-name'>Team-2</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div className="player-list">
+                    {playersTeam1.map((player, index) => (
+                      <div key={index} className="player-item">
+                        <img src={player.image} alt={player.name} className="player-icon" />
+                        <span>{player.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </td>
+                <td>
+                  <div className="player-list">
+                    {playersTeam2.map((player, index) => (
+                      <div key={index} className="player-item">
+                        <img src={player.image} alt={player.name} className="player-icon" />
+                        <span>{player.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+
         </div>
       </div>
       <Footer />

@@ -1,12 +1,24 @@
 .cricket-page-container {
+  margin-top: 90px;
+  margin-bottom: 70px;
+  flex: 1;
+  overflow-y: auto;
+
   .match-info {
     text-align: center;
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border: 2px solid rgb(224, 222, 222);
+    border-radius: 10px;
 
     .match-banner {
-      width: 100%;
-      max-width: 500px;
+      width: 120px;
+        height: 80px;
       border-radius: 10px;
-      object-fit: cover;
+      // object-fit: cover;
     }
 
     .bid-info {
@@ -17,50 +29,76 @@
       font-size: 16px;
 
       .top-sixer {
+        background: linear-gradient(to right, rgb(26, 176, 235), rgb(242, 122, 142));
         font-weight: bold;
-        color: #FF4500;
+        color: white;
+        border-radius: 50px;
+        height: 30px;
+        width: 90px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
       }
 
       .countdown {
         font-size: 20px;
         font-weight: bold;
+        color: red;
       }
     }
   }
 
-  .player-list-container {
-    text-align: center;
-    margin-top: 20px;
-
-    .player-list-header {
-      font-weight: bold;
-      padding: 10px 0;
-      font-size: 18px;
-    }
-
-    .player-list {
-      margin-top: 20px;
-
-      .player-item {
-        display: flex;
-        align-items: center;
-        padding: 10px 0;
-        justify-content: center;
-
-        .player-icon {
-          width: 50px;
-          height: 50px;
-          border-radius: 50%;
-          margin-right: 10px;
-        }
-
-        span {
-          font-size: 16px;
-          font-weight: bold;
-        }
-      }
-    }
+  .player-list-table {
+    width: 100%;
+    border-collapse: collapse;
+    /* Ensures borders are merged */
   }
+
+  .heading-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+
+  .player-list-table th,
+  .player-list-table td {
+    border: 1px solid #ddd;
+    /* Adds borders to cells */
+    padding: 8px;
+    /* Adds padding for spacing */
+    vertical-align: top;
+    /* Aligns content to the top */
+  }
+
+  .player-list {
+    display: flex;
+    flex-direction: column;
+    /* Ensures players are stacked vertically */
+  }
+
+  .player-item {
+    display: flex;
+    align-items: center;
+    /* Centers the image and text */
+  }
+
+  .player-icon {
+    width: 30px;
+    /* Adjust size as needed */
+    height: 30px;
+    /* Adjust size as needed */
+    margin-right: 8px;
+    /* Adds space between image and text */
+    border-radius: 50%;
+  }
+
+  .header-name {
+    color: #0a2a59;
+  }
+
 }
 
 /* Mobile Styles */
@@ -69,8 +107,11 @@
 
     .match-info {
       .match-banner {
-        width: 100%;
-        height: auto;
+        width: 90px;
+        height: 50px;
+        border-radius: 10px;
+        width: 120px;
+        height: 80px;
       }
 
       .bid-info {
@@ -78,8 +119,8 @@
         font-size: 14px;
 
         .countdown {
-          margin-top: 10px;
           font-size: 18px;
+          color: red;
         }
       }
     }
