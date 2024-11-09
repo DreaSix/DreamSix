@@ -1,14 +1,15 @@
 .landing-page {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Ensures it takes full height of the viewport */
+  height: 100vh;
+  background-color: #25d366;
 
   .content-area {
-    flex: 1; /* Allows content area to grow and take available space */
+    flex: 1;
     padding-top: 90px; /* Space for fixed header */
     padding-bottom: 60px; /* Space for fixed footer */
     overflow-y: auto; /* Enables vertical scrolling for the content */
-    background-color: #f8f8f8;
+    background-color: #a65454;
 
     .section {
       padding-left: 10px;
@@ -31,19 +32,20 @@
       align-items: center;
       justify-content: space-between;
     }
-    
+
     .match-card {
       display: flex;
       flex-direction: column;
+      width: 100%;
       align-items: center;
       text-align: center;
     }
-    
+
     .match-image {
       width: 100%; /* Make image responsive */
       height: auto;
     }
-    
+
     .countdown {
       font-weight: bold;
       font-size: 1.2em;
@@ -55,16 +57,16 @@
 
       .whatsapp-container {
         display: flex;
-        flex-direction: row; 
-        align-items: center; 
-        justify-content: space-between; 
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
         background-color: white;
         padding: 10px;
         border-radius: 10px;
       }
 
       .whatsapp-details {
-        width: 300px; 
+        width: 300px;
       }
 
       .whatsapp-button {
@@ -85,6 +87,8 @@
 
     .recent-winners {
       margin-top: 20px;
+      padding: 30px;
+      background-color: #25d366;
       margin-bottom: 50px;
 
       h3 {

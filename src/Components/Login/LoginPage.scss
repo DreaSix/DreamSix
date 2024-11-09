@@ -1,55 +1,117 @@
 .login-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background-color: #071c3a; /* Light grey background to match Ant Design */
-    
-    .logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20%;
+  height: 100vh;
+  background-color: #071c3a;
+
+  .logo {
+    margin-bottom: 20px;
+    margin-top: 30px;
+
+    img {
+      max-width: 150px;
+    }
+  }
+
+  h2 {
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 30px;
+    // text-align: center;
+    font-size: 1.5rem; // Default font size
+
+    // Adjust heading size on smaller screens
+    @media (max-width: 768px) {
+      font-size: 1.25rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 1.7rem;
+    }
+  }
+
+  .login-form {
+    width: 100%;
+    max-width: 400px;
+
+    .ant-form-item {
+      margin-bottom: 16px;
+    }
+    .ant-input {
+      height: 45px;
+    }
+    // #loginpage_password {
+    //   height: 40px;
+    // }
+    .ant-form-item-control-input-content {
+      height: 42px;
+    }
+
+    .forgot-password {
+      display: flex;
+      justify-content: flex-end;
       margin-bottom: 20px;
-      img {
-        max-width: 150px; /* Adjust logo size */
-      }
-    }
-  
-    h2 {
-      color: #fff; /* Dark text color for better contrast */
-      font-weight: 600;
-      margin-bottom: 30px;
-      text-align: center;
-    }
-  
-    .login-form {
-  
-      .ant-form-item {
-        margin-bottom: 16px;
-      }
-  
-      .forgot-password {
-        display: flex;
-        justify-content: flex-end;
-        margin-bottom: 20px;
-  
-        a {
-          color: #1890ff;
-          &:hover {
-            text-decoration: underline;
-          }
-        }
-      }
-  
-      .login-button {
-        width: 100%;
-        background-color: #fadb14; /* Button color to match previous page */
-        border-color: #fadb14;
-        color: #000;
-  
+
+      a {
+        color: #ff3333;
         &:hover {
-          background-color: #d4b106;
-          border-color: #d4b106;
+          text-decoration: underline;
         }
+      }
+    }
+
+    .login-button {
+      width: 100%;
+      background-color: #fadb14;
+      border-color: #fadb14;
+      font-weight: bold;
+      font-size: 16px;
+      color: #000;
+      height: 48px;
+      padding: 10px; // Adds padding for better touch targets on mobile
+
+      &:hover {
+        background-color: #d4b106;
+        border-color: #d4b106;
       }
     }
   }
-  
+}
+
+// Media queries for responsive design
+@media (max-width: 1024px) {
+  .login-container {
+    padding: 20px;
+  }
+
+  .login-form {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .login-form {
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 10px;
+  }
+
+  .logo img {
+    max-width: 120px;
+  }
+
+  .login-form {
+    max-width: 250px;
+  }
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
+}
