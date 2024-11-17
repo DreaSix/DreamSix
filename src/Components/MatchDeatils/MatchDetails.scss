@@ -1,32 +1,53 @@
 .match-page {
+  padding: 10px;
+  margin-top: 80px;
+
+  .ant-card {
+    padding: 0px !important;
+  }
+  .custom-tabs .ant-tabs-tab {
+    color: black;
+    font-size: 12px;
     padding: 10px;
-    margin-top: 80px;
-  
-    .tabs-wrapper {
-      margin-top: 10px; // Ensure tabs are under the header
-      background-color: #ffd700;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    font-weight: bold;
+  }
+  .custom-tabs .ant-tabs-tab-active {
+    background-color: yellow;
+    border-radius: 4px;
+  }
+
+  .custom-tabs .ant-tabs-tab {
+    transition: background-color 0.3s;
+  }
+
+  .custom-tabs .ant-tabs-tab:hover {
+    background-color: rgba(255, 255, 0, 0.7);
+  }
+
+  .tabs-wrapper {
+    margin-top: 10px;
+    // background-color: green;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .match-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .match-details {
+    display: flex;
+    justify-content: space-between;
+
+    h3 {
+      font-size: 16px;
+      margin-bottom: 8px;
     }
-  
-    .match-image {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-    }
-  
-    .match-details {
-      display: flex;
-      justify-content:space-between;
-  
-      h3 {
-        font-size: 16px;
-        margin-bottom: 8px;
-      }
-  
-      .countdown {
-        font-size: 14px;
-        color: red;
-      }
+
+    .countdown {
+      font-size: 14px;
+      color: red;
     }
   }
-  
+}

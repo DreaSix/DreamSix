@@ -1,34 +1,31 @@
 .match-page {
-    padding: 0px;
-    margin-top: 80px;
-    padding-bottom: 80px;
-  
-    .tabs-wrapper {
-      margin-top: 10px; // Ensure tabs are under the header
-      background-color: #ffd700;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-      margin-bottom: 80px;
+  padding: 10px;
+  margin-top: 80px;
+
+  .tabs-wrapper {
+    margin-top: 10px; // Ensure tabs are under the header
+    // background-color: #ffd700;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .match-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .match-details {
+    display: flex;
+    justify-content: space-between;
+
+    h3 {
+      font-size: 16px;
+      margin-bottom: 8px;
     }
-  
-    .match-image {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-    }
-  
-    .match-details {
-      display: flex;
-      justify-content:space-between;
-  
-      h3 {
-        font-size: 16px;
-        margin-bottom: 8px;
-      }
-  
-      .countdown {
-        font-size: 14px;
-        color: red;
-      }
+
+    .countdown {
+      font-size: 14px;
+      color: red;
     }
   }
-  
+}
