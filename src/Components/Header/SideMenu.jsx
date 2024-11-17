@@ -45,11 +45,11 @@ const SideMenu = () => {
             <p>Available Balance: </p>
             <p>₹ 0.00</p>
           </div>
-          <hr/>
+          {/* <hr/>
           <div style={{marginTop:"10px", marginBottom:"10px"}} className="balance-actions">
             <Button  style={{marginRight:"10px", backgroundColor:"#ffd700",}} onClick={() => handleNavigation("/depositpage")}>Deposit</Button>
             <Button onClick={() => handleNavigation("/withdraw")}>Withdrawal</Button>
-          </div>
+          </div> */}
         </div>
 
         <hr/>

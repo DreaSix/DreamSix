@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Live Demo
+
+You can view the live version of the app [here](https://dream-six-seven.vercel.app/).
+
 ## Available Scripts
 
 In the project directory, you can run:
