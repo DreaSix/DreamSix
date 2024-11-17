@@ -2,14 +2,14 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background-color: #25d366;
+  // background-color: #25d366;
 
   .content-area {
     flex: 1;
     padding-top: 90px; /* Space for fixed header */
     padding-bottom: 60px; /* Space for fixed footer */
     overflow-y: auto; /* Enables vertical scrolling for the content */
-    background-color: #a65454;
+    // background-color: #a65454;
 
     .section {
       padding-left: 10px;
@@ -88,7 +88,7 @@
     .recent-winners {
       margin-top: 20px;
       padding: 30px;
-      background-color: #25d366;
+      // background-color: #25d366;
       margin-bottom: 50px;
 
       h3 {
