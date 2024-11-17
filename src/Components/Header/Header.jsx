@@ -20,9 +20,9 @@ const Header = () => {
       </div>
       <img src={Logo} alt="DreamSix Logo" className="logo" />
       <div className="header-actions">
-        <Button onClick={onDeposit} className="deposit-button">
+        {/* <Button onClick={onDeposit} className="deposit-button">
           Deposit
-        </Button>
+        </Button> */}
         <div className="balance">₹ 0.00</div>
       </div>
     </div>
