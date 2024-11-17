@@ -1,31 +1,30 @@
-import React from 'react';
-import { Form, Input, Button } from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
-import './LoginPage.scss';
+import React from "react";
+import { Form, Input, Button } from "antd";
+import { Link, useNavigate } from "react-router-dom";
+import "./LoginPage.scss";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
-
-    const handleLoginClick = () => {
-      navigate('/main-homepage');  // Navigates to the login page
-    };
+  const handleLoginClick = () => {
+    navigate("/main-homepage"); // Navigates to the login page
+  };
 
   const onFinish = (values) => {
-    console.log('Success:', values);
+    console.log("Success:", values);
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    console.log("Failed:", errorInfo);
   };
 
   return (
-    <div className="login-container">
+    <div className="login-container" style={{ padding: "10%" }}>
       <div className="logo">
         <img src="/path-to-your-logo.png" alt="DreamSix Logo" />
       </div>
       <h2>Welcome back! Glad to see you, Again!</h2>
-      
+
       <Form
         name="loginpage"
         onFinish={onFinish}
@@ -36,14 +35,16 @@ const LoginPage = () => {
       >
         <Form.Item
           name="mobileNumber"
-          rules={[{ required: true, message: 'Please input your mobile number!' }]}
+          rules={[
+            { required: true, message: "Please input your mobile number!" },
+          ]}
         >
           <Input placeholder="Mobile Number" />
         </Form.Item>
 
         <Form.Item
           name="password"
-          rules={[{ required: true, message: 'Please input your password!' }]}
+          rules={[{ required: true, message: "Please input your password!" }]}
         >
           <Input.Password placeholder="Password" />
         </Form.Item>
@@ -53,7 +54,12 @@ const LoginPage = () => {
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" className="login-button" onClick={handleLoginClick}>
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="login-button"
+            onClick={handleLoginClick}
+          >
             Login
           </Button>
         </Form.Item>
