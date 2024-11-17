@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { WhatsAppOutlined } from "@ant-design/icons";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-import "./HomePage.scss";
+import "./Homepage.scss";
 
 const matches = [
   {
