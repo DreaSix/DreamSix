@@ -1,121 +1,122 @@
 .top-sixer-scorer-page {
-    padding: 20px;
-    background-color: #f8f8f8;
-    margin-top: 70px;
-    margin-bottom: 60px;
-  
-    .option-section {
-      margin-bottom: 20px;
-  
-      h2 {
-        font-size: 18px;
-        margin-bottom: 10px;
+  padding: 10px;
+  background-color: #0d1117; /* Dark background */
+  margin-top: 72px;
+
+  .option-section {
+    margin-bottom: 20px;
+
+    h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #fff; /* White text color */
+    }
+
+    .card {
+      position: relative;
+      background-color: #0d1117; /* Match background */
+      border-radius: 10px;
+      border: 2px solid #fff; /* White border */
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1); /* Subtle white shadow */
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-direction: column;
+
+      .team-image {
+        width: 100%;
+        border-radius: 8px;
+        max-width: 400px;
+        height: auto;
+        border: 1px solid #fff; /* White border for images */
       }
-  
+
+      .radio-container {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+
+        input[type='radio'] {
+          display: none;
+        }
+
+        input[type='radio'] + label {
+          width: 20px;
+          height: 20px;
+          border: 2px solid #fff; /* White border for radio */
+          border-radius: 50%;
+          display: inline-block;
+          cursor: pointer;
+        }
+
+        input[type='radio']:checked + label {
+          background-color: #fff; /* Filled white for selected */
+        }
+      }
+    }
+  }
+
+  // Media query for tablet responsiveness
+  @media only screen and (max-width: 768px) {
+    padding: 10px;
+
+    .option-section {
+      margin-bottom: 15px;
+
+      h2 {
+        font-size: 16px;
+      }
+
       .card {
-        position: relative;
-        background-color: #fff;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        padding: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-direction: column;  // Adjust for smaller screen sizes
-  
+        padding: 8px;
+
         .team-image {
           width: 100%;
-          border-radius: 8px;
-          max-width: 400px;
           height: auto;
         }
-  
+
         .radio-container {
-          position: absolute;
-          top: 10px;
-          right: 10px;
-          input[type='radio'] {
-            display: none;
-          }
-  
+          top: 8px;
+          right: 8px;
+
           input[type='radio'] + label {
-            width: 20px;
-            height: 20px;
-            border: 2px solid #007aff;
-            border-radius: 50%;
-            display: inline-block;
-            cursor: pointer;
-          }
-  
-          input[type='radio']:checked + label {
-            background-color: #007aff;
-          }
-        }
-      }
-    }
-  
-    // Media query for mobile responsiveness
-    @media only screen and (max-width: 768px) {
-      padding: 10px;
-  
-      .option-section {
-        margin-bottom: 15px;
-  
-        h2 {
-          font-size: 16px;
-        }
-  
-        .card {
-          padding: 8px;
-          flex-direction: column;
-  
-          .team-image {
-            width: 100%;
-            height: auto;
-          }
-  
-          .radio-container {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-  
-            input[type='radio'] + label {
-              width: 18px;
-              height: 18px;
-            }
-          }
-        }
-      }
-    }
-  
-    @media only screen and (max-width: 480px) {
-      padding: 8px;
-  
-      .option-section {
-        h2 {
-          font-size: 14px;
-          margin-bottom: 8px;
-        }
-  
-        .card {
-          padding: 5px;
-  
-          .team-image {
-            max-width: 100%;
-          }
-  
-          .radio-container {
-            top: 6px;
-            right: 6px;
-  
-            input[type='radio'] + label {
-              width: 16px;
-              height: 16px;
-            }
+            width: 18px;
+            height: 18px;
           }
         }
       }
     }
   }
-  
+
+  // Media query for mobile responsiveness
+  @media only screen and (max-width: 480px) {
+    padding: 8px;
+
+    .option-section {
+      h2 {
+        font-size: 14px;
+        margin-bottom: 8px;
+      }
+
+      .card {
+        padding: 5px;
+
+        .team-image {
+          max-width: 100%;
+        }
+
+        .radio-container {
+          top: 6px;
+          right: 6px;
+
+          input[type='radio'] + label {
+            width: 16px;
+            height: 16px;
+          }
+        }
+      }
+    }
+  }
+}

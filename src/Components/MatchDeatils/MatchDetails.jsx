@@ -1,5 +1,5 @@
 import React from "react";
-import { Tabs, Card, Row, Col } from "antd";
+import { Tabs, Card } from "antd";
 import "./MatchDetails.scss";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -9,15 +9,27 @@ const { TabPane } = Tabs;
 const MatchPage = () => {
   const matches = [
     {
-      team1: "IND",
-      team2: "BAN",
-      img: "https://www.panasiabiz.com/wp-content/uploads/2024/06/ind-vs-ban-2-678x381.png",
+      team1: "RCB",
+      team2: "CSK",
+      img: "https://i.pinimg.com/originals/a1/de/a2/a1dea2cf213703688b3d040e1c112a53.png",
       countdown: "03:34:23",
     },
     {
-      team1: "ENG",
+      team1: "IND",
       team2: "AUS",
-      img: "https://img.jagranjosh.com/images/2023/November/3112023/england-vs-australia-head-to-head.jpg",
+      img: "https://images.news9live.com/wp-content/uploads/2024/10/India-vs-Australia-womens-t20-World-Cup.jpg?w=1200&enlarge=true",
+      countdown: "03:34:23",
+    },
+    {
+      team1: "RCB",
+      team2: "CSK",
+      img: "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/poster-design-template-351effd160d6232fa505498a400cd1a1_screen.jpg?ts=1713411077",
+      countdown: "03:34:23",
+    },
+    {
+      team1: "IND",
+      team2: "AUS",
+      img: "https://images.news9live.com/wp-content/uploads/2024/10/India-vs-Australia-womens-t20-World-Cup.jpg?w=1200&enlarge=true",
       countdown: "03:34:23",
     },
   ];
@@ -29,65 +41,27 @@ const MatchPage = () => {
       content:
         matches && matches.length > 0 ? (
           matches.map((match, index) => (
-            <Card
-              key={index}
-              hoverable
-              style={{ marginBottom: "16px" }}
-              bodyStyle={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
+            <Card key={index} hoverable className="match-card">
               <img
                 src={match.img}
                 alt={`${match.team1} vs ${match.team2}`}
-                style={{
-                  width: "100%",
-                  maxHeight: "200px",
-                  objectFit: "cover",
-                  borderRadius: "8px",
-                }}
               />
-              <div
-                style={{
-                  display: "flex",
-                  width: "100%",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
-                <h3 style={{ textAlign: "center" }}>
+              <div className="match-info">
+                <h3>
                   {match.team1} vs {match.team2}
                 </h3>
-                <p
-                  style={{
-                    color: "#999",
-                    fontSize: "14px",
-                    textAlign: "center",
-                    color: "red",
-                    fontWeight: "bold",
-                  }}
-                >
-                  {match.countdown}
-                </p>
+                <p>{match.countdown}</p>
               </div>
             </Card>
           ))
         ) : (
-          <p style={{ textAlign: "center", color: "#666" }}>
-            No matches available for today.
-          </p>
+          <p className="no-matches">No matches available for today.</p>
         ),
     },
     {
       key: "2",
       label: "Tomorrow Matches",
-      content: (
-        <p style={{ textAlign: "center", color: "#666" }}>
-          No matches available for tomorrow.
-        </p>
-      ),
+      content: <p className="no-matches">No matches available for tomorrow.</p>,
     },
   ];
 

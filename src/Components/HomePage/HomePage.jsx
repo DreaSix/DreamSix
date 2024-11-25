@@ -10,22 +10,22 @@ const matches = [
   {
     id: 1,
     image:
-      "https://www.panasiabiz.com/wp-content/uploads/2024/06/ind-vs-ban-2-678x381.png",
-    details: "Get Ready Bid Will Open",
+      "https://i.pinimg.com/originals/a1/de/a2/a1dea2cf213703688b3d040e1c112a53.png",
+    details: "Today Afternoon 2:00 PM",
     countdown: "03:34:23",
   },
   {
     id: 2,
     image:
-      "https://img.jagranjosh.com/images/2023/November/3112023/england-vs-australia-head-to-head.jpg",
-    details: "Match Starts Soon",
+      "https://images.news9live.com/wp-content/uploads/2024/10/India-vs-Australia-womens-t20-World-Cup.jpg?w=1200&enlarge=true",
+    details: "Today Morning 6:00 AM",
     countdown: "05:12:15",
   },
   {
     id: 3,
     image:
-      "https://tse4.mm.bing.net/th?id=OIP.sozWmFFHVrtOK54hN1aYGAHaEK&pid=Api&P=0&h=180",
-    details: "Prepare for the Match",
+      "https://i.ytimg.com/vi/ZZ7QIRihNic/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLB_cpHVO8pSXdYSNASbuU4hASQvPA",
+    details: "Tomorrow Evening 4:00 PM",
     countdown: "02:45:30",
   },
   // Add more match cards as needed
@@ -48,7 +48,7 @@ const HomePage = () => {
           <Carousel autoplay dots infinite>
             {matches.map((match) => (
               <div key={match.id}>
-                <Card className="match-card" hoverable>
+                <Card className="match-cards" hoverable>
                   <img
                     src={match.image}
                     alt={`Match ${match.id}`}
@@ -70,46 +70,7 @@ const HomePage = () => {
           </Carousel>
         </div>
 
-        {/* WhatsApp Call to Action */}
-        <div className="whatsapp-cta">
-          <div className="whatsapp-container">
-            <div className="whatsapp-details">
-              <h3>Customer Support</h3>
-              <p>
-                "One Click Is All It Takes To Win More, Dream Bigger, And Turn
-                Your Ambitions Into Reality."
-              </p>
-            </div>
-            <Button className="whatsapp-button">
-              <WhatsAppOutlined />
-            </Button>
-          </div>
-        </div>
-
-        {/* Recent Winners */}
-        <div className="recent-winners">
-          <h3>Recent Winners</h3>
-          <div className="winners-list">
-            <Card className="winner-card">
-              <img
-                src="https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg"
-                alt="Aditya Chatterjee"
-                className="winner-avatar"
-              />
-              <h4>Aditya Chatterjee</h4>
-              <p>₹ 45,000</p>
-            </Card>
-            <Card className="winner-card">
-              <img
-                src="https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg"
-                alt="Manish Kapoor"
-                className="winner-avatar"
-              />
-              <h4>Manish Kapoor</h4>
-              <p>₹ 56,000</p>
-            </Card>
-          </div>
-        </div>
+       
       </div>
       <Footer />
     </div>

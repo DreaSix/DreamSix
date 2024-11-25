@@ -1,63 +1,69 @@
-import React, { useState } from 'react';
-import { Tabs, Card, Row, Col, Button } from 'antd';
-import './PlayersList.scss'; // Add your styles here
-import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
-import PaymentStatus from '../PaymentStatus/PaymentStatus';
-import PlayersFinalList from './PlayersFinalList';
-
-const { TabPane } = Tabs;
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { Card } from "antd";
+import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
+import "./PlayersList.scss";
 
 const PlayersList = () => {
-  const [selectedMatch, setSelectedMatch] = useState(null); // Track selected match
+  const navigate = useNavigate();
 
   const matches = [
     {
-      img: 'https://www.panasiabiz.com/wp-content/uploads/2024/06/ind-vs-ban-2-678x381.png',
+      id: 1,
+      team1: "RCB",
+      team2: "CSK",
+      img: "https://i.pinimg.com/originals/a1/de/a2/a1dea2cf213703688b3d040e1c112a53.png",
+      countdown: "03:34:23",
     },
     {
-      img: 'https://img.jagranjosh.com/images/2023/November/3112023/england-vs-australia-head-to-head.jpg',
-      
+      id: 2,
+      team1: "IND",
+      team2: "AUS",
+      img: "https://images.news9live.com/wp-content/uploads/2024/10/India-vs-Australia-womens-t20-World-Cup.jpg?w=1200&enlarge=true",
+      countdown: "03:34:23",
+    },
+    {
+      id: 3,
+      team1: "RCB",
+      team2: "CSK",
+      img: "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/poster-design-template-351effd160d6232fa505498a400cd1a1_screen.jpg?ts=1713411077",
+      countdown: "03:34:23",
+    },
+    {
+      id: 4,
+      team1: "IND",
+      team2: "AUS",
+      img: "https://images.news9live.com/wp-content/uploads/2024/10/India-vs-Australia-womens-t20-World-Cup.jpg?w=1200&enlarge=true",
+      countdown: "03:34:23",
     },
   ];
 
-  // Function to handle match card click
-  const handleMatchClick = (match) => {
-    setSelectedMatch(match); // Set the selected match
-  };
-
- 
-
   return (
-    <div>
+    <div className="match-page">
       <Header />
-      <div className="match-page">
-        {selectedMatch ? (
-          <div>
-            <PlayersFinalList/>
-          </div>
-        ) : (
-          <Tabs defaultActiveKey="1" centered className="tabs-wrapper">
-            <TabPane tab="Today Matches" key="1">
-              <Row gutter={[16, 16]}>
-                {matches.map((match, index) => (
-                  <Col xs={24} sm={12} key={index}>
-                    <Card
-                      hoverable
-                      onClick={() => handleMatchClick(match)} // Set selected match on click
-                    >
-                      <img src={match.img} className="match-image" />
-                     
-                    </Card>
-                  </Col>
-                ))}
-              </Row>
-            </TabPane>
-            <TabPane tab="Tomorrow Matches" key="2">
-              <p>No matches available for tomorrow.</p>
-            </TabPane>
-          </Tabs>
-        )}
+      <div className="matches-container">
+        {matches.map((match) => (
+          <Card
+            key={match.id}
+            hoverable
+            className="match-card"
+            // onClick={() => navigate(`/match/${match.id}`)}
+            onClick={() => navigate('/players-final-list')}
+          >
+            <img
+              src={match.img}
+              alt={`${match.team1} vs ${match.team2}`}
+              className="match-image"
+            />
+            <div className="match-info">
+              <h3>
+                {match.team1} vs {match.team2}
+              </h3>
+              <p>{match.countdown}</p>
+            </div>
+          </Card>
+        ))}
       </div>
       <Footer />
     </div>
