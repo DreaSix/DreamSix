@@ -3,7 +3,7 @@
   flex-direction: column;
   height: 100vh;
   color: white;
-background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
+
   .content-area {
     flex: 1;
     padding-top: 60px; /* Space for fixed header */
@@ -31,8 +31,8 @@ background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%
       display: flex;
       flex-direction: column;
       text-align: center;
-      background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
-      border: 1px solid black; /* Add border */
+      background-color: #0d1117;
+      border: 1px solid #85909b; /* Add border */
       border-radius: 8px;
       margin: 10px;
       padding: 10px;
