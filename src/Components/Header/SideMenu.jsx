@@ -3,6 +3,7 @@ import { Button, Drawer, Avatar, List } from "antd";
 import { UserOutlined, BankOutlined, LockOutlined, HistoryOutlined, PhoneOutlined, PoweroffOutlined, MenuOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import "./SideMenu.scss";
+import { Color } from "antd/es/color-picker";
 
 const SideMenu = () => {
   const [visible, setVisible] = useState(false);
@@ -22,50 +23,50 @@ const SideMenu = () => {
   };
 
   return (
-    <div className="side-menu">
+    <div className="side-menu" >
       {/* Menu Button */}
       <Button type="text" onClick={showDrawer} className="menu-icon-button">
         <MenuOutlined className="menu-icon" />
       </Button>
-      <Drawer placement="left" width="70%" onClose={onClose} open={visible}>
+      <Drawer placement="left" width="70%" onClose={onClose} open={visible} style={{background:"linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)", color:"white"}}>
         {/* User Info */}
         <div className="user-info" style={{display:"flex", alignItems:"center"}}>
-          <Avatar style={{marginRight:"15px"}} icon={<UserOutlined />} size={32} />
-          <div className="username" style={{color:"#0a2a59",fontWeight:"bold"}}>Kabali59</div>
+          <Avatar style={{marginRight:"15px", border:"1px solid yellow"}} icon={<UserOutlined />} size={32} />
+          <div className="username" style={{color:"yellow",fontWeight:"bold"}}>Kabali59</div>
         </div>
 
         <hr/>
 
         {/* Balance Information */}
         <div className="balance-info">
-          <div style={{marginTop:"10px", marginBottom:"10px",color:"#0a2a59",fontWeight:"bold"}} className="balance-title">
-            <BankOutlined style={{fontSize:"25px", marginRight:"15px"}} className="icon" /> Balance Information
+          <div style={{marginTop:"10px", marginBottom:"10px", color:"white",fontWeight:"bold", }} className="balance-title">
+            <BankOutlined style={{fontSize:"25px", marginRight:"15px", color:"white"}} className="icon" /> Balance Information
           </div>
-          <div style={{display:"flex", alignItems:"center", justifyContent:"space-between"}}>
+          <div style={{display:"flex", alignItems:"center", justifyContent:"space-between", color:"white"}}>
             <p>Available Balance: </p>
             <p>₹ 0.00</p>
           </div>
-          {/* <hr/>
-          <div style={{marginTop:"10px", marginBottom:"10px"}} className="balance-actions">
+          <hr/>
+          <div style={{marginTop:"10px", marginBottom:"10px", color:"white"}} className="balance-actions">
             <Button  style={{marginRight:"10px", backgroundColor:"#ffd700",}} onClick={() => handleNavigation("/depositpage")}>Deposit</Button>
             <Button onClick={() => handleNavigation("/withdraw")}>Withdrawal</Button>
-          </div> */}
+          </div>
         </div>
 
         <hr/>
 
         {/* Menu List */}
-        <List>
-          <List.Item onClick={() => handleNavigation("/players")}>
-            <HistoryOutlined /> Transactions History
+        <List >
+          <List.Item onClick={() => handleNavigation("/players")} style={{ color:"white"}}>
+            <HistoryOutlined style={{ color:"white"}} /> Transactions History
           </List.Item>
-          <List.Item onClick={() => handleNavigation("/change-password")}>
+          <List.Item onClick={() => handleNavigation("/change-password")} style={{ color:"white"}}>
             <LockOutlined /> Change Password
           </List.Item>
-          <List.Item onClick={() => handleNavigation("/bets")}>
+          <List.Item onClick={() => handleNavigation("/bets")} style={{ color:"white"}}>
             <UserOutlined /> My Bets
           </List.Item>
-          <List.Item onClick={() => handleNavigation("/contact-us")}>
+          <List.Item onClick={() => handleNavigation("/contact-us")} style={{ color:"white"}}>
             <PhoneOutlined /> Contact Us
           </List.Item>
           <List.Item onClick={() => handleNavigation("/loginpage")} style={{ color: 'red' }}>

@@ -41,15 +41,15 @@ const MyBets = () => {
               className="player-card"
               onClick={() => handlePlayerClick(player)}
             >
-              <Row align="middle">
-                <Col>
+              <Row gutter={[16, 16]}> {/* Gutter added to create space between items */}
+                <Col span={6}>
                   <Avatar src={player.avatar} size={64} />
                 </Col>
-                <Col flex="auto" style={{ marginLeft: '10px' }}>
+                <Col span={12}>
                   <h3 className="player-name">{player.name}</h3>
                   <p className="date">{player.date}</p>
                 </Col>
-                <Col>
+                <Col span={6} style={{ textAlign: 'right' }}>
                   <div className="amount">₹ {player.amount}</div>
                   <div className={`status ${player.status === 'Loss' ? 'loss' : 'win'}`}>
                     {player.status}

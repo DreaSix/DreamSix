@@ -1,5 +1,5 @@
 .rules-container{
-    background-color: white;
+    color:#ccc;
 
     .rules{
       margin-top: 90px;
@@ -9,7 +9,7 @@
         font-size: 24px; 
         margin: 20px 0; 
         padding: 0 15px; 
-        color: #333; 
+        color: #716a6a; 
     }
 
       @media (max-width: 600px) {
@@ -100,7 +100,8 @@
       }
       
       .tab:hover {
-        background-color: #f0f0f0; 
+        background-color: #d6f719; 
+        color:#000;
       }
       
       
@@ -125,7 +126,7 @@
       .rule p {
         margin: 5px 0 0;
         font-size: 14px;
-        color: #666;
+        color: #f1ecec;
       }
       
 }

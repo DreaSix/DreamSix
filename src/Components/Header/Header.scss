@@ -1,5 +1,5 @@
 .header {
-  background-color: #003366;
+  background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
   padding: 10px 20px;
   display: flex;
   justify-content: space-between;
@@ -35,6 +35,7 @@
       background-color: #ffd700;
       padding: 5px 10px;
       border-radius: 15px;
+      color:#000;
     }
   }
 }
