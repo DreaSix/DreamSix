@@ -1,27 +1,32 @@
 import React from "react";
 import "./PlayersFinalList.scss";
+import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
 
 const PlayersFinalList = () => {
   const playersLeft = [
     { name: "KL Rahul", amount: 2000, buyer: "Aditi Sharma", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUcR_4M1U-SyADac_IqQ209kzVkeCPM00ajg&s" },
-    { name: "Quinton De Kock", amount: 5000, buyer: "Kabir Verma", image: "path_to_image" },
-    { name: "Deepak Hooda", amount: 600, buyer: "Meera Kapoor", image: "path_to_image" },
-    { name: "KL Rahul", amount: 2000, buyer: "Aditi Sharma", image: "path_to_image" },
-    { name: "Quinton De Kock", amount: 5000, buyer: "Kabir Verma", image: "path_to_image" },
-    { name: "Deepak Hooda", amount: 600, buyer: "Meera Kapoor", image: "path_to_image" },
+    { name: "Quinton De Kock", amount: 5000, buyer: "Kabir Verma", image: "https://www.cricketcountry.com/wp-content/uploads/2024/07/Rohit-sharma-15.jpg" },
+    { name: "Deepak Hooda", amount: 600, buyer: "Meera Kapoor", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIHd_YV7rH-c4PT0cmXp0rY4zYfzsECxNQiA&s" },
+    { name: "KL Rahul", amount: 2000, buyer: "Aditi Sharma", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS09XRPL0EYGO9jzMOmPADjEcamWlaXg96Rag&s" },
+    { name: "Quinton De Kock", amount: 5000, buyer: "Kabir Verma", image: "https://www.cricketcountry.com/wp-content/uploads/2024/07/Rohit-sharma-15.jpg" },
+    { name: "Deepak Hooda", amount: 600, buyer: "Meera Kapoor", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS09XRPL0EYGO9jzMOmPADjEcamWlaXg96Rag&s" },
   ];
 
   const playersRight = [
-    { name: "Faf Du Plessis", amount: 1000, buyer: "Rohan Iyer", image: "path_to_image" },
-    { name: "Rajat Patidar", amount: 3000, buyer: "Priya Desai", image: "path_to_image" },
-    { name: "Virat Kohli", amount: 7000, buyer: "Nikhil Reddy", image: "path_to_image" },
-    { name: "Faf Du Plessis", amount: 1000, buyer: "Rohan Iyer", image: "path_to_image" },
-    { name: "Rajat Patidar", amount: 3000, buyer: "Priya Desai", image: "path_to_image" },
-    { name: "Virat Kohli", amount: 7000, buyer: "Nikhil Reddy", image: "path_to_image" },
+    { name: "Faf Du Plessis", amount: 1000, buyer: "Rohan Iyer", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIHd_YV7rH-c4PT0cmXp0rY4zYfzsECxNQiA&s" },
+    { name: "Rajat Patidar", amount: 3000, buyer: "Priya Desai", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS09XRPL0EYGO9jzMOmPADjEcamWlaXg96Rag&s" },
+    { name: "Virat Kohli", amount: 7000, buyer: "Nikhil Reddy", image: "https://www.cricketcountry.com/wp-content/uploads/2024/07/Rohit-sharma-15.jpg" },
+    { name: "Faf Du Plessis", amount: 1000, buyer: "Rohan Iyer", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIHd_YV7rH-c4PT0cmXp0rY4zYfzsECxNQiA&s" },
+    { name: "Rajat Patidar", amount: 3000, buyer: "Priya Desai", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS09XRPL0EYGO9jzMOmPADjEcamWlaXg96Rag&s" },
+    { name: "Virat Kohli", amount: 7000, buyer: "Nikhil Reddy", image: "https://www.cricketcountry.com/wp-content/uploads/2024/07/Rohit-sharma-15.jpg" },
   ];
 
   return (
+    <div>
+      <Header/>
     <div className="players-final-list">
+      
       <div className="top-menu">
         <button className="menu-btn active">Top Sixer</button>
         <button className="menu-btn">Top Scorer</button>
@@ -66,6 +71,8 @@ const PlayersFinalList = () => {
       <div className="total-amount-container">
         <span>Total Amount =</span> ₹32000
       </div>
+      <Footer/>
+    </div>
     </div>
   );
 };
