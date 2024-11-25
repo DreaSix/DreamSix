@@ -28,7 +28,7 @@ const SideMenu = () => {
       <Button type="text" onClick={showDrawer} className="menu-icon-button">
         <MenuOutlined className="menu-icon" />
       </Button>
-      <Drawer placement="left" width="70%" onClose={onClose} open={visible} style={{background:"linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)", color:"white"}}>
+      <Drawer placement="left" width="70%" onClose={onClose} open={visible} style={{background:" linear-gradient(to top, #99ccff 0%, #003366 100%)", color:"white"}}>
         {/* User Info */}
         <div className="user-info" style={{display:"flex", alignItems:"center"}}>
           <Avatar style={{marginRight:"15px", border:"1px solid yellow"}} icon={<UserOutlined />} size={32} />
