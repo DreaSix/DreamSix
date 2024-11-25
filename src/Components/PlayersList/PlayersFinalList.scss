@@ -1,156 +1,182 @@
-.player-stats {
-  padding:0px;
-  .ant-tabs-nav {
-    .ant-tabs-tab {
-      font-size: 16px; // Tab font size
-      margin: 0 25px; // Remove any default margin
-      padding: 0; // Remove any default padding
+.players-final-list {
+  .top-menu {
+    display: flex;
+    justify-content: space-between;
+    background-color: #ffe500;
+    padding: 10px;
+
+    .menu-btn {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+      font-weight: bold;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+
+      &.active {
+        background: #ffe500;
+        border-bottom: 2px solid black;
+      }
     }
   }
 
   .match-name-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: rgb(244, 244, 244);
-    font-size: 8px;
-  }
-
-  .match-name {
-    font-size: 8px; // Match name font size
+    padding: 10px 16px;
+    background-color: #f0f2f5;
     font-weight: bold;
-    margin: 0; // Remove margin
-    padding: 0; // Remove padding
-
-  }
-
-  .total-amount {
-    margin-top: 16px; // Adjust if needed
-    font-size: 18px; // Total amount font size
-    font-weight: bold;
-    text-align: center; // Align total amount to the right
-    padding: 0; // Remove padding
-    margin: 0; // Remove margin
-    background-color: yellow;
-    height:50px;
-    width: 300px;
-    padding:10px;
+    font-size: 14px;
     text-align: center;
+  }
+
+  .players-container {
     display: flex;
-    align-items: center;
+    gap: 20px;
+    padding: 16px;
+
+    .players-column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      .player-card {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+
+        .player-info {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+
+          .player-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+          }
+
+          .details {
+            display: flex;
+            flex-direction: column;
+
+            .player-amount {
+              font-weight: bold;
+              color: #0a2a59;
+            }
+
+            .player-buyer {
+              font-size: 12px;
+              color: grey;
+            }
+          }
+        }
+
+        .player-name {
+          font-size: 14px;
+          font-weight: 500;
+          color: #333;
+        }
+      }
+    }
+  }
+
+  .total-amount-container {
+    display: flex;
     justify-content: center;
-  }
-
-  .total-amount-container{
-    width: 100vw;
-    display: flex;
     align-items: center;
-    justify-content: center;
-  }
-
-  .image-name-container{
-    display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-  }
-
-  .text{
-    font-size: 9px;
-    margin: 0px;
-    padding: 0px;
+    padding: 16px;
+    background-color: #ffe500;
+    font-size: 16px;
     font-weight: bold;
+    color: #0a2a59;
+
+    span {
+      margin-right: 8px;
+      color: black;
+    }
   }
 
-  .ant-list-item {
-    padding: 0; // Remove default padding for list items
-  }
-
-  .ant-list-item-meta {
-    margin: 0; // Remove default margin for list item meta
-  }
-
-  .ant-list-item-meta-avatar img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin: 0; // Remove margin from avatar images
-  }
-
+  // Mobile responsiveness
   @media (max-width: 768px) {
-    .ant-list-item-meta-avatar img {
-      width: 30px;
-      height: 30px;
+    .players-container {
+      flex-wrap: wrap;
+      gap: 12px;
+
+      .players-column {
+        flex: 0 0 50%; // Ensures two columns fit in a row
+        max-width: 50%;
+
+        .player-card {
+          flex-direction: row;
+          align-items: center;
+          gap: 8px;
+
+          .player-info {
+            flex-direction: row;
+
+            .player-image {
+              width: 30px;
+              height: 30px;
+            }
+
+            .details {
+              .player-amount {
+                font-size: 12px;
+              }
+
+              .player-buyer {
+                font-size: 10px;
+              }
+            }
+          }
+
+          .player-name {
+            font-size: 12px;
+          }
+        }
+      }
     }
 
-    .match-name {
-      font-size: 16px; // Smaller font size for mobile
-      margin: 0; // Remove margin
-      padding: 0; // Remove padding
-    }
-
-    .total-amount {
-      font-size: 12px; // Smaller total amount font size for mobile
-      margin: 0; // Remove margin
-      padding: 0; // Remove padding
-      height: 50px;
-      width:200px;
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .image-name-container{
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-    }
-    .total-amount-container{
-      width: 100vw;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .total-amount-container {
+      font-size: 14px;
+      padding: 12px;
     }
   }
 
-  @media (max-width: 576px) {
-    .ant-list-item-meta-avatar img {
-      width: 24px;
-      height: 24px;
+  @media (max-width: 480px) {
+    .players-container {
+      flex-wrap: wrap;
+
+      .players-column {
+        flex: 0 0 50%; // Two columns side-by-side
+        max-width: 50%;
+
+        .player-card {
+          .player-info {
+            flex-direction: column;
+            align-items: flex-start;
+
+            .player-image {
+              width: 25px;
+              height: 25px;
+            }
+          }
+
+          .player-name {
+            font-size: 10px;
+          }
+        }
+      }
     }
 
-    .match-name {
-      font-size: 14px; // Smaller font size for mobile
-      margin: 0; // Remove margin
-      padding: 0; // Remove padding
-    }
-    
-
-    .total-amount {
-      font-size: 10px; // Smaller total amount font size for mobile
-      margin: 0; // Remove margin
-      padding: 0; // Remove padding
-      background-color: yellow;
-      height:20px;
-      width: 200px;
-      padding:10px;
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .image-name-container{
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-    }
-    .total-amount-container{
-      width: 100vw;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .total-amount-container {
+      font-size: 12px;
     }
   }
 }

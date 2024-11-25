@@ -2,123 +2,114 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  // background-color: #25d366;
+  color: white;
 
   .content-area {
     flex: 1;
-    padding-top: 90px; /* Space for fixed header */
+    padding-top: 60px; /* Space for fixed header */
     padding-bottom: 60px; /* Space for fixed footer */
     overflow-y: auto; /* Enables vertical scrolling for the content */
-    // background-color: #a65454;
 
     .section {
-      padding-left: 10px;
+      padding-right: 10px;
 
       h3 {
         font-size: 18px;
-        color: #0a2a59;
+        color: #fff;
+        text-align: center;
       }
     }
 
     .matches-section {
       width: 100%;
-      max-width: 600px; /* Adjust as necessary */
+      max-width: 550px; /* Adjust as necessary */
       margin: auto;
       overflow: auto;
+    }
+
+    .match-cards {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      background-color: #0d1117;
+      border: 1px solid #85909b; /* Add border */
+      border-radius: 8px;
+      margin: 10px;
+      padding: 10px;
+
+      &:hover {
+        transform: scale(1.02); /* Slight hover effect */
+        transition: transform 0.3s ease;
+      }
+    }
+
+    .match-image {
+      width: 100%; /* Full width of card */
+      height: 300px; /* Increased height for the image */
+      object-fit: contain; /* Ensures the full image is shown */
+      border-radius: 4px;
     }
 
     .match-details {
       display: flex;
       align-items: center;
       justify-content: space-between;
-    }
+      color: #fff;
+      margin-top: 10px;
 
-    .match-card {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      align-items: center;
-      text-align: center;
-    }
-
-    .match-image {
-      width: 100%; /* Make image responsive */
-      height: auto;
-    }
-
-    .countdown {
-      font-weight: bold;
-      font-size: 1.2em;
-      color: rgb(228, 60, 60);
-    }
-
-    .whatsapp-cta {
-      margin: 10px;
-
-      .whatsapp-container {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        background-color: white;
-        padding: 10px;
-        border-radius: 10px;
+      p {
+        margin: 0;
       }
 
-      .whatsapp-details {
-        width: 300px;
-      }
-
-      .whatsapp-button {
-        background-color: #25d366;
-        height: 40px;
-        width: 40px;
-        border-radius: 50%;
-        color: white;
-        border: none;
-        margin-left: 10px; /* Space between text and button */
-      }
-
-      img {
-        width: 24px;
-        margin-right: 10px;
+      .countdown {
+        font-weight: bold;
+        font-size: 1.2em;
+        color: rgb(228, 60, 60); /* Red color for countdown */
       }
     }
+  }
 
-    .recent-winners {
-      margin-top: 20px;
-      padding: 30px;
-      // background-color: #25d366;
-      margin-bottom: 50px;
-
-      h3 {
-        font-size: 18px;
-        margin-left: 10px;
+  @media screen and (max-width: 768px) {
+    .content-area {
+      .matches-section {
+        max-width: 90%; /* Shrink content for smaller screens */
       }
 
-      .winners-list {
-        display: flex;
-        margin: 10px;
-        gap: 10px;
+      .match-card {
+        padding: 8px; /* Reduce padding */
+      }
 
-        .winner-card {
-          text-align: center;
+      .match-image {
+        height: 250px; /* Reduced height for medium screens */
+        object-fit: contain; /* Ensure full image is visible */
+      }
 
-          .winner-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-          }
+      .match-details {
+        .countdown {
+          font-size: 1em; /* Reduce font size */
+        }
+      }
+    }
+  }
 
-          h4 {
-            font-size: 16px;
-            margin-top: 10px;
-          }
+  @media screen and (max-width: 480px) {
+    .content-area {
+      .matches-section {
+        max-width: 100%; /* Use full width */
+      }
 
-          p {
-            font-size: 14px;
-            color: #666;
-          }
+      .match-card {
+        padding: 6px; /* Slightly smaller padding */
+      }
+
+      .match-image {
+        height: 200px; /* Further reduce image height for small screens */
+        object-fit: contain; /* Ensure full image is visible */
+      }
+
+      .match-details {
+        .countdown {
+          font-size: 0.9em; /* Smaller font size for mobile */
         }
       }
     }
