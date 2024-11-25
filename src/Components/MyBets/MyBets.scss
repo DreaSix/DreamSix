@@ -1,12 +1,76 @@
 .player-page {
-    padding: 20px;
-    background-color: #f0f2f5;
-    margin-top: 70px;
-    margin-bottom: 40px;
+  background-color: #0d1117;
+  margin-top: 70px;
+  padding: 10px; // Added padding for space around the content
+}
+
+.player-card {
+  background-color: #0d0d27;
+  color: aliceblue;
+  border-radius: 8px; // Rounded corners for the card
+  padding: 10px; // Inside padding for the card
+  margin-bottom: 10px; // Space between the cards
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); // Subtle shadow for depth
+  transition: transform 0.3s ease; // Smooth hover effect
+  cursor: pointer;
+  height:120px;
+}
+
+.player-card:hover {
+  transform: translateY(-5px); // Slight lift effect on hover
+}
+
+.player-name {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top:12px;
+}
+
+.date {
+  font-size: 14px;
+  color: #bbb;
+  margin-top:5px;
+}
+
+.amount {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.status {
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.status.win {
+  color: green;
+}
+
+.status.loss {
+  color: red;
+}
+
+.player-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; // Spacing between each card
+}
+
+@media (max-width: 768px) {
+  .player-card {
+    padding: 12px; // Less padding on smaller screens
   }
-  
-  .player-list {
-    margin-bottom: 20px;
+
+  .player-name {
+    font-size: 16px;
   }
-  
-  
+
+  .amount {
+    font-size: 14px;
+  }
+
+  .status {
+    font-size: 12px;
+  }
+}

@@ -1,5 +1,5 @@
 .match-page {
-  background-color: #0d1117; // Matches background color
+  background:linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%); // Matches background color
   
   .custom-tabs {
     .ant-tabs-nav {
@@ -31,8 +31,9 @@
 
   .match-card {
     margin-bottom: 16px;
-    background-color: #1e2127; // Card background color
+    background:linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%); // Card background color
     border-radius: 8px;
+    border:1px solid black;
     transition: transform 0.2s;
     &:hover {
       transform: scale(1.02);
