@@ -1,115 +1,213 @@
 .landing-page {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  color: white;
 
   .content-area {
-    flex: 1;
-    padding-top: 60px; /* Space for fixed header */
-    padding-bottom: 60px; /* Space for fixed footer */
-    overflow-y: auto; /* Enables vertical scrolling for the content */
-
-    .section {
-      padding-right: 10px;
-
-      h3 {
-        font-size: 18px;
-        color: #fff;
-        text-align: center;
-      }
-    }
+    padding: 20px;
 
     .matches-section {
-      width: 100%;
-      max-width: 550px; /* Adjust as necessary */
-      margin: auto;
-      overflow: auto;
+      margin-top: 25px;
+
+      h3 {
+        font-size: 24px;
+        color: #fbf7f7;
+        margin-top: 10px;
+      }
+
+      .match-cards {
+        border: none;
+        background: #001529;
+        color: #fff;
+
+        .match-image {
+          cursor: pointer;
+          border-radius: 5px;
+        }
+
+        .match-details {
+          display: flex;
+          justify-content: space-between; /* Align details to the left and countdown to the right */
+          align-items: center; /* Vertically align items */
+          margin-top: 10px;
+        
+          p {
+            margin: 0;
+            font-size: 16px;
+            color: #fff;
+        
+            &.countdown {
+              color: #ff4d4f;
+              font-weight: bold;
+            }
+          }
+        }
+        
+      }
     }
 
-    .match-cards {
-      display: flex;
-      flex-direction: column;
+    .buttons-container {
+      margin-top: 20px;
       text-align: center;
-      background-color: #0d1117;
-      border: 1px solid #85909b; /* Add border */
-      border-radius: 8px;
-      margin: 10px;
-      padding: 10px;
-
-      &:hover {
-        transform: scale(1.02); /* Slight hover effect */
-        transition: transform 0.3s ease;
-      }
-    }
-
-    .match-image {
-      width: 100%; /* Full width of card */
-      height: 300px; /* Increased height for the image */
-      object-fit: contain; /* Ensures the full image is shown */
-      border-radius: 4px;
-    }
-
-    .match-details {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: #fff;
-      margin-top: 10px;
-
-      p {
-        margin: 0;
-      }
-
-      .countdown {
+    
+      button {
+        margin:3px;
+        width: 120px;
+        height: 40px;
+        font-size: 16px;
         font-weight: bold;
-        font-size: 1.2em;
-        color: rgb(228, 60, 60); /* Red color for countdown */
+        border-radius: 5px;
+
+      }
+    
+      .green-button {
+        background-color: #2ca430;
+        color: white;
+        border: 0.5px solid white;
+      }
+    
+      .red-button {
+        background-color: #e23125;
+        color: white;
+        border: 0.5px solid white;
+      }
+    
+      .blue-button {
+        background-color: #43a1ee;
+        color: white;
+        border: 0.5px solid white;
+      }
+    
+      button:hover {
+        opacity: 0.9;
       }
     }
-  }
+    
 
-  @media screen and (max-width: 768px) {
-    .content-area {
-      .matches-section {
-        max-width: 90%; /* Shrink content for smaller screens */
+
+    .recent-winners {
+      margin-bottom: 40px;
+
+      h2 {
+        font-size: 22px;
+        color: #fdfcfd;
+        margin-bottom:10px;
+        margin-left: 10px;
       }
 
-      .match-card {
-        padding: 8px; /* Reduce padding */
-      }
+      .winner-card {
+        background: #001529;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom:3px;
 
-      .match-image {
-        height: 250px; /* Reduced height for medium screens */
-        object-fit: contain; /* Ensure full image is visible */
-      }
+        .winner-info {
+          display: flex;
+          align-items: center;
 
-      .match-details {
-        .countdown {
-          font-size: 1em; /* Reduce font size */
+          img {
+            margin-right: 10px;
+          }
+
+          h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #fff;
+          }
+
+          span {
+            font-size: 14px;
+            color: #fff;
+          }
+        }
+
+        .amount {
+          font-size: 18px;
+          font-weight: bold;
+          color: #f4d005;
         }
       }
     }
   }
+}
 
-  @media screen and (max-width: 480px) {
+@media screen and (max-width: 768px) {
+  .landing-page {
     .content-area {
+      padding: 10px;
+
       .matches-section {
-        max-width: 100%; /* Use full width */
+        h3 {
+          font-size: 20px;
+        }
+
+        .match-details p {
+          font-size: 14px;
+        }
       }
 
-      .match-card {
-        padding: 6px; /* Slightly smaller padding */
+      .recent-winners {
+        h2 {
+          font-size: 18px;
+        }
+
+        .winner-card {
+          padding: 10px;
+
+          .winner-info {
+            img {
+              width: 40px;
+              height: 40px;
+            }
+
+            h3 {
+              font-size: 16px;
+            }
+
+            span {
+              font-size: 12px;
+            }
+          }
+
+          .amount {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .landing-page {
+    .content-area {
+      max-width: 1200px;
+      margin: 0 auto;
+
+      .matches-section {
+        .match-cards {
+          max-width: 400px;
+          margin: 0 auto;
+        }
       }
 
-      .match-image {
-        height: 200px; /* Further reduce image height for small screens */
-        object-fit: contain; /* Ensure full image is visible */
+      .highlights {
+        .ant-card {
+          transition: transform 0.3s ease-in-out;
+
+          &:hover {
+            transform: scale(1.05);
+          }
+        }
       }
 
-      .match-details {
-        .countdown {
-          font-size: 0.9em; /* Smaller font size for mobile */
+      .recent-winners {
+        .winner-card {
+          transition: box-shadow 0.3s ease-in-out;
+
+          &:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          }
         }
       }
     }
