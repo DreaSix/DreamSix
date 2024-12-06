@@ -2,12 +2,13 @@ import React from "react";
 import { Form, Input, Button } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import "./LoginPage.scss";
+import Logo from "../../assets/logo.jpeg";
 
 const LoginPage = () => {
   const navigate = useNavigate();
 
   const handleLoginClick = () => {
-    navigate("/main-homepage"); // Navigates to the login page
+    navigate("/homepage"); // Navigates to the login page
   };
 
   const onFinish = (values) => {
@@ -21,7 +22,7 @@ const LoginPage = () => {
   return (
     <div className="login-container" style={{ padding: "10%" }}>
       <div className="logo">
-        <img src="/path-to-your-logo.png" alt="DreamSix Logo" />
+        <img src={Logo} alt="DreamSix Logo" />
       </div>
       <h2>Welcome back! Glad to see you, Again!</h2>
 

@@ -1,10 +1,8 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useAuth } from "./Context/AuthContext";
 import LoginPage from "./Components/Login/LoginPage";
 import HomePage from "./Components/HomePage/HomePage";
-import MainHomePage from "./Components/MainHomePage/MainHomePage";
 import Rules from "./Components/Rules/Rules";
 import DepositPage from "./Components/DepositPage/DepositPage";
 import USerAuctionPage from "./Components/UserAuction/UserAuctionPage";
@@ -21,9 +19,11 @@ import PlayerDetails from "./Components/MyBets/PlayerDetails";
 import MatchPage from "./Components/MatchDeatils/MatchDetails";
 import PlayersList from "./Components/PlayersList/PlayersList";
 import PlayersFinalList from "./Components/PlayersList/PlayersFinalList";
+import Registration from "./Components/Registration/Registration";
+import RegisterProcess from "./Components/Registration/RegisterProcess";
 
 function App() {
-  const { isAuthenticated } = useAuth();
+  
 
   return (
     <div
@@ -35,11 +35,11 @@ function App() {
       }}
     >
       <Router>
-        {/* {isAuthenticated ? <NavbarAfterLogin /> : <NavbarBeforeLogin />} */}
         <Routes>
-          <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<Registration />} />
+        <Route path="register-process" element={<RegisterProcess />} />
+          <Route path="homepage" element={<HomePage />} />
           <Route path="/loginpage" element={<LoginPage />} />
-          <Route path="/main-homepage" element={<MainHomePage />} />
           <Route path="/rules" element={<Rules />} />
           <Route path="/auction-type" element={<AuctionTypePage />} />
           <Route path="/depositpage" element={<DepositPage />} />
