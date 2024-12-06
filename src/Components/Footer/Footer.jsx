@@ -7,7 +7,7 @@ const Footer = () => {
     return(
         <div className="bottom-nav">
         <div className="nav-item">
-          <Link to="/">
+          <Link to="/homepage">
             <HomeOutlined style={{ fontSize: '24px' }} />
             <p>Home</p>
           </Link>

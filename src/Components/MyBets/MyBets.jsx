@@ -34,6 +34,20 @@ const Betcards = [
     status: 'Win',
     avatar: 'https://biowikis.com/wp-content/uploads/2020/09/Marcus-Stoinis-Bio-Wiki-Net-Worth.jpg' // Placeholder avatar
   },
+  {
+    name: 'Suresh Raina',
+    date: 'Aug 15th, 2024',
+    amount: 3000,
+    status: 'Win',
+    avatar: 'https://biowikis.com/wp-content/uploads/2020/09/Marcus-Stoinis-Bio-Wiki-Net-Worth.jpg' // Placeholder avatar
+  },
+  {
+    name: 'Rohit Sharma',
+    date: 'Aug 6th, 2024',
+    amount: 1000,
+    status: 'Loss',
+    avatar: 'https://starsunfolded.com/wp-content/uploads/2016/05/KL-Rahul-10-768x744.jpg' // Placeholder avatar
+  },
   
 ];
 
