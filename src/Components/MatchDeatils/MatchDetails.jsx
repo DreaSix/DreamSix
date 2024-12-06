@@ -11,25 +11,25 @@ const MatchPage = () => {
     {
       team1: "RCB",
       team2: "CSK",
-      img: "https://i.pinimg.com/originals/a1/de/a2/a1dea2cf213703688b3d040e1c112a53.png",
+      img: "https://img.jagranjosh.com/images/2024/April/242024/RCB-vs-LSG-today.jpg",
       countdown: "03:34:23",
     },
     {
       team1: "IND",
       team2: "AUS",
-      img: "https://images.news9live.com/wp-content/uploads/2024/10/India-vs-Australia-womens-t20-World-Cup.jpg?w=1200&enlarge=true",
+      img: "https://img.jagranjosh.com/images/2024/March/2932024/KKR-vs-RCB-tODAY.jpg",
       countdown: "03:34:23",
     },
     {
       team1: "RCB",
       team2: "CSK",
-      img: "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/poster-design-template-351effd160d6232fa505498a400cd1a1_screen.jpg?ts=1713411077",
+      img: "https://st1.latestly.com/wp-content/uploads/2018/04/M27-IPL-CSK-vs-MI-Live-Update-781x441.jpg",
       countdown: "03:34:23",
     },
     {
       team1: "IND",
       team2: "AUS",
-      img: "https://images.news9live.com/wp-content/uploads/2024/10/India-vs-Australia-womens-t20-World-Cup.jpg?w=1200&enlarge=true",
+      img: "https://sm.ign.com/t/ign_in/screenshot/default/template-1-ipl_3m2z.1200.png",
       countdown: "03:34:23",
     },
   ];

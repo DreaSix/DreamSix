@@ -26,14 +26,14 @@ const AuctionTypePage = () => {
            <Header/>
     <div className="top-sixer-scorer-page">
       <div className="option-section">
-        <h2>Top Sixer</h2> 
+        <h2> ▼ TopSixer </h2> 
         <div className="card"  onClick={cardButton}>
           <img src={TopSix} alt="LSG vs RCB" className="team-image" />
         </div>
       </div>
 
       <div className="option-section">
-        <h2>Top Scorer</h2>
+        <h2> ▼ TopScorer</h2>
         <div className="card"  onClick={cardButton}>
             <img src={TopScorer} alt="LSG vs RCB" className="team-image" />
            </div>

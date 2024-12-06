@@ -1,36 +1,37 @@
-.match-page { background-color: #0d1117; // Matches background color
+.match-page {
   
   .custom-tabs {
     .ant-tabs-nav {
       justify-content: center;
 
       .ant-tabs-tab {
-        background-color: yellow; // Button background color
+        // background-color: rgb(255, 132, 0); // Button background color
         border-radius: 4px;
         margin: 0 8px;
         padding: 8px 16px;
-        transition: background-color 0.3s, color 0.3s;
+        transition: background-color 0.3s, color 0.3s; 
 
         &:hover {
-          background-color: #f7c70f; // Slightly darker yellow on hover
+          background-color: #f7eb0f; // Slightly darker yellow on hover
           
         }
 
         &.ant-tabs-tab-active {
-          background-color: #f7c70f; // Highlight active tab
-          color: black; // Ensure text is visible
+          background-color: #f7eb0f; // Highlight active tab
         }
 
         .ant-tabs-tab-btn {
           font-weight: bold;
+          color: black;
+            
         }
       }
     }
   }
 
   .match-card {
-    margin-bottom: 16px;
-    background-color: #1e2127; // Card background color
+    margin-bottom: 14px;
+    background-color: #1e2127; 
     border-radius: 8px;
     transition: transform 0.2s;
     &:hover {
@@ -39,9 +40,9 @@
 
     img {
       width: 100%;
-      max-height: 150px;
+      max-height: 100px;
       object-fit: cover;
-      border-radius: 8px;
+      border-radius: 4px;
     }
 
     .match-info {
@@ -67,7 +68,7 @@
 
   .no-matches {
     text-align: center;
-    color: #666;
+    color: #fdf9f9;
   }
 }
 
