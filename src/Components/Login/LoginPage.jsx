@@ -35,12 +35,12 @@ const LoginPage = () => {
         className="login-form"
       >
         <Form.Item
-          name="mobileNumber"
+          name="username"
           rules={[
             { required: true, message: "Please input your mobile number!" },
           ]}
         >
-          <Input placeholder="Mobile Number" />
+          <Input placeholder="User Name" />
         </Form.Item>
 
         <Form.Item

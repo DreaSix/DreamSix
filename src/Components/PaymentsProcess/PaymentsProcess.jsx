@@ -10,7 +10,7 @@ const PaymentsProcess = () => {
   const navigate = useNavigate(); // Initialize useNavigate for routing
 
   const handleDone = () => {
-    navigate('/main-homepage'); // Navigate to the desired route
+    navigate('/homepage'); // Navigate to the desired route
   };
 
   return (

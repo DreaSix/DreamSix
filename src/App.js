@@ -48,7 +48,7 @@ function App() {
           <Route path="/match-countdown" element={<CountdownPage />} />
           <Route path="/payments-process" element={<PaymentsProcess />} />
           <Route path="/change-password" element={<ChangePassword />} />
-          <Route path="/players" element={<TransactionPage />} />
+          <Route path="/transactions" element={<TransactionPage />} />
           <Route path="/player-details" element={<PlayerDetails />} />
           <Route path="/payment-status" element={<PaymentStatus />} />
           <Route path="/bets" element={<MyBets />} />

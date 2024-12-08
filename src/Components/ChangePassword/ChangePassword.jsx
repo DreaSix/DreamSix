@@ -22,13 +22,13 @@ const ChangePassword = () => {
       <h2>Change Password</h2>
       <Form
         form={form}
-        name="changePassword"
+      
         layout="vertical"
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
       >
         <Form.Item
-          label="Current Password"
+      
           name="currentPassword"
           rules={[{ required: true, message: 'Please enter your current password' }]}
         >
@@ -36,7 +36,7 @@ const ChangePassword = () => {
         </Form.Item>
 
         <Form.Item
-          label="New Password"
+         
           name="newPassword"
           rules={[{ required: true, message: 'Please enter your new password' }]}
         >
@@ -44,7 +44,7 @@ const ChangePassword = () => {
         </Form.Item>
 
         <Form.Item
-          label="Confirm New Password"
+      
           name="confirmNewPassword"
           dependencies={['newPassword']}
           hasFeedback

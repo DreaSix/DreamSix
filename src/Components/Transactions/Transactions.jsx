@@ -59,7 +59,7 @@ const TransactionPage = () => {
         renderItem={(transaction) => (
           <List.Item
             actions={[
-              <RightOutlined onClick={OnpaymentStatus} key="arrow" style={{ color: '#000' }} />,
+              <RightOutlined onClick={OnpaymentStatus} key="arrow" style={{ color: '#fff' }} />,
             ]}
           >
             <List.Item.Meta

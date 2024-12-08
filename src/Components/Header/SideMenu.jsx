@@ -57,7 +57,7 @@ const SideMenu = () => {
 
         {/* Menu List */}
         <List >
-          <List.Item onClick={() => handleNavigation("/players")} style={{ color:"white"}}>
+          <List.Item onClick={() => handleNavigation("/transactions")} style={{ color:"white"}}>
             <HistoryOutlined style={{ color:"white"}} /> Transactions History
           </List.Item>
           <List.Item onClick={() => handleNavigation("/change-password")} style={{ color:"white"}}>
