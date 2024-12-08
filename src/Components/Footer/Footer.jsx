@@ -1,44 +1,42 @@
-import { BookOutlined, DollarCircleOutlined, HomeOutlined, TeamOutlined, TrophyOutlined } from "@ant-design/icons"
-import React from "react"
-import { Link } from "react-router-dom"
-import "./Footer.scss"
+import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import {
+  BookOutlined,
+  DollarCircleOutlined,
+  HomeOutlined,
+  TeamOutlined,
+  TrophyOutlined,
+} from "@ant-design/icons";
+import "./Footer.scss";
 
 const Footer = () => {
-    return(
-        <div className="bottom-nav">
-        <div className="nav-item">
-          <Link to="/homepage">
-            <HomeOutlined style={{ fontSize: '24px' }} />
-            <p>Home</p>
-          </Link>
-        </div>
-        <div className="nav-item">
-          <Link to="/matchs-page">
-            <TrophyOutlined style={{ fontSize: '24px' }} />
-            <p>Matches</p>
-          </Link>
-        </div>
-        <div className="nav-item">
-          <Link to="/players-list">
-            <TeamOutlined style={{ fontSize: '24px' }} />
-            <p>Players List</p>
-          </Link>
-        </div>
-        <div className="nav-item">
-          <Link to="/rules">
-            <BookOutlined style={{ fontSize: '24px' }} />
-            <p>Rules</p>
-          </Link>
-        </div>
-        <div className="nav-item">
-          <Link to="/bets">
-            <DollarCircleOutlined style={{ fontSize: '24px' }} />
-            <p>My Bets</p>
-          </Link>
-        </div>
-      </div>
-    )
-}
+  const location = useLocation(); // Get the current route
+  const [activeRoute, setActiveRoute] = useState(location.pathname); // Set the active route
 
+  const navItems = [
+    { path: "/homepage", label: "Home", icon: <HomeOutlined /> },
+    { path: "/matchs-page", label: "Matches", icon: <TrophyOutlined /> },
+    { path: "/players-list", label: "Players List", icon: <TeamOutlined /> },
+    { path: "/rules", label: "Rules", icon: <BookOutlined /> },
+    { path: "/bets", label: "My Bets", icon: <DollarCircleOutlined /> },
+  ];
+
+  return (
+    <div className="bottom-nav">
+      {navItems.map((item) => (
+        <div
+          key={item.path}
+          className={`nav-item ${activeRoute === item.path ? "active" : ""}`}
+          onClick={() => setActiveRoute(item.path)} // Update active route on click
+        >
+          <Link to={item.path}>
+            {React.cloneElement(item.icon, { style: { fontSize: "24px" } })}
+            <p>{item.label}</p>
+          </Link>
+        </div>
+      ))}
+    </div>
+  );
+};
 
 export default Footer;

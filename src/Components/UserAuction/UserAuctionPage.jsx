@@ -1,6 +1,7 @@
 import React from 'react';
 import '../UserAuction/UserAuctionPage.scss'
 import Footer from '../Footer/Footer';
+import { Badge, Button, Card } from 'antd';
 
 const USerAuctionPage = () => {
   const nextPlayers = [
@@ -17,13 +18,18 @@ const USerAuctionPage = () => {
     { name: 'Rajan Kumar', price: 700, image: 'player_image_url' },
   ];
 
+  const bids = [
+    { phone: "9515206990", name: "Sreevardhan", price: 1050, initial: "S" },
+    { phone: "9515206990", name: "Elisha", price: 1100, initial: "E" },
+  ];
+
   return (
     <div className="player-page">
       <div className="header">
         <div className="header-left">
-          <img src="team_logo.png" alt="team logo" className="team-logo" />
+          <img src="https://tse4.mm.bing.net/th?id=OIP.OzuHtcqMSQR6cmY0njCcfwHaG2&pid=Api&P=0&h=180" alt="team logo" className="team-logo" />
           <div>
-            <h2>Sreenu</h2>
+            <h2>Narasimha</h2>
             <p className="status">Online</p>
           </div>
         </div>
@@ -53,19 +59,36 @@ const USerAuctionPage = () => {
         </div>
       </div>
 
-      <div className="amount-input">
-        <span className="smiley">😊</span>
-        <input type="number" value="100" />
-        <button className="send-btn">▶</button>
-      </div>
-
-      <div className="keypad">
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((key) => (
-          <div key={key} className="key">
-            {key}
+{/* 
+      <section className="bidding-section">
+        <Card className="player-details">
+          <img src="rajat.jpg" alt="Rajat Patidar" />
+          <div>
+            <h3>Rajat Patidar</h3>
+            <p>Starting Price: ₹1000</p>
           </div>
-        ))}
-      </div>
+        </Card>
+
+        <div className="bids-list">
+          {bids.map((bid, index) => (
+            <Card key={index} className="bid-card">
+              <p>{bid.phone}</p>
+              <p>{bid.name}</p>
+              <Badge count={bid.initial} />
+              <p className="bid-price">₹{bid.price}</p>
+            </Card>
+          ))}
+        </div>
+      </section> */}
+
+      <footer className="bidding-footer">
+        <Button>+50</Button>
+        <Button>+100</Button>
+        <Button>+200</Button>
+        <Button>+500</Button>
+      </footer>
+
+     
       <Footer/>
     </div>
   );

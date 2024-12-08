@@ -4,11 +4,13 @@
     // padding: 10px;
     margin: 10px;
     cursor: pointer;
+    color:white;
 
   
     .player-name {
       font-size: 16px;
       font-weight: 600;
+      color: #f9ee5a;
     }
   
     .date {
@@ -18,12 +20,15 @@
     .amount {
       font-size: 16px;
       font-weight: bold;
+      color: #fcfafa;
+      
     }
   
     .status {
       text-align: right;
       font-size: 14px;
       font-weight: bold;
+      color: #fcfafa;
     }
   
     .win {
@@ -37,6 +42,7 @@
   
   .player-details {
     margin-top: 200px;
+    color:white;
     .player-detail-card {
       background-color: #1a0202;
     }
