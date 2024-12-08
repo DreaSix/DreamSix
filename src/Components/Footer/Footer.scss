@@ -1,27 +1,35 @@
 .bottom-nav {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: linear-gradient(to top, #99ccff 0%, #003366 100%);
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: linear-gradient(to top, #99ccff 0%, #003366 100%);
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 
-    .nav-item {
-      text-align: center;
+  .nav-item {
+    text-align: center;
+    color: white;
+
+    p {
+      margin: 0;
+      font-size: 12px;
+    }
+
+    a {
       color: white;
+      text-decoration: none;
+    }
 
-      p {
-        margin: 0;
-        font-size: 12px;
-      }
+    &.active {
+      color: yellow;
 
       a {
-        color: white;
-        text-decoration: none;
+        color: yellow;
       }
     }
   }
+}

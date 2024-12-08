@@ -24,6 +24,7 @@
         h2 {
           font-size: 16px;
           margin: 0;
+          color:white;
         }
   
         .status {
@@ -84,6 +85,18 @@
             margin-top: 5px;
           }
         }
+      }
+    }
+
+    .bidding-footer {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 1rem;
+  
+      button {
+        background-color: #ffd700;
+        color: #000;
+        font-weight: bold;
       }
     }
   
