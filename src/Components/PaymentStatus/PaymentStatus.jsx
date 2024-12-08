@@ -14,35 +14,35 @@ const PaymentStatus = () => {
       <Card className="payment-card">
         <Row gutter={[16, 16]}>
           <Col span={24}>
-            <Text strong>Request ID</Text>
+            <Text strong className='payment-headers'style={{color:'#e6a7a7'}}>Request ID</Text>
             <Text className="payment-value">#tnx33074901</Text>
           </Col>
           <Col span={24}>
-            <Text strong>Date & Time</Text>
+            <Text strong style={{color:'#e6a7a7'}} >Date & Time</Text>
             <Text className="payment-value">Aug 6th, 2024, 16:08:05</Text>
           </Col>
           <Col span={24}>
-            <Text strong>Amount</Text>
+            <Text strong style={{color:'#e6a7a7'}} >Amount</Text>
             <Text className="payment-value">₹ 1000</Text>
           </Col>
           <Col span={24}>
-            <Text strong>Type</Text>
+            <Text strong style={{color:'#e6a7a7'}}>Type</Text>
             <Text className="payment-value">Deposit</Text>
           </Col>
           <Col span={24}>
-            <Text strong>Status</Text>
+            <Text strong style={{color:'#e6a7a7'}}>Status</Text>
             <Text className="payment-value pending">Pending</Text>
           </Col>
           <Col span={24}>
-            <Text strong>Payment Type</Text>
+            <Text strong style={{color:'#e6a7a7'}}>Payment Type</Text>
             <Text className="payment-value">IMPS</Text>
           </Col>
           <Col span={24}>
-            <Text strong>Remarks</Text>
+            <Text strong style={{color:'#e6a7a7'}}>Remarks</Text>
             <Text className="payment-value">Deposit Done</Text>
           </Col>
           <Col span={24}>
-            <Text strong>Transaction Image</Text>
+            <Text strong style={{color:'#e6a7a7'}}>Transaction Image</Text>
             <Text className="payment-value">screenshot1.img.png</Text>
           </Col>
         </Row>
