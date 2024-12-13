@@ -35,6 +35,9 @@ const HomePage = () => {
   const onClickMatchImage = () => {
     navigate("/auction-type");
   };
+  const onClickWithdrawl = () => {
+    navigate("/withdrawl");
+  };
 
   const handleButtonClick = (buttonType) => {
     console.log(`${buttonType} button clicked`);
@@ -88,7 +91,7 @@ const HomePage = () => {
             </Button>
             <Button
               className="withdraw-button red-button"
-              onClick={() => handleButtonClick("Withdraw")}
+              onClick={() => onClickWithdrawl("/withdrawl")}
             >
               Withdraw
             </Button>

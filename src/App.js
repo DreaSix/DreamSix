@@ -21,6 +21,7 @@ import PlayersList from "./Components/PlayersList/PlayersList";
 import PlayersFinalList from "./Components/PlayersList/PlayersFinalList";
 import Registration from "./Components/Registration/Registration";
 import RegisterProcess from "./Components/Registration/RegisterProcess";
+import Withdrawl from "./Components/Withdrawl/Withdrawl";
 
 function App() {
   
@@ -56,6 +57,8 @@ function App() {
           <Route path="/matchs-page" element={<MatchPage />} />
           <Route path="/players-list" element={<PlayersList />} />
           <Route path="/players-final-list" element={<PlayersFinalList />} />
+          <Route path="/withdrawl" element={<Withdrawl />} />
+
         </Routes>
       </Router>
     </div>
