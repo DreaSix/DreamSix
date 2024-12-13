@@ -1,0 +1,121 @@
+.withdraw-funds {
+    padding: 20px;
+    max-width: 600px;
+    margin: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+    h2 {
+      font-size: 24px;
+      color: #fefdfd;
+      text-align: center;
+    }
+  
+    .instructions {
+      margin: 10px 0;
+      color: #e8d9d7;   
+      font-size: 14px;
+      list-style: none;
+      padding: 0;   
+  
+      li {
+        margin-bottom: 5px;
+      }
+    }
+  
+    h3 {
+      font-size: 18px;
+      color: #f9fbfb;
+      margin-bottom: 20px;
+    }
+  
+    .account-tabs {
+      .ant-tabs-tab {
+        font-size: 14px;
+        color: white;
+      }
+  
+      .ant-tabs-tab-active {
+        color: #ffc107;
+        
+      }
+  
+      .ant-tabs-ink-bar {
+        background-color: #ffc107;
+      }
+    }
+  
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap:12px;
+  
+      label {
+        font-size: 14px;
+        font-weight: bold;
+        color: #090909;
+      }
+  
+      .hint {
+        font-size: 12px;
+        color: #ebf591;
+      }
+  
+      .proceed-btn {
+        background-color: #ffc107;
+        color: #fff;
+        border: none;
+        height: 40px;
+        font-size: 16px;
+  
+        &:hover {
+          background-color: #e0a800;
+        }
+      }
+    }
+  
+    .previous-account-card {
+      margin-bottom: 20px;
+      background-color: #080808;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      color:white;
+  
+      .account-title {
+        font-size: 16px;
+        margin-bottom: 10px;
+        color: #fcf9f9;
+      }
+  
+      .delete-icon {
+        font-size: 18px;
+        color: #e74c3c;
+        cursor: pointer;
+  
+        &:hover {
+          color: #c0392b;
+        }
+      }
+  
+      p {
+        margin: 0;
+        font-size: 14px;
+        color: #f8f5f5;
+      }
+    }
+  }
+  
+
+  @media (max-width: 768px) {
+    .withdraw-funds {
+      padding: 15px;
+  
+      .form {
+        .proceed-btn {
+          width: 100%;
+        }
+      }
+    }
+  }
+    
