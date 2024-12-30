@@ -5,11 +5,6 @@ import "./LoginPage.scss";
 import Logo from "../../assets/logo.jpeg";
 
 const LoginPage = () => {
-  const navigate = useNavigate();
-
-  const handleLoginClick = () => {
-    navigate("/homepage"); // Navigates to the login page
-  };
 
   const onFinish = (values) => {
     console.log("Success:", values);
@@ -59,7 +54,6 @@ const LoginPage = () => {
             type="primary"
             htmlType="submit"
             className="login-button"
-            onClick={handleLoginClick}
           >
             Login
           </Button>
