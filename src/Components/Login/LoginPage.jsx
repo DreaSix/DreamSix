@@ -3,11 +3,18 @@ import { Form, Input, Button } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import "./LoginPage.scss";
 import Logo from "../../assets/logo.jpeg";
+import { userService } from "../../Service/UserService";
 
 const LoginPage = () => {
 
   const onFinish = (values) => {
-    console.log("Success:", values);
+    userService.loginUser(values)
+      .then(response => {
+        console.log('response', response)
+      })
+      .catch(error => {
+        console.log('error', error)
+      })
   };
 
   const onFinishFailed = (errorInfo) => {
