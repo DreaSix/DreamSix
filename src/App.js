@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Cookies from "js-cookie";
+
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import LoginPage from "./Components/Login/LoginPage";
 import HomePage from "./Components/HomePage/HomePage";
 import Rules from "./Components/Rules/Rules";
@@ -22,9 +24,11 @@ import PlayersFinalList from "./Components/PlayersList/PlayersFinalList";
 import Registration from "./Components/Registration/Registration";
 import RegisterProcess from "./Components/Registration/RegisterProcess";
 import Withdrawl from "./Components/Withdrawl/Withdrawl";
+import Header from "./Components/Header/Header";
+import Footer from "./Components/Footer/Footer";
 
 function App() {
-  
+  const [isAuthenticated, setIsAuthenticated] = useState(Cookies.get("jwtToken"))  
 
   return (
     <div
@@ -36,30 +40,43 @@ function App() {
       }}
     >
       <Router>
-        <Routes>
-        <Route path="/" element={<Registration />} />
-        <Route path="register-process" element={<RegisterProcess />} />
-          <Route path="homepage" element={<HomePage />} />
-          <Route path="/loginpage" element={<LoginPage />} />
-          <Route path="/rules" element={<Rules />} />
-          <Route path="/auction-type" element={<AuctionTypePage />} />
-          <Route path="/depositpage" element={<DepositPage />} />
-          <Route path="/user-auctionpage" element={<USerAuctionPage />} />
-          <Route path="/admin-auctionpage" element={<AdminAuctionPage />} />
-          <Route path="/match-countdown" element={<CountdownPage />} />
-          <Route path="/payments-process" element={<PaymentsProcess />} />
-          <Route path="/change-password" element={<ChangePassword />} />
-          <Route path="/transactions" element={<TransactionPage />} />
-          <Route path="/player-details" element={<PlayerDetails />} />
-          <Route path="/payment-status" element={<PaymentStatus />} />
-          <Route path="/bets" element={<MyBets />} />
-          <Route path="/contact-us" element={<ContactUs />} />
-          <Route path="/matchs-page" element={<MatchPage />} />
-          <Route path="/players-list" element={<PlayersList />} />
-          <Route path="/players-final-list" element={<PlayersFinalList />} />
-          <Route path="/withdrawl" element={<Withdrawl />} />
-
-        </Routes>
+        {!isAuthenticated ? (
+          <Routes>
+            <Route
+              path="/loginpage"
+              element={<LoginPage setIsAuthenticated={setIsAuthenticated} />}
+            />
+            <Route path="*" element={<Navigate to="/loginpage" />} />
+          </Routes>
+        ) : (
+          <>
+            <Header />
+            <Routes>
+              <Route path="/" element={<Registration />} />
+              <Route path="/register-process" element={<RegisterProcess />} />
+              <Route path="/homepage" element={<HomePage />} />
+              <Route path="/rules" element={<Rules />} />
+              <Route path="/auction-type" element={<AuctionTypePage />} />
+              <Route path="/depositpage" element={<DepositPage />} />
+              <Route path="/user-auctionpage" element={<USerAuctionPage />} />
+              <Route path="/admin-auctionpage" element={<AdminAuctionPage />} />
+              <Route path="/match-countdown" element={<CountdownPage />} />
+              <Route path="/payments-process" element={<PaymentsProcess />} />
+              <Route path="/change-password" element={<ChangePassword />} />
+              <Route path="/transactions" element={<TransactionPage />} />
+              <Route path="/player-details" element={<PlayerDetails />} />
+              <Route path="/payment-status" element={<PaymentStatus />} />
+              <Route path="/bets" element={<MyBets />} />
+              <Route path="/contact-us" element={<ContactUs />} />
+              <Route path="/matchs-page" element={<MatchPage />} />
+              <Route path="/players-list" element={<PlayersList />} />
+              <Route path="/players-final-list" element={<PlayersFinalList />} />
+              <Route path="/withdrawl" element={<Withdrawl />} />
+              <Route path="*" element={<Navigate to="/homepage" />} />
+            </Routes>
+            <Footer />
+          </>
+        )}
       </Router>
     </div>
   );

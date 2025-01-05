@@ -3,14 +3,18 @@ import { Form, Input, Button } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import "./LoginPage.scss";
 import Logo from "../../assets/logo.jpeg";
+import Cookies from "js-cookie";
 import { userService } from "../../Service/UserService";
 
-const LoginPage = () => {
+const LoginPage = ({setIsAuthenticated}) => {
+  const navigate = useNavigate()
 
   const onFinish = (values) => {
     userService.loginUser(values)
       .then(response => {
-        console.log('response', response)
+        Cookies.set("jwtToken", response?.jwtToken)
+        setIsAuthenticated(response?.jwtToken)
+        navigate("/homepage")
       })
       .catch(error => {
         console.log('error', error)

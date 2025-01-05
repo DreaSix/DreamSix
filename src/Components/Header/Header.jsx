@@ -7,11 +7,6 @@ import "./Header.scss";
 import SideMenu from "./SideMenu";
 
 const Header = () => {
-  const navigate = useNavigate();
-
-  const onDeposit = () => {
-    navigate("/depositpage");
-  };
 
   return (
     <div className="header">
