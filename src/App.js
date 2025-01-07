@@ -37,10 +37,10 @@ function App() {
     >
       <Router>
         <Routes>
-        <Route path="/" element={<Registration />} />
+        <Route path="/registration-page" element={<Registration />} />
         <Route path="register-process" element={<RegisterProcess />} />
           <Route path="homepage" element={<HomePage />} />
-          <Route path="/loginpage" element={<LoginPage />} />
+          <Route path="/" element={<LoginPage />} />
           <Route path="/rules" element={<Rules />} />
           <Route path="/auction-type" element={<AuctionTypePage />} />
           <Route path="/depositpage" element={<DepositPage />} />

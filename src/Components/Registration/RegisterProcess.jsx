@@ -9,7 +9,7 @@ const RegisterProcess = () => {
   const navigate = useNavigate();
 
   const onLogin = () => {
-    navigate("/loginpage");
+    navigate("/");
   };
 
 
