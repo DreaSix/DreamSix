@@ -55,11 +55,25 @@
       margin-bottom: 20px;
 
       a {
-        color: #ff3333;
+        color: #daff33;
         &:hover {
           text-decoration: underline;
         }
       }
+    }
+
+    .Create-Account{
+      display: flex;
+      margin-top: 30px;
+      margin-left: 15px;
+
+      a {
+        color: #f5f0f0;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
     }
 
     .login-button {

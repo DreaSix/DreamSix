@@ -64,6 +64,11 @@ const LoginPage = () => {
             Login
           </Button>
         </Form.Item>
+
+        <Form.Item className="Create-Account">
+          <Link to="/registration-page">Do you have an account ?  <span style={{color:"black"}}>  Create-Account</span> </Link>
+        </Form.Item>
+
       </Form>
     </div>
   );
