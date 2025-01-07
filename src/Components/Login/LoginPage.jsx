@@ -3,16 +3,22 @@ import { Form, Input, Button } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import "./LoginPage.scss";
 import Logo from "../../assets/logo.jpeg";
+import Cookies from "js-cookie";
+import { userService } from "../../Service/UserService";
 
-const LoginPage = () => {
-  const navigate = useNavigate();
-
-  const handleLoginClick = () => {
-    navigate("/homepage"); // Navigates to the login page
-  };
+const LoginPage = ({setIsAuthenticated}) => {
+  const navigate = useNavigate()
 
   const onFinish = (values) => {
-    console.log("Success:", values);
+    userService.loginUser(values)
+      .then(response => {
+        Cookies.set("jwtToken", response?.jwtToken)
+        setIsAuthenticated(response?.jwtToken)
+        navigate("/homepage")
+      })
+      .catch(error => {
+        console.log('error', error)
+      })
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -59,7 +65,6 @@ const LoginPage = () => {
             type="primary"
             htmlType="submit"
             className="login-button"
-            onClick={handleLoginClick}
           >
             Login
           </Button>

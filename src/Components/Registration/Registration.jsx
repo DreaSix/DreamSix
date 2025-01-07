@@ -2,19 +2,22 @@ import React from "react";
 import { Form, Input, Button } from "antd";
 import "./Registration.scss";
 import Logo from "../../assets/logo.jpeg";
-import { useNavigate } from "react-router-dom";
+import { userService } from "../../Service/UserService";
 
 const Registration = () => {
   const onFinish = (values) => {
-    console.log("Form Values: ", values);
+    const payload = {
+      ...values,
+      role: "USER"
+    }
+    userService.createUser(payload)
+      .then(response => {
+        console.log('response', response)
+      })
+      .catch(error => {
+        console.log('error', error)
+      })
   };
-
-  const navigate = useNavigate();
-
-  const onLogin = () => {
-    navigate("/register-process");
-  };
-
 
   return (
     <div className="register-container">
@@ -25,14 +28,14 @@ const Registration = () => {
       <Form className="register-form" onFinish={onFinish} layout="vertical">
         <Form.Item
          
-          name="fullname"
+          name="userName"
           rules={[{ required: true, message: "Please enter your full name!" }]}
         >
           <Input placeholder="Full Name"  style={{height:50}}/>
         </Form.Item>
         <Form.Item
           
-          name="whatsapp"
+          name="contactNumber"
           rules={[
             { required: true, message: "Please enter your WhatsApp number!" },
             { pattern: /^\d{10}$/, message: "Enter a valid 10-digit number!" },
@@ -41,7 +44,7 @@ const Registration = () => {
           <Input placeholder="WhatsApp Number"style={{height:50}} />
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit" className="register-button" onClick={onLogin}>
+          <Button type="primary" htmlType="submit" className="register-button">
             Register
           </Button>
         </Form.Item>

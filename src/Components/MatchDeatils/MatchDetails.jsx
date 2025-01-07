@@ -66,8 +66,8 @@ const MatchPage = () => {
   ];
 
   return (
-    <div className="match-page">
-      <Header />
+    <main>
+      <div className="match-page">
       <Tabs
         defaultActiveKey="1"
         centered
@@ -78,8 +78,8 @@ const MatchPage = () => {
           children: tab.content,
         }))}
       />
-      <Footer />
     </div>
+    </main>
   );
 };
 

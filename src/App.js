@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Cookies from "js-cookie";
+
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import LoginPage from "./Components/Login/LoginPage";
 import HomePage from "./Components/HomePage/HomePage";
 import Rules from "./Components/Rules/Rules";
@@ -22,9 +24,11 @@ import PlayersFinalList from "./Components/PlayersList/PlayersFinalList";
 import Registration from "./Components/Registration/Registration";
 import RegisterProcess from "./Components/Registration/RegisterProcess";
 import Withdrawl from "./Components/Withdrawl/Withdrawl";
+import Header from "./Components/Header/Header";
+import Footer from "./Components/Footer/Footer";
 
 function App() {
-  
+  const [isAuthenticated, setIsAuthenticated] = useState(Cookies.get("jwtToken"))  
 
   return (
     <div
