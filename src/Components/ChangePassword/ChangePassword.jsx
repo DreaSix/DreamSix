@@ -16,8 +16,8 @@ const ChangePassword = () => {
   };
 
   return (
+    <main>
     <div>
-     <Header/>
     <div className="change-password-container">
       <h2>Change Password</h2>
       <Form
@@ -70,8 +70,8 @@ const ChangePassword = () => {
         </Form.Item>
       </Form>
     </div>
-    <Footer/>
     </div>
+    </main>
   );
 };
 

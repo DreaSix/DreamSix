@@ -20,6 +20,7 @@ const Registration = () => {
   };
 
   return (
+    <main>
     <div className="register-container">
       <div className="register-logo">
         <img src={Logo} alt="DreamSix Logo" />
@@ -50,6 +51,7 @@ const Registration = () => {
         </Form.Item>
       </Form>
     </div>
+    </main>
   );
 };
 

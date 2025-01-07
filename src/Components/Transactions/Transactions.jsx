@@ -37,9 +37,8 @@ const TransactionPage = () => {
   };
 
   return (
+    <main>
     <div>
-      <Header/>
-    
     <div className="transaction-page-container">
       <Tabs defaultActiveKey="deposit" onChange={onTabChange}>
         <TabPane
@@ -78,8 +77,8 @@ const TransactionPage = () => {
         )}
       />
     </div>
-    <Footer/>
     </div>
+    </main>
   );
 };
 

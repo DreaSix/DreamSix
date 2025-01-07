@@ -22,8 +22,8 @@ const AuctionTypePage = () => {
   }
 
   return (
+    <main>
     <div>
-           <Header/>
     <div className="top-sixer-scorer-page">
       <div className="option-section">
         <h2> ▼ TopSixer </h2> 
@@ -40,9 +40,9 @@ const AuctionTypePage = () => {
       </div>
     </div>
     <div>
-        <Footer/>
     </div>
     </div>
+    </main>
   );
 };
 

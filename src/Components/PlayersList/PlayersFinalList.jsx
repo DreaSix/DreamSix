@@ -23,8 +23,8 @@ const PlayersFinalList = () => {
   ];
 
   return (
+    <main>
     <div>
-      <Header/>
     <div className="players-final-list">
       
       <div className="top-menu">
@@ -71,9 +71,9 @@ const PlayersFinalList = () => {
       <div className="total-amount-container">
         <span>Total Amount =</span> ₹32000
       </div>
-      <Footer/>
     </div>
     </div>
+    </main>
   );
 };
 

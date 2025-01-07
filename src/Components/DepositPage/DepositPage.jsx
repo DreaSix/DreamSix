@@ -42,8 +42,8 @@ const DepositPage = () => {
   };
 
   return (
+    <main>
     <div>
-      <Header/>
     <div className="deposit-page">
 
       <div className="deposit-form">
@@ -126,9 +126,9 @@ const DepositPage = () => {
       </div>
     </div>
     <div>
-      <Footer/>
     </div>
     </div>
+    </main>
   );
 };
 

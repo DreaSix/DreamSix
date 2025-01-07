@@ -59,8 +59,8 @@ const MyBets = () => {
   };
 
   return (
+    <main>
     <div>
-      <Header />
       <div className="player-page">
         {/* Player List */}
         <List
@@ -91,8 +91,8 @@ const MyBets = () => {
           className="player-list"
         />
       </div>
-      <Footer />
     </div>
+    </main>
   );
 };
 

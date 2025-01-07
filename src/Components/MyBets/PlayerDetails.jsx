@@ -11,8 +11,8 @@ const PlayerDetails = () => {
   const { player } = location.state || {};
 
     return(
+      <main>
         <div>
-            <Header/>
             <div className="player-details">
           <Card className="player-detail-card">
             <div align="middle">
@@ -32,8 +32,8 @@ const PlayerDetails = () => {
             </div>
           </Card>
         </div>
-        <Footer/>
         </div>
+        </main>
     )
 
 }

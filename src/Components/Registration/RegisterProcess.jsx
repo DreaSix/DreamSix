@@ -14,6 +14,7 @@ const RegisterProcess = () => {
 
 
   return (
+    <main>
     <div className="registration-container">
      <div className="register-logo">
         <img src={Logo} alt="DreamSix Logo" />
@@ -39,6 +40,7 @@ const RegisterProcess = () => {
         </Button>
       </div>
     </div>
+    </main>
   );
 };
 

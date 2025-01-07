@@ -31,8 +31,8 @@ const CountdownPage = () => {
   };
 
   return (
+    <main>
     <div>
-      <Header />
       <div className="cricket-page-container">
 
         {/* Match Info */}
@@ -89,12 +89,10 @@ const CountdownPage = () => {
               </tr>
             </tbody>
           </table>
-
-
         </div>
       </div>
-      <Footer />
     </div>
+    </main>
   );
 };
 

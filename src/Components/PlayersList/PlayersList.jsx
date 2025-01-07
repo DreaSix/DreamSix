@@ -40,8 +40,8 @@ const PlayersList = () => {
   ];
 
   return (
+    <main>
     <div className="match-page">
-      <Header />
       <div className="matches-container">
         {matches.map((match) => (
           <Card
@@ -65,8 +65,8 @@ const PlayersList = () => {
           </Card>
         ))}
       </div>
-      <Footer />
     </div>
+    </main>
   );
 };
 

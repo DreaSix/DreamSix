@@ -127,9 +127,8 @@ const Rules = () => {
   };
 
   return (
+    <main>
     <div className='rules-container'>
-
-      <Header/>
       <div className='rules'>
       <div>
         <h1>Select Languages:</h1>
@@ -164,10 +163,9 @@ const Rules = () => {
           </div>
         ))}
       </div>
-
       </div>
-      <Footer/>
     </div>
+    </main>
   );
 };
 

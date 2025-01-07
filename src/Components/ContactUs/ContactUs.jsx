@@ -9,8 +9,8 @@ import Footer from '../Footer/Footer'
 
 const ContactUs = () => {
   return (
+    <main>
     <div>
-      <Header/>
       <div className="contact-page">
       {/* Contact Information Section */}
       <Row justify="center" className="contact-info">
@@ -44,8 +44,8 @@ const ContactUs = () => {
         </Col>
       </Row>
     </div>
-    <Footer/>
     </div>
+    </main>
   );
 };
 

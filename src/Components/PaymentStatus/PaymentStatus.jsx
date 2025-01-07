@@ -8,8 +8,8 @@ const { Text } = Typography;
 
 const PaymentStatus = () => {
   return (
+    <main>
     <div>
-        <Header/>
     <div className="payment-details-container">
       <Card className="payment-card">
         <Row gutter={[16, 16]}>
@@ -48,8 +48,8 @@ const PaymentStatus = () => {
         </Row>
       </Card>
     </div>
-    <Footer/>
     </div>
+    </main>
   );
 };
 

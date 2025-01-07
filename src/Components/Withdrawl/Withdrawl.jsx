@@ -22,9 +22,8 @@ const Withdrawl = () => {
   };
 
   return (
+    <main>
     <div>
-        <Header/>
-  
     <div className="withdraw-funds">
       <h2>Withdraw Funds</h2>
       <ul className="instructions">
@@ -107,9 +106,9 @@ const Withdrawl = () => {
         </TabPane>
       </Tabs>
     </div>
-   
-        <Footer/>
         </div>
+              
+    </main>
     
   );
 };
