@@ -3,11 +3,12 @@ import './AuctionType.scss'; // SCSS file for styling
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import { Button } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import TopSix from '../../assets/topsixer.png'
 import TopScorer from '../../assets/topscorer.png'
 
 const AuctionTypePage = () => {
+  const { matchId } = useParams();
   const [selectedOption, setSelectedOption] = useState('');
 
   const handleOptionChange = (option) => {
@@ -18,7 +19,7 @@ const AuctionTypePage = () => {
   const navigate = useNavigate();
 
   const cardButton = () =>{   
-      navigate("/match-countdown");
+      navigate(`/match-countdown/${matchId}`);
   }
 
   return (
