@@ -10,9 +10,14 @@ const LoginPage = ({setIsAuthenticated}) => {
   const navigate = useNavigate()
 
   const onFinish = (values) => {
-    userService.loginUser(values)
+    const payload = {
+      ...values,
+      role: "USER"
+    }
+    userService.loginUser(payload)
       .then(response => {
         Cookies.set("jwtToken", response?.jwtToken)
+        Cookies.set("userId", response?.userId)
         setIsAuthenticated(response?.jwtToken)
         navigate("/homepage")
       })
@@ -71,7 +76,7 @@ const LoginPage = ({setIsAuthenticated}) => {
         </Form.Item>
 
         <Form.Item className="Create-Account">
-          <Link to="/registration-page">Do you have an account ?  <span style={{color:"black"}}>  Create-Account</span> </Link>
+          <Link to="/">Do you have an account ?  <span style={{color:"black"}}>  Create-Account</span> </Link>
         </Form.Item>
 
       </Form>

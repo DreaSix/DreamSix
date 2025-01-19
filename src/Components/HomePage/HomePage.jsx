@@ -61,8 +61,8 @@ const HomePage = () => {
                       }}
                     />
                     <div className="match-details">
-                      <p>{match.details}</p> {/* Details on the left */}
-                      <p className="countdown">{match.countdown}</p> {/* Countdown on the right */}
+                      <p>{match.details}</p> 
+                      <p className="countdown">{match.countdown}</p> 
                     </div>
                   </Card>
                 </div>

@@ -46,13 +46,13 @@ function App() {
               path="/loginpage"
               element={<LoginPage setIsAuthenticated={setIsAuthenticated} />}
             />
+            <Route path="/" element={<Registration />} />
             <Route path="*" element={<Navigate to="/loginpage" />} />
           </Routes>
         ) : (
           <>
             <Header />
             <Routes>
-              <Route path="/" element={<Registration />} />
               <Route path="/register-process" element={<RegisterProcess />} />
               <Route path="/homepage" element={<HomePage />} />
               <Route path="/rules" element={<Rules />} />

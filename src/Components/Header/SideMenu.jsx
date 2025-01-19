@@ -1,13 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Drawer, Avatar, List } from "antd";
 import { UserOutlined, BankOutlined, LockOutlined, HistoryOutlined, PhoneOutlined, PoweroffOutlined, MenuOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import "./SideMenu.scss";
+import Cookies from "js-cookie";
+
 import { Color } from "antd/es/color-picker";
+import { userService } from "../../Service/UserService";
 
 const SideMenu = () => {
   const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
+  const [userWallet, setUserWallet] = useState(0)
+
+  useEffect(() => {
+    getUserDetails()
+  }, [])
+
+  const getUserDetails = () => {
+    userService.getUser(Cookies.get("userId"))
+      .then(response => {
+        setUserWallet(response?.data?.userWallet)
+      })
+      .catch(error => {
+        console.log('error', error)
+      })
+  }
 
   const showDrawer = () => {
     setVisible(true);
@@ -44,7 +62,7 @@ const SideMenu = () => {
           </div>
           <div style={{display:"flex", alignItems:"center", justifyContent:"space-between", color:"white"}}>
             <p>Available Balance: </p>
-            <p>₹ 0.00</p>
+            <p>₹ {userWallet}</p>
           </div>
           <hr/>
           <div style={{marginTop:"10px", marginBottom:"10px", color:"white"}} className="balance-actions">
