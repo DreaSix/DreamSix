@@ -5,16 +5,38 @@ import './DepositPage.scss'
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
+import { matchDetailsService } from "../../Service/MatchDetailsService";
 
 const DepositPage = () => {
   const [amount, setAmount] = useState("");
   const [utrNumber, setUtrNumber] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("Paytm");
+  const [fileList, setFileList] = useState()
 
   const navigate = useNavigate();
 
   const OnchangePayment = () =>{   
-      navigate("/payments-process");
+      const formData = new FormData();
+      formData.append("amount", amount)
+      formData.append("paymentMethod", paymentMethod)
+      formData.append("utrNumber", utrNumber)
+      formData.append("paymentOption", "Deposit")
+      formData.append("userId", Cookies.get("userId"))
+      if (fileList.length > 0) {
+        fileList.forEach((file) => {
+          formData.append("uploadedProof", file.originFileObj);
+        });
+      }
+
+      matchDetailsService.addDeposite(formData)
+        .then(response => {
+          console.log('response', response)
+        })
+        .catch(error => {
+          console.log('error', error)
+        })
+
   }
 
   const handleAmountChange = (value) => {
@@ -34,12 +56,9 @@ const DepositPage = () => {
     message.success("Copied to clipboard!");
   };
 
-  const uploadProps = {
-    beforeUpload: (file) => {
-      message.success(`${file.name} file uploaded successfully.`);
-      return false; // Prevent auto-upload
-    },
-  };
+  const handleFileUpload = ({fileList}) => {
+    setFileList(fileList)
+  }
 
   return (
     <div>
@@ -106,7 +125,13 @@ const DepositPage = () => {
         </div>
 
         <h3>Upload your photo below</h3>
-        <Upload {...uploadProps}>
+
+        <Upload
+            listType="picture"
+            maxCount={1}
+            accept="image/*"
+            onChange={handleFileUpload}
+        >
           <Button icon={<UploadOutlined />}>Upload or drop a file right here</Button>
         </Upload>
 

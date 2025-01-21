@@ -1,38 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Tabs, Card } from "antd";
 import "./MatchDetails.scss";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
+import { matchDetailsService } from "../../Service/MatchDetailsService";
 
 const { TabPane } = Tabs;
 
 const MatchPage = () => {
-  const matches = [
-    {
-      team1: "RCB",
-      team2: "CSK",
-      img: "https://img.jagranjosh.com/images/2024/April/242024/RCB-vs-LSG-today.jpg",
-      countdown: "03:34:23",
-    },
-    {
-      team1: "IND",
-      team2: "AUS",
-      img: "https://img.jagranjosh.com/images/2024/March/2932024/KKR-vs-RCB-tODAY.jpg",
-      countdown: "03:34:23",
-    },
-    {
-      team1: "RCB",
-      team2: "CSK",
-      img: "https://st1.latestly.com/wp-content/uploads/2018/04/M27-IPL-CSK-vs-MI-Live-Update-781x441.jpg",
-      countdown: "03:34:23",
-    },
-    {
-      team1: "IND",
-      team2: "AUS",
-      img: "https://sm.ign.com/t/ign_in/screenshot/default/template-1-ipl_3m2z.1200.png",
-      countdown: "03:34:23",
-    },
-  ];
+  const [matches, setMatches] = useState([])
+
+  useEffect(() => {
+    getAllMatches()
+  }, [])
+
+  const getAllMatches = () => {
+    matchDetailsService.getAllMatches()
+      .then(response => {
+        setMatches(response?.data)
+      })
+      .catch(error => {
+        console.log('error', error)
+      })
+  }
+
 
   const tabItems = [
     {
@@ -43,12 +34,12 @@ const MatchPage = () => {
           matches.map((match, index) => (
             <Card key={index} hoverable className="match-card">
               <img
-                src={match.img}
-                alt={`${match.team1} vs ${match.team2}`}
+                src={`data:image/jpeg;base64,${match?.matchImage}`}
+                alt={`${match.teamOneName} vs ${match.teamTwoName}`}
               />
               <div className="match-info">
                 <h3>
-                  {match.team1} vs {match.team2}
+                  {match.teamOneName} vs {match.teamTwoName}
                 </h3>
                 <p>{match.countdown}</p>
               </div>

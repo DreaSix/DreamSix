@@ -46,21 +46,21 @@ function App() {
               path="/loginpage"
               element={<LoginPage setIsAuthenticated={setIsAuthenticated} />}
             />
+            <Route path="/" element={<Registration />} />
             <Route path="*" element={<Navigate to="/loginpage" />} />
           </Routes>
         ) : (
           <>
             <Header />
             <Routes>
-              <Route path="/" element={<Registration />} />
               <Route path="/register-process" element={<RegisterProcess />} />
               <Route path="/homepage" element={<HomePage />} />
               <Route path="/rules" element={<Rules />} />
-              <Route path="/auction-type" element={<AuctionTypePage />} />
+              <Route path="/auction-type/:matchId" element={<AuctionTypePage />} />
               <Route path="/depositpage" element={<DepositPage />} />
               <Route path="/user-auctionpage" element={<USerAuctionPage />} />
               <Route path="/admin-auctionpage" element={<AdminAuctionPage />} />
-              <Route path="/match-countdown" element={<CountdownPage />} />
+              <Route path="/match-countdown/:matchId" element={<CountdownPage />} />
               <Route path="/payments-process" element={<PaymentsProcess />} />
               <Route path="/change-password" element={<ChangePassword />} />
               <Route path="/transactions" element={<TransactionPage />} />
@@ -70,7 +70,7 @@ function App() {
               <Route path="/contact-us" element={<ContactUs />} />
               <Route path="/matchs-page" element={<MatchPage />} />
               <Route path="/players-list" element={<PlayersList />} />
-              <Route path="/players-final-list" element={<PlayersFinalList />} />
+              <Route path="/players-final-list/:matchId" element={<PlayersFinalList />} />
               <Route path="/withdrawl" element={<Withdrawl />} />
               <Route path="*" element={<Navigate to="/homepage" />} />
             </Routes>

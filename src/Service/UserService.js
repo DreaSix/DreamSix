@@ -1,5 +1,5 @@
-import { LOGIN_URL, REGISTER_USER } from "../Constants/Constant"
-import { PostAPIRequest } from "./Api"
+import { LOGIN_URL, REGISTER_USER, USER_DETAILS } from "../Constants/Constant"
+import { GetAPIRequest, PostAPIRequest } from "./Api"
 
 const createUser = (payload) => {
     return PostAPIRequest({
@@ -15,7 +15,14 @@ const loginUser = (payload) => {
     })
 }
 
+const getUser = (userId) => {
+    return GetAPIRequest({
+        url: USER_DETAILS + "/" + userId
+    })
+}
+
 export const userService = {
     createUser,
-    loginUser
+    loginUser, 
+    getUser
 }

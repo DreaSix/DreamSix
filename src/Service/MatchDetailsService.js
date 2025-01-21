@@ -1,4 +1,4 @@
-import { GET_MATCH_DETAILS, SAVE_TEAM_PLAYERS } from "../Constants/Constant"
+import { ADD_DEPOSITE, ADD_WITHDRAW, GET_MATCH_DETAILS, GET_MATCH_DETAILS_BY_ID, GET_MATCH_PLAYER_DETAILS, SAVE_TEAM_PLAYERS } from "../Constants/Constant"
 import { GetAPIRequest, PostAPIRequest } from "./Api"
 
 const getAllMatches = () => {
@@ -14,7 +14,36 @@ const saveTeamPlayers = (payload) =>{
     })
 }
 
+const getMtachDetailsById = (matchId) => {
+    return GetAPIRequest({
+      url: GET_MATCH_DETAILS_BY_ID + matchId
+      })
+  }
+  const getMatchPlayerDetails = (matchId) => {
+    return GetAPIRequest({
+        url: GET_MATCH_PLAYER_DETAILS + matchId,
+  });
+};
+
+const addDeposite = (payload) => {
+    return PostAPIRequest({
+        url: ADD_DEPOSITE,
+        data: payload
+    })
+}
+
+const addWithdraw = (payload) => {
+    return PostAPIRequest({
+        url: ADD_WITHDRAW,
+        data: payload
+    })
+}
+
 export const matchDetailsService = {
     getAllMatches,
-    saveTeamPlayers
+    saveTeamPlayers,
+    getMtachDetailsById,
+    getMatchPlayerDetails,
+    addDeposite,
+    addWithdraw
 }
