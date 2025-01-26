@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Input, Upload, Radio, message } from "antd";
 import { CopyOutlined, UploadOutlined } from "@ant-design/icons";
 import './DepositPage.scss'
@@ -7,12 +7,29 @@ import Footer from "../Footer/Footer";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { matchDetailsService } from "../../Service/MatchDetailsService";
+import { userService } from "../../Service/UserService";
 
 const DepositPage = () => {
   const [amount, setAmount] = useState("");
   const [utrNumber, setUtrNumber] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("Paytm");
   const [fileList, setFileList] = useState()
+
+   const [userDetails, setUserDetails] = useState()
+  
+    useEffect(() => {
+      getUserDetails()
+    }, [])
+  
+    const getUserDetails = () => {
+      userService.getUser(Cookies.get("userId"))
+        .then(response => {
+          setUserDetails(response?.data)
+        })
+        .catch(error => {
+          console.log('error', error)
+        })
+    }
 
   const navigate = useNavigate();
 
@@ -32,6 +49,7 @@ const DepositPage = () => {
       matchDetailsService.addDeposite(formData)
         .then(response => {
           console.log('response', response)
+          navigate("/payments-process")
         })
         .catch(error => {
           console.log('error', error)
@@ -100,9 +118,9 @@ const DepositPage = () => {
 
         <h3>Payment Details</h3>
         <div className="payment-info">
-          <p>Account Name: <span>Paytm</span></p>
+          <p>Account Name: <span>{paymentMethod}</span></p>
           <p>
-            Holder Name: <span>Kabali</span>
+            Holder Name: <span>{userDetails?.fullName}</span>
             <Button
               icon={<CopyOutlined />}
               onClick={() => copyToClipboard("Kabali")}
@@ -116,7 +134,7 @@ const DepositPage = () => {
             />
           </p>
           <p>
-            UPI Phone No: <span>9515206990</span>
+            UPI Phone No: <span>{userDetails?.contactNo}</span>
             <Button
               icon={<CopyOutlined />}
               onClick={() => copyToClipboard("9515206990")}

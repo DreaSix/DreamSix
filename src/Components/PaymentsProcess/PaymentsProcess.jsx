@@ -14,8 +14,7 @@ const PaymentsProcess = () => {
   };
 
   return (
-    <div>
-      <Header/>
+    <main>
     <div className="pending-payment-container">
       <Card className="payment-card">
         <img
@@ -38,8 +37,7 @@ const PaymentsProcess = () => {
         </p>
       </Card>
     </div>
-    <Footer/>
-    </div>
+    </main>
   );
 };
 

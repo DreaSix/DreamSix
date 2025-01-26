@@ -11,7 +11,7 @@ import { userService } from "../../Service/UserService";
 const SideMenu = () => {
   const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
-  const [userWallet, setUserWallet] = useState(0)
+  const [userDetails, setUserDetails] = useState()
 
   useEffect(() => {
     getUserDetails()
@@ -20,7 +20,7 @@ const SideMenu = () => {
   const getUserDetails = () => {
     userService.getUser(Cookies.get("userId"))
       .then(response => {
-        setUserWallet(response?.data?.userWallet)
+        setUserDetails(response?.data)
       })
       .catch(error => {
         console.log('error', error)
@@ -50,7 +50,7 @@ const SideMenu = () => {
         {/* User Info */}
         <div className="user-info" style={{display:"flex", alignItems:"center"}}>
           <Avatar style={{marginRight:"15px", border:"1px solid yellow"}} icon={<UserOutlined />} size={32} />
-          <div className="username" style={{color:"yellow",fontWeight:"bold"}}>Kabali59</div>
+          <div className="username" style={{color:"yellow",fontWeight:"bold"}}>{userDetails?.fullName}</div>
         </div>
 
         <hr/>
@@ -62,12 +62,12 @@ const SideMenu = () => {
           </div>
           <div style={{display:"flex", alignItems:"center", justifyContent:"space-between", color:"white"}}>
             <p>Available Balance: </p>
-            <p>₹ {userWallet}</p>
+            <p>₹ {userDetails?.userWallet}</p>
           </div>
           <hr/>
           <div style={{marginTop:"10px", marginBottom:"10px", color:"white"}} className="balance-actions">
             <Button  style={{marginRight:"10px", backgroundColor:"#ffd700",}} onClick={() => handleNavigation("/depositpage")}>Deposit</Button>
-            <Button onClick={() => handleNavigation("/withdraw")}>Withdrawal</Button>
+            <Button onClick={() => handleNavigation("/withdrawl")}>Withdrawal</Button>
           </div>
         </div>
 

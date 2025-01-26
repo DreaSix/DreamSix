@@ -59,7 +59,7 @@ const CountdownPage = () => {
 
         <div className="match-info">
           <img
-            src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/poster-design-template-351effd160d6232fa505498a400cd1a1_screen.jpg?ts=1713411077"
+            src={`data:image/jpeg;base64,${matchData?.matchImage}`}
             alt="LSG vs RCB"
             className="match-banner"
             onClick={handleImageClick} // Add the click event here
@@ -74,14 +74,14 @@ const CountdownPage = () => {
 
         <div className="player-list-container">
           <div className='heading-container'>
-            <h4> RCB vs CSK </h4>
+            <h4> {matchData?.teamOneName} vs {matchData?.teamTwoName} </h4>
             <p>Expected Players</p>
           </div>
           <table className="player-list-table">
             <thead>
               <tr>
-                <th className='header-name'>RCB</th>
-                <th className='header-name'>CSK</th>
+                <th className='header-name'>{matchData?.teamOneName}</th>
+                <th className='header-name'>{matchData?.teamTwoName}</th>
               </tr>
             </thead>
             <tbody>

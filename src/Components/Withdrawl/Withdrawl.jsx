@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Input, Select, Tabs, Button, Card, Row, Col, Form, message } from "antd";
 import { CheckCircleOutlined, DeleteOutlined } from "@ant-design/icons";
 import "./Withdrawl.scss";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie"
 import { matchDetailsService } from "../../Service/MatchDetailsService";
 import { userService } from "../../Service/UserService";
@@ -11,6 +11,7 @@ const { TabPane } = Tabs;
 
 const Withdrawl = () => {
   const [form] = Form.useForm();
+  
   
   const [userWallet, setUserWallet] = useState(0)
   const [activeTab, setActiveTab] = useState("newAccount");
@@ -45,6 +46,7 @@ const Withdrawl = () => {
     matchDetailsService.addWithdraw(payload)
       .then(response => {
         message.success("Withdraw Added Successfully")
+        navigate("/payments-process")
       })
       .catch(error => {
         console.log('error', error)
