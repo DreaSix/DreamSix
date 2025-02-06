@@ -3,12 +3,24 @@ import { Form, Input, Button } from 'antd';
 import './ChangePassword.scss';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
+import { userService } from '../../Service/UserService';
 
 const ChangePassword = () => {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
-    console.log('Success:', values);
+    const payload = {
+      password: values?.password,
+      newPassword: values?.newPassword
+    }
+
+    userService.changePassword(payload)
+      .then(response => {
+        console.log('response', response)
+      })
+      .catch(error => {
+        console.log('error', error)
+      })
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -29,7 +41,7 @@ const ChangePassword = () => {
       >
         <Form.Item
       
-          name="currentPassword"
+          name="password"
           rules={[{ required: true, message: 'Please enter your current password' }]}
         >
           <Input.Password placeholder="Enter Current Password" />

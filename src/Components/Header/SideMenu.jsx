@@ -50,7 +50,7 @@ const SideMenu = () => {
         {/* User Info */}
         <div className="user-info" style={{display:"flex", alignItems:"center"}}>
           <Avatar style={{marginRight:"15px", border:"1px solid yellow"}} icon={<UserOutlined />} size={32} />
-          <div className="username" style={{color:"yellow",fontWeight:"bold"}}>{userDetails?.fullName}</div>
+          <div className="username" style={{color:"yellow",fontWeight:"bold"}}>{userDetails?.name}</div>
         </div>
 
         <hr/>

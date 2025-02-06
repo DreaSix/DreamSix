@@ -8,14 +8,35 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { matchDetailsService } from "../../Service/MatchDetailsService";
 import { userService } from "../../Service/UserService";
+import { paymentService } from "../../Service/PaymentService";
 
 const DepositPage = () => {
+  const [selectedMethod, setSelectedMethod] = useState();
+  const [selectedPayment, setSelectedPayment] = useState()
+
   const [amount, setAmount] = useState("");
   const [utrNumber, setUtrNumber] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("Paytm");
   const [fileList, setFileList] = useState()
+  const [paymentDetails, setPaymentDetails] = useState([])
 
    const [userDetails, setUserDetails] = useState()
+
+   useEffect(() => {
+    getAccountDetails()
+   },[])
+
+   const getAccountDetails = () => {
+      paymentService.getAllPayments()
+        .then(response => {
+          setPaymentDetails(response?.data)
+          setSelectedMethod(response?.data[0]?.paymentMethod)
+          setSelectedPayment(response?.data[0])
+        })
+        .catch(error => {
+          console.log('error', error)
+        })
+   }
   
     useEffect(() => {
       getUserDetails()
@@ -36,13 +57,12 @@ const DepositPage = () => {
   const OnchangePayment = () =>{   
       const formData = new FormData();
       formData.append("amount", amount)
-      formData.append("paymentMethod", paymentMethod)
-      formData.append("utrNumber", utrNumber)
-      formData.append("paymentOption", "Deposit")
-      formData.append("userId", Cookies.get("userId"))
+      formData.append("paymentId", selectedPayment?.id)
+      formData.append("utr", utrNumber)
+      formData.append("transactionType", "DEPOSIT")
       if (fileList.length > 0) {
         fileList.forEach((file) => {
-          formData.append("uploadedProof", file.originFileObj);
+          formData.append("transactionImage", file.originFileObj);
         });
       }
 
@@ -78,6 +98,13 @@ const DepositPage = () => {
     setFileList(fileList)
   }
 
+  const handleSelectedMethod = (e) => {
+    setSelectedMethod(e.target.value)
+    setSelectedPayment(paymentDetails?.find(payment => payment?.paymentMethod === e.target.value))
+  }
+
+  console.log('selectedPayment', selectedPayment)
+
   return (
     <div>
       <Header/>
@@ -101,46 +128,43 @@ const DepositPage = () => {
 
         <h3>Payment Methods</h3>
         <Radio.Group
-          value={paymentMethod}
-          onChange={handlePaymentMethodChange}
-          className="payment-methods"
-        >
-          <Radio.Button value="Paytm">Paytm</Radio.Button>
-          <Radio.Button value="PhonePe">PhonePe</Radio.Button>
-          <Radio.Button value="GooglePay">G-Pay</Radio.Button>
-        </Radio.Group>
+        value={selectedMethod}
+        onChange={(e) => handleSelectedMethod(e)}
+        className="payment-methods"
+      >
+        {paymentDetails?.map((payment) => (
+          <Radio.Button key={payment?.paymentMethod} value={payment?.paymentMethod}>
+            {payment?.paymentMethod}
+          </Radio.Button>
+        ))}
+      </Radio.Group>
 
-        <div className="payment-details">
-          <p>1. "Your Deposit Is Being Processed."</p>
-          <p>2. "Estimated Time: 2-5 Minutes."</p>
-          <p>3. "You Will Receive A Confirmation Once The Deposit Is Complete."</p>
-        </div>
+      <div className="payment-details">
+        <p>1. "Your Deposit Is Being Processed."</p>
+        <p>2. "Estimated Time: 2-5 Minutes."</p>
+        <p>3. "You Will Receive A Confirmation Once The Deposit Is Complete."</p>
+      </div>
 
-        <h3>Payment Details</h3>
-        <div className="payment-info">
-          <p>Account Name: <span>{paymentMethod}</span></p>
-          <p>
-            Holder Name: <span>{userDetails?.fullName}</span>
-            <Button
-              icon={<CopyOutlined />}
-              onClick={() => copyToClipboard("Kabali")}
-            />
-          </p>
-          <p>
-            UPI ID: <span>kabali@paytm</span>
-            <Button
-              icon={<CopyOutlined />}
-              onClick={() => copyToClipboard("kabali@paytm")}
-            />
-          </p>
-          <p>
-            UPI Phone No: <span>{userDetails?.contactNo}</span>
-            <Button
-              icon={<CopyOutlined />}
-              onClick={() => copyToClipboard("9515206990")}
-            />
-          </p>
-        </div>
+      <h3>Payment Details</h3>
+      <div className="payment-info">
+        {selectedMethod === "BANK" ? (
+          <>
+            <p>Account Name: <span>{selectedPayment?.accountName}</span></p>
+            <p>Account Number: <span>{selectedPayment?.accountNumber}</span></p>
+            <p>IFSC Code: <span>{selectedPayment?.ifscCode}</span></p>
+            <p>Bank Name: <span>{selectedPayment?.bankName}</span></p>
+          </>
+        ) : (
+          <>
+            <p>UPI ID: <span>{selectedPayment?.upiId}</span>
+              <Button icon={<CopyOutlined />} onClick={() => copyToClipboard(selectedPayment.upiId)} />
+            </p>
+            <p>UPI Phone No: <span>{selectedPayment?.upiPhone}</span>
+              <Button icon={<CopyOutlined />} onClick={() => copyToClipboard(selectedPayment.upiPhone)} />
+            </p>
+          </>
+        )}
+      </div>
 
         <h3>Upload your photo below</h3>
 

@@ -12,13 +12,13 @@ const LoginPage = ({setIsAuthenticated}) => {
   const onFinish = (values) => {
     const payload = {
       ...values,
-      role: "USER"
     }
     userService.loginUser(payload)
       .then(response => {
-        Cookies.set("jwtToken", response?.jwtToken)
-        Cookies.set("userId", response?.userId)
-        setIsAuthenticated(response?.jwtToken)
+        console.log('response', response)
+        Cookies.set("jwtToken", response?.data?.accessToken)
+        Cookies.set("userId", response?.data?.userId)
+        setIsAuthenticated(response?.data?.accessToken)
         navigate("/homepage")
       })
       .catch(error => {
@@ -46,7 +46,7 @@ const LoginPage = ({setIsAuthenticated}) => {
         className="login-form"
       >
         <Form.Item
-          name="username"
+          name="userName"
           rules={[
             { required: true, message: "Please input your mobile number!" },
           ]}

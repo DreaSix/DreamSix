@@ -1,80 +1,111 @@
 import React, { useEffect, useState } from 'react';
-import { Row, Col } from 'antd';
 import { useNavigate, useParams } from 'react-router-dom';
 import './MatchCountDown.scss';
-import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
 import { matchDetailsService } from '../../Service/MatchDetailsService';
 
 const CountdownPage = () => {
   const { matchId } = useParams();
+  const navigate = useNavigate();
 
-  const [matchData, setMatchDetails] = useState()
-  const [playersTeam1, setPlayersTeam1] = useState([])
-  const [playersTeam2, setPlayersTeam2] = useState([])
+  const [matchData, setMatchDetails] = useState(null);
+  const [playersTeam1, setPlayersTeam1] = useState([]);
+  const [playersTeam2, setPlayersTeam2] = useState([]);
+  const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
     if (matchId) {
-      getMatchDetailsById()
+      getMatchDetailsById();
     }
-  }, [])
+  }, [matchId]);
 
   const getMatchDetailsById = () => {
     matchDetailsService.getMtachDetailsById(matchId)
       .then(response => {
-        setMatchDetails(response?.data)
+        setMatchDetails(response?.data);
       })
       .catch(error => {
-        console.log('error', error)
-      })
-  }
+        console.log('Error fetching match details:', error);
+      });
+  };
 
   useEffect(() => {
-    getPlayerDetailsByMatchId()
-  }, [matchData])
+    if (matchData?.countdownEndTime) {
+      const calculateTimeLeft = () => {
+        const now = new Date();
+        const endTime = new Date(matchData.countdownEndTime);
+        const difference = endTime - now;
+
+        if (difference > 0) {
+          return {
+            hours: Math.floor(difference / (1000 * 60 * 60)),
+            minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+            seconds: Math.floor((difference % (1000 * 60)) / 1000)
+          };
+        }
+        return { hours: 0, minutes: 0, seconds: 0 };
+      };
+
+      // Set initial time
+      setTimeLeft(calculateTimeLeft());
+
+      const timer = setInterval(() => {
+        setTimeLeft(calculateTimeLeft());
+      }, 1000);
+
+      return () => clearInterval(timer);
+    }
+  }, [matchData?.countdownEndTime]);
+
+  useEffect(() => {
+    if (matchData) {
+      getPlayerDetailsByMatchId();
+    }
+  }, [matchData]);
 
   const getPlayerDetailsByMatchId = () => {
-      matchDetailsService.getMatchPlayerDetails(matchId)
-        .then(response => {
-          const teamOneData = response?.data?.filter(player => player?.teamName === matchData?.teamOneName)
-          const teamTwoData = response?.data?.filter(player => player?.teamName === matchData?.teamTwoName)
-          setPlayersTeam1(teamOneData)
-          setPlayersTeam2(teamTwoData)
-        })
-        .catch(error => {
-          console.log('error', error)
-        })
-    }
-
-  const navigate = useNavigate(); 
+    matchDetailsService.getMatchPlayerDetails(matchId)
+      .then(response => {
+        const teamOneData = response?.data?.filter(player => player?.teamName === matchData?.teamOneName);
+        const teamTwoData = response?.data?.filter(player => player?.teamName === matchData?.teamTwoName);
+        setPlayersTeam1(teamOneData || []);
+        setPlayersTeam2(teamTwoData || []);
+      })
+      .catch(error => {
+        console.log('Error fetching player details:', error);
+      });
+  };
 
   const handleImageClick = () => {
-    navigate('/user-auctionpage'); 
+    navigate('/user-auctionpage');
   };
 
   return (
     <main>
-      <div>
       <div className="cricket-page-container">
-
         <div className="match-info">
-          <img
-            src={`data:image/jpeg;base64,${matchData?.matchImage}`}
-            alt="LSG vs RCB"
-            className="match-banner"
-            onClick={handleImageClick} // Add the click event here
-            style={{ cursor: 'pointer' }} // Change cursor to pointer to indicate clickability
-          />
+          {matchData?.matchImage && (
+            <img
+              src={`data:image/jpeg;base64,${matchData.matchImage}`}
+              alt={`${matchData.teamOneName} vs ${matchData.teamTwoName}`}
+              className="match-banner"
+              onClick={handleImageClick}
+              style={{ cursor: 'pointer' }}
+            />
+          )}
           <div className="bid-info">
             <div className="top-sixer">Top Sixer</div>
-            <h4>Get Ready Bid Will</h4>
-            <div className="countdown">03 : 34 : 23</div>
+            <h4>Get Ready, Bid Will Start Soon</h4>
+            <div className="countdown">
+              {String(timeLeft.hours).padStart(2, "0")} :
+              {String(timeLeft.minutes).padStart(2, "0")} :
+              {String(timeLeft.seconds).padStart(2, "0")}
+            </div>
           </div>
         </div>
 
         <div className="player-list-container">
           <div className='heading-container'>
-            <h4> {matchData?.teamOneName} vs {matchData?.teamTwoName} </h4>
+            <h4>{matchData?.teamOneName} vs {matchData?.teamTwoName}</h4>
             <p>Expected Players</p>
           </div>
           <table className="player-list-table">
@@ -90,7 +121,7 @@ const CountdownPage = () => {
                   <div className="player-list">
                     {playersTeam1.map((player, index) => (
                       <div key={index} className="player-item">
-                        <img  src={`data:image/jpeg;base64,${player?.playerImage}`} alt={player.playerName} className="player-icon" />
+                        <img src={`data:image/jpeg;base64,${player?.playerImage}`} alt={player.playerName} className="player-icon" />
                         <span>{player.playerName}</span>
                       </div>
                     ))}
@@ -100,7 +131,7 @@ const CountdownPage = () => {
                   <div className="player-list">
                     {playersTeam2.map((player, index) => (
                       <div key={index} className="player-item">
-                        <img  src={`data:image/jpeg;base64,${player?.playerImage}`} alt={player.playerName} className="player-icon" />
+                        <img src={`data:image/jpeg;base64,${player?.playerImage}`} alt={player.playerName} className="player-icon" />
                         <span>{player.playerName}</span>
                       </div>
                     ))}
@@ -111,7 +142,6 @@ const CountdownPage = () => {
           </table>
         </div>
       </div>
-    </div>
     </main>
   );
 };

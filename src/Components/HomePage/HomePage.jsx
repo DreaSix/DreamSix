@@ -7,6 +7,7 @@ import "./Homepage.scss";
 import { matchDetailsService } from "../../Service/MatchDetailsService";
 
 const HomePage = () => {
+  console.log("leeeeeeeeeeeeeeeeee")
   const [matches, setMatches] = useState([])
   const navigate = useNavigate();
 

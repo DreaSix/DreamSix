@@ -11,8 +11,8 @@ const { TabPane } = Tabs;
 
 const Withdrawl = () => {
   const [form] = Form.useForm();
-  
-  
+
+
   const [userWallet, setUserWallet] = useState(0)
   const [activeTab, setActiveTab] = useState("newAccount");
   const [amount, setAmount] = useState()
@@ -23,18 +23,18 @@ const Withdrawl = () => {
   };
 
   useEffect(() => {
-      getUserDetails()
-    }, [])
-  
-    const getUserDetails = () => {
-      userService.getUser(Cookies.get("userId"))
-        .then(response => {
-          setUserWallet(response?.data?.userWallet)
-        })
-        .catch(error => {
-          console.log('error', error)
-        })
-    }
+    getUserDetails()
+  }, [])
+
+  const getUserDetails = () => {
+    userService.getUser(Cookies.get("userId"))
+      .then(response => {
+        setUserWallet(response?.data?.userWallet)
+      })
+      .catch(error => {
+        console.log('error', error)
+      })
+  }
 
   const handleSubmit = (values) => {
     const payload = {
@@ -60,11 +60,11 @@ const Withdrawl = () => {
   };
 
   const handleWheel = (e) => {
-      e.target.blur();  
-      setTimeout(() => {
-        e.target.focus(); 
-      }, 0);
-      e.preventDefault();
+    e.target.blur();
+    setTimeout(() => {
+      e.target.focus();
+    }, 0);
+    e.preventDefault();
   };
 
   return (
@@ -86,116 +86,88 @@ const Withdrawl = () => {
           centered
           className="account-tabs"
         >
-          <TabPane tab="Use New Account" key="newAccount">
-            <Form form={form} onFinish={handleSubmit} className="form">
+          <TabPane tab="Create new account" key="newAccount">
+            <Form
+              form={form}
+              name="withdrawBankForm"
+              onFinish={handleSubmit}
+              layout="vertical"
+            >
               <Form.Item
-                label="Amount*"
-                name="amount"
-                rules={[{ required: true, message: "Please enter an amount." },
-                  {
-                    validator: (_, value) => {
-                      const maxLimit = userWallet;
-                      if (!value || value <= maxLimit) {
-                        return Promise.resolve();
-                      }
-                      return Promise.reject(new Error(`Amount must not exceed ${maxLimit}.`));
-                    },
-                  },
-                ]}
-              >
-                <Input
-                  onChange={(e) => setAmount(e.target.value)}
-                  placeholder="Enter Amount"
-                  onWheel={handleWheel}
-                  type="number"
-                />
-              </Form.Item>
-              <p className="hint">Minimum Withdrawal: ₹100</p>
-
-              <Form.Item
-                label="Bank Name*"
                 name="bankName"
+                label="Bank Name"
+                rules={[{ required: true, message: "Please enter your bank name!" }]}
               >
-                <Select placeholder="Type Or Select Name From The List" allowClear>
-                  <Select.Option value="ICICI">ICICI</Select.Option>
-                  <Select.Option value="SBI">SBI</Select.Option>
-                  <Select.Option value="HDFC">HDFC</Select.Option>
-                </Select>
+                <Input placeholder="Enter bank name" />
               </Form.Item>
 
               <Form.Item
-                label="Account Holder's Name*"
                 name="accountHolderName"
+                label="Account Holder Name"
+                rules={[{ required: true, message: "Please enter account holder name!" }]}
               >
-                <Input placeholder="Eg. Yesipogu Sreevardhan" />
+                <Input placeholder="Enter account holder name" />
               </Form.Item>
 
               <Form.Item
-                label="Account Number*"
                 name="accountNumber"
+                label="Account Number"
+                rules={[{ required: true, message: "Please enter account number!" }]}
               >
-                <Input.Password placeholder="Enter Account Number" />
+                <Input placeholder="Enter account number" />
               </Form.Item>
 
               <Form.Item
-                label="IFSC Code*"
                 name="ifscCode"
-              >
-                <Input placeholder="Eg. ICIC0000183" />
-              </Form.Item>
+                label="IFSC Code"
+                rules={[
+              {required: true, message: "Please enter IFSC code!" },
+              {pattern: /^[A-Z]{4}0[A-Z0-9]{6}$/, message: "Enter a valid IFSC code!" }
+              ]}
+      >
+              <Input placeholder="Enter IFSC code" />
+            </Form.Item>
 
-              <div className="separator">
-                <span>---------------------------- Or ------------------------------------</span>
-              </div>
-
-              <Form.Item label="UPI ID" name="upiId">
-                <Input
-                  onChange={(e) => setUpiId(e.target.value)}
-                  placeholder="Enter UPI ID"
-                />
-              </Form.Item>
-
-              <Form.Item>
-                <Button type="primary" htmlType="submit" className="proceed-btn">
-                  Proceed
-                </Button>
-              </Form.Item>
-            </Form>
-
-          </TabPane>
-
-          <TabPane tab="Use Previous Account" key="previousAccount">
-            <Card className="previous-account-card">
-              <Row>
-                <Col span={22}>
-                  <h4 className="account-title">
-                    <CheckCircleOutlined style={{ color: "green", marginRight: "8px" }} />
-                    Primary Account
-                  </h4>
-                  <p><b>Account Name  :   </b> ICICI</p>
-                  <p><b>Holder Name  :   </b> Yesipogu Sreevardhan</p>
-                  <p><b>Account  :   </b> 006901596780</p>
-                  <p><b>IFSC  :   </b> ICIC0000183</p>
-                </Col>
-                <Col span={2}>
-                  <DeleteOutlined className="delete-icon" />
-                </Col>
-              </Row>
-            </Card>
-
-            <form className="form">
-              <label>Amount*</label>
-              <Input placeholder="Enter Amount" type="number" />
-              <p className="hint">Minimum Withdrawal: ₹100</p>
-
-              <Button type="primary" className="proceed-btn" onClick={onClickProceed}>
-                Proceed
+            <Form.Item>
+              <Button type="primary" htmlType="submit" className="w-full">
+                Submit
               </Button>
-            </form>
-          </TabPane>
-        </Tabs>
-      </div>
-    </main>
+            </Form.Item>
+          </Form>
+        </TabPane>
+
+        <TabPane tab="Use Previous Account" key="previousAccount">
+          <Card className="previous-account-card">
+            <Row>
+              <Col span={22}>
+                <h4 className="account-title">
+                  <CheckCircleOutlined style={{ color: "green", marginRight: "8px" }} />
+                  Primary Account
+                </h4>
+                <p><b>Account Name  :   </b> ICICI</p>
+                <p><b>Holder Name  :   </b> Yesipogu Sreevardhan</p>
+                <p><b>Account  :   </b> 006901596780</p>
+                <p><b>IFSC  :   </b> ICIC0000183</p>
+              </Col>
+              <Col span={2}>
+                <DeleteOutlined className="delete-icon" />
+              </Col>
+            </Row>
+          </Card>
+
+          <form className="form">
+            <label>Amount*</label>
+            <Input placeholder="Enter Amount" type="number" />
+            <p className="hint">Minimum Withdrawal: ₹100</p>
+
+            <Button type="primary" className="proceed-btn" onClick={onClickProceed}>
+              Proceed
+            </Button>
+          </form>
+        </TabPane>
+      </Tabs>
+    </div>
+    </main >
 
   );
 };

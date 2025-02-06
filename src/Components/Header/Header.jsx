@@ -36,7 +36,7 @@ const Header = () => {
         {/* <Button onClick={onDeposit} className="deposit-button">
           Deposit
         </Button> */}
-        <div className="balance">₹ {userWallet}</div>
+        <div className="balance">₹ {userWallet ? userWallet : 0}</div>
       </div>
     </div>
   );
