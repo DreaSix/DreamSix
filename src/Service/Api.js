@@ -6,7 +6,7 @@ const accessToken = Cookies.get("jwtToken")
 console.log('accessToken', accessToken)
 
 const redirectToLogin = () => {
-    window.location.href = "/loginpage";
+    window.location.href = "/";
   };
 
 const request = async function (options) {
