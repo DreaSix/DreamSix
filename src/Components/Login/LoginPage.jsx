@@ -15,7 +15,6 @@ const LoginPage = ({setIsAuthenticated}) => {
     }
     userService.loginUser(payload)
       .then(response => {
-        console.log('response', response)
         Cookies.set("jwtToken", response?.data?.accessToken)
         Cookies.set("userId", response?.data?.userId)
         setIsAuthenticated(response?.data?.accessToken)
@@ -76,7 +75,7 @@ const LoginPage = ({setIsAuthenticated}) => {
         </Form.Item>
 
         <Form.Item className="Create-Account">
-          <Link to="/">Do you have an account ?  <span style={{color:"black"}}>  Create-Account</span> </Link>
+          <Link to="/registration">Do you have an account ?  <span style={{color:"black"}}>  Create-Account</span> </Link>
         </Form.Item>
 
       </Form>

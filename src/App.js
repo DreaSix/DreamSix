@@ -42,16 +42,13 @@ function App() {
       <Router>
         {!isAuthenticated ? (
           <Routes>
-            <Route
-              path="/loginpage"
-              element={<LoginPage setIsAuthenticated={setIsAuthenticated} />}
-            />
-            <Route path="/" element={<Registration />} />
-            <Route path="*" element={<Navigate to="/loginpage" />} />
+            <Route path="/registration" element={<Registration />} />
+            <Route path="/" element={<LoginPage setIsAuthenticated={setIsAuthenticated} />} />
+            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         ) : (
           <>
-            <Header />
+            <Header setIsAuthenticated={setIsAuthenticated} />
             <Routes>
               <Route path="/register-process" element={<RegisterProcess />} />
               <Route path="/homepage" element={<HomePage />} />

@@ -9,7 +9,7 @@ import "./Header.scss";
 import SideMenu from "./SideMenu";
 import { userService } from "../../Service/UserService";
 
-const Header = () => {
+const Header = ({setIsAuthenticated}) => {
   const [userWallet, setUserWallet] = useState(0)
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const Header = () => {
   return (
     <div className="header">
       <div className="menu-container">
-        <SideMenu />
+        <SideMenu setIsAuthenticated={setIsAuthenticated} />
       </div>
       <img src={Logo} alt="DreamSix Logo" className="logo" />
       <div className="header-actions">

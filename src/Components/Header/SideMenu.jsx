@@ -8,7 +8,7 @@ import Cookies from "js-cookie";
 import { Color } from "antd/es/color-picker";
 import { userService } from "../../Service/UserService";
 
-const SideMenu = () => {
+const SideMenu = ({setIsAuthenticated}) => {
   const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState()
@@ -39,6 +39,13 @@ const SideMenu = () => {
     navigate(path);
     setVisible(false); // Close drawer on navigation
   };
+
+  const handleLogout = () => {
+    Cookies.remove("jwtToken")
+    Cookies.remove("userId")
+    setIsAuthenticated(false)
+    navigate("/")
+  }
 
   return (
     <div className="side-menu" >
@@ -87,7 +94,7 @@ const SideMenu = () => {
           <List.Item onClick={() => handleNavigation("/contact-us")} style={{ color:"white"}}>
             <PhoneOutlined /> Contact Us
           </List.Item>
-          <List.Item onClick={() => handleNavigation("/loginpage")} style={{ color: 'red' }}>
+          <List.Item onClick={handleLogout} style={{ color: 'red' }}>
             <PoweroffOutlined /> Logout
           </List.Item>
         </List>

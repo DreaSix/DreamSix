@@ -16,7 +16,7 @@ const Registration = () => {
   }, [])
 
   const getRoleList = () => {
-    axios.get("http://localhost:8080/api/role/all")
+    axios.get("http://localhost:8082/api/role/all")
     .then(response => {
       console.log('response', response)
       setRoleList(response?.data?.totalContent)
@@ -29,14 +29,15 @@ const Registration = () => {
     if (values.password !== values.confirmPassword){
       return message.error("Password and confirm password should be equal")
     }
-    const role = roleList?.filter(role => role.roleName === "USER")
+    const role = roleList?.find(role => role.roleName === "USER")
+    console.log('role', role)
     const payload = {
       ...values,
-      roles: role?.id
+      roles: [role?.id]
     }
     userService.createUser(payload)
       .then(response => {
-        navigate("/loginpage")
+        navigate("/")
       })
       .catch(error => {
         console.log('error', error)
