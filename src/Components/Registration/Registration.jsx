@@ -59,10 +59,10 @@ const Registration = () => {
           <Input placeholder="Mobile Number" />
         </Form.Item>
         <Form.Item name="password" rules={[{ required: true, message: "Enter your password!" }]}> 
-          <Input placeholder="Create Password" type="password" />
+          <Input.Password placeholder="Create Password" type="password" />
         </Form.Item>
         <Form.Item name="confirmPassword" rules={[{ required: true, message: "Re-enter your password!" }]}> 
-          <Input placeholder="Re-Enter Password" type="password" />
+          <Input.Password placeholder="Re-Enter Password" type="password" />
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit" className="register-button">
