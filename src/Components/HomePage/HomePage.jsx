@@ -45,7 +45,6 @@ const HomePage = () => {
 
         <div className="content-area">
           <div className="section matches-section">
-            <h3>Today Matches</h3>
             <Carousel autoplay dots infinite>
               {matches.map((match) => (
                 <div key={match.matchId}>
@@ -86,18 +85,18 @@ const HomePage = () => {
               >
                 Withdraw
               </Button>
-              <Button
+              {/* <Button
                 className="updates-button blue-button"
                 onClick={() => handleButtonClick("Updates")}
               >
                 Updates
-              </Button>
+              </Button> */}
             </Col>
           </Row>
 
           {/* Recent Winners */}
           <section className="recent-winners">
-            <h2>Recent Winners</h2>
+            <h2>DreamSix Recent Winners</h2>
             {[{ name: "Aditya Chatterjee", match: "IND v AUS", amount: "₹45,000" },
             { name: "Rahul Gupta", match: "ENG v SA", amount: "₹30,000" },
             { name: "Aditya Chatterjee", match: "IND v AUS", amount: "₹45,000" },

@@ -31,10 +31,6 @@ const LoginPage = ({setIsAuthenticated}) => {
 
   return (
     <div className="login-container" style={{ padding: "10%" }}>
-      <div className="logo">
-        <img src={Logo} alt="DreamSix Logo" />
-      </div>
-      <h2>Welcome back! Glad to see you, Again!</h2>
 
       <Form
         name="loginpage"
@@ -44,6 +40,10 @@ const LoginPage = ({setIsAuthenticated}) => {
         layout="vertical"
         className="login-form"
       >
+        <div className="logo">
+        <img src={Logo} alt="DreamSix Logo" />
+      </div>
+      <h2>Welcome back to DreamSix !</h2>
         <Form.Item
           name="userName"
           rules={[
@@ -75,7 +75,7 @@ const LoginPage = ({setIsAuthenticated}) => {
         </Form.Item>
 
         <Form.Item className="Create-Account">
-          <Link to="/registration">Do you have an account ?  <span style={{color:"black"}}>  Create-Account</span> </Link>
+          <Link to="/registration">Do you have an account ?  <span style={{color:"#ffd700"}}>  Create-Account</span> </Link>
         </Form.Item>
 
       </Form>

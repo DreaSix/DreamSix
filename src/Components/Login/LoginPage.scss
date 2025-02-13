@@ -1,50 +1,58 @@
 .login-container {
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20%;
-  height: 100vh;
- margin-top: 50px;
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(to right, #1c3a56, #005f73); // Updated gradient background
+  justify-content: center;
 
   .logo {
-    margin-bottom: 20px;
-    margin-top: 30px;
+    margin-bottom: 10px;
 
     img {
-      max-width: 150px;
+      max-width: 140px;
+
+      @media (max-width: 480px) {
+        max-width: 120px;
+      }
     }
   }
 
   h2 {
     color: #fff;
     font-weight: 600;
-    margin-bottom: 30px;
-    // text-align: center;
-    font-size: 1.5rem; // Default font size
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    text-align: center;
 
-    // Adjust heading size on smaller screens
     @media (max-width: 768px) {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
     }
 
     @media (max-width: 480px) {
-      font-size: 1.7rem;
+      font-size: 1.2rem;
     }
   }
 
   .login-form {
     width: 100%;
     max-width: 400px;
+    background-color: #08273b;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 
     .ant-form-item {
       margin-bottom: 16px;
     }
+
     .ant-input {
       height: 45px;
+      font-size: 14px;
     }
-    // #loginpage_password {
-    //   height: 40px;
-    // }
+
     .ant-form-item-control-input-content {
       height: 42px;
     }
@@ -52,7 +60,7 @@
     .forgot-password {
       display: flex;
       justify-content: flex-end;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
 
       a {
         color: #daff33;
@@ -62,18 +70,18 @@
       }
     }
 
-    .Create-Account{
+    .Create-Account {
       display: flex;
-      margin-top: 30px;
-      margin-left: 15px;
+      justify-content: center;
+      margin-top: 20px;
 
       a {
-        color: #f5f0f0;
+        color: #fdfdfa;
+        font-weight: 500;
         &:hover {
           text-decoration: underline;
         }
       }
-
     }
 
     .login-button {
@@ -84,7 +92,7 @@
       font-size: 16px;
       color: #000;
       height: 48px;
-      padding: 10px; // Adds padding for better touch targets on mobile
+      padding: 10px;
 
       &:hover {
         background-color: #d4b106;
@@ -94,37 +102,54 @@
   }
 }
 
-// Media queries for responsive design
+// Responsive Media Queries
 @media (max-width: 1024px) {
+  .login-container {
+    padding: 30px;
+  }
+
+  .login-form {
+    max-width: 350px;
+  }
+}
+
+@media (max-width: 768px) {
   .login-container {
     padding: 20px;
   }
 
   .login-form {
-    max-width: 300px;
-  }
-}
-
-@media (max-width: 768px) {
-  .login-form {
-    max-width: 280px;
+    max-width: 320px;
+    padding: 25px;
   }
 }
 
 @media (max-width: 480px) {
   .login-container {
-    padding: 10px;
-  }
-
-  .logo img {
-    max-width: 120px;
+    padding: 15px;
   }
 
   .login-form {
-    max-width: 250px;
+    max-width: 90%; // Allows the form to take most of the screen width on small devices
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 1.1rem;
+  }
+
+  .login-button {
+    height: 45px;
+    font-size: 15px;
+  }
+
+  .forgot-password {
+    font-size: 14px;
   }
 }
 
+// Ensure all elements respect the box-sizing rule
+*,
 *::before,
 *::after {
   box-sizing: border-box;
