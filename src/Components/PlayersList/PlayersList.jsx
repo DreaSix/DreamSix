@@ -55,9 +55,12 @@ const PlayersList = () => {
     matchDetailsService.getMatchPlayerDetails(matchId)
       .then(response => {
         const teamOneData = response?.data?.filter(player => player?.teamName === matchData?.teamOneName)
-        const teamTwoData = response?.data?.filter(player => player?.teamName === matchData?.teamTwoName)
-        setPlayersTeam1(teamOneData)
-        setPlayersTeam2(teamTwoData)
+            const teamTwoData = response?.data?.filter(player => player?.teamName === matchData?.teamTwoName)
+            const flattenedPlayers1 = teamOneData?.flatMap(item => item?.playerDetailsResponseList); 
+            const flattenedPlayers2 = teamTwoData?.flatMap(item => item?.playerDetailsResponseList); 
+
+            setPlayersTeam1(flattenedPlayers1)
+            setPlayersTeam2(flattenedPlayers2)
       })
       .catch(error => {
         console.log('error', error)

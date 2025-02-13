@@ -39,14 +39,14 @@ function App() {
         justifyContent: "space-between",
       }}
     >
-      <Router>
-        {!isAuthenticated ? (
+      <Router> 
+        {/* {!isAuthenticated ? (
           <Routes>
             <Route path="/registration" element={<Registration />} />
             <Route path="/" element={<LoginPage setIsAuthenticated={setIsAuthenticated} />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
-        ) : (
+        ) : ( */}
           <>
             <Header setIsAuthenticated={setIsAuthenticated} />
             <Routes>
@@ -73,7 +73,7 @@ function App() {
             </Routes>
             <Footer />
           </>
-        )}
+        {/* )} */}
       </Router>
     </div>
   );
