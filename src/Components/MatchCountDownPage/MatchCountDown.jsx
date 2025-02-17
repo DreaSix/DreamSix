@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import './MatchCountDown.scss';
 import { matchDetailsService } from '../../Service/MatchDetailsService';
+import { Button } from 'antd';
 
 const CountdownPage = () => {
   const { matchId } = useParams();
@@ -45,7 +46,6 @@ const CountdownPage = () => {
         return { hours: 0, minutes: 0, seconds: 0 };
       };
 
-      // Set initial time
       setTimeLeft(calculateTimeLeft());
 
       const timer = setInterval(() => {
@@ -57,21 +57,21 @@ const CountdownPage = () => {
   }, [matchData?.countdownEndTime]);
 
   useEffect(() => {
-    if (matchData) {
+    if (matchId) {
       getPlayerDetailsByMatchId();
     }
-  }, [matchData]);
+  }, [matchId]);
 
   const getPlayerDetailsByMatchId = () => {
     matchDetailsService.getMatchPlayerDetails(matchId)
       .then(response => {
         const teamOneData = response?.data?.filter(player => player?.teamName === matchData?.teamOneName)
-            const teamTwoData = response?.data?.filter(player => player?.teamName === matchData?.teamTwoName)
-            const flattenedPlayers1 = teamOneData?.flatMap(item => item?.playerDetailsResponseList); 
-            const flattenedPlayers2 = teamTwoData?.flatMap(item => item?.playerDetailsResponseList); 
+        const teamTwoData = response?.data?.filter(player => player?.teamName === matchData?.teamTwoName)
+        const flattenedPlayers1 = teamOneData?.flatMap(item => item?.playerDetailsResponseList);
+        const flattenedPlayers2 = teamTwoData?.flatMap(item => item?.playerDetailsResponseList);
 
-            setPlayersTeam1(flattenedPlayers1)
-            setPlayersTeam2(flattenedPlayers2)
+        setPlayersTeam1(flattenedPlayers1)
+        setPlayersTeam2(flattenedPlayers2)
       })
       .catch(error => {
         console.log('Error fetching player details:', error);
@@ -79,7 +79,7 @@ const CountdownPage = () => {
   };
 
   const handleImageClick = () => {
-    navigate('/user-auctionpage');
+    navigate(`/user-auctionpage/${matchId}`);
   };
 
   return (
@@ -91,18 +91,23 @@ const CountdownPage = () => {
               src={`data:image/jpeg;base64,${matchData.matchImage}`}
               alt={`${matchData.teamOneName} vs ${matchData.teamTwoName}`}
               className="match-banner"
-              onClick={handleImageClick}
               style={{ cursor: 'pointer' }}
             />
           )}
           <div className="bid-info">
             <div className="top-sixer">Top Sixer</div>
             <h4>Get Ready, Bid Will Start Soon</h4>
-            <div className="countdown">
-              {String(timeLeft.hours).padStart(2, "0")} :
-              {String(timeLeft.minutes).padStart(2, "0")} :
-              {String(timeLeft.seconds).padStart(2, "0")}
-            </div>
+
+
+            {(timeLeft.hours === 0 && timeLeft.minutes === 0 && timeLeft.seconds === 0) ? (
+              <Button onClick={handleImageClick} className="start-button">Start</Button>
+            ) : (
+              <div className="countdown">
+                {String(timeLeft.hours).padStart(2, "0")} :
+                {String(timeLeft.minutes).padStart(2, "0")} :
+                {String(timeLeft.seconds).padStart(2, "0")}
+              </div>
+            )}
           </div>
         </div>
 

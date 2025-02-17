@@ -1,30 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Tabs, List } from 'antd';
 import { CheckCircleOutlined, QuestionCircleOutlined, RightOutlined } from '@ant-design/icons';
 import './Transactions.scss';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import { useNavigate } from 'react-router-dom';
+import { transactionService } from '../../Service/TransactionService';
 
 const { TabPane } = Tabs;
 
-const transactions = [
-  {
-    id: 'tnx33074901',
-    date: 'Aug 6th, 2024, 16:08:05',
-    amount: '₹1000',
-    status: 'pending',
-  },
-  {
-    id: 'tnx32492668',
-    date: 'Aug 32th, 2024, 23:17:40',
-    amount: '₹1000',
-    status: 'success',
-  },
-];
-
 const TransactionPage = () => {
-  const [activeTab, setActiveTab] = useState('deposit');
+  const [activeTab, setActiveTab] = useState('DEPOSIT');
+  const [transactions, setTransactions] = useState([])
+  const [allTransactions, setAllTransactions] = useState([])
+
+  useEffect(() => {
+    getUserTransactions()
+  }, [])
+
+  const getUserTransactions = () => {
+    transactionService.getUserTransactions()
+      .then(response => {
+        const filteredData = response?.totalContent?.filter(item => item?.transactionType === activeTab)
+        setAllTransactions(response?.totalContent)
+        setTransactions(filteredData)
+      })
+      .catch(error => {
+        console.log('error', error)
+      })
+  }
 
   const navigate = useNavigate();
 
@@ -34,20 +38,23 @@ const TransactionPage = () => {
 
   const onTabChange = (key) => {
     setActiveTab(key);
+    const filteredData = allTransactions?.filter(item => item?.transactionType === key)
+    setTransactions(filteredData)
+
   };
 
   return (
     <main>
     
     <div className="transaction-page-container">
-      <Tabs defaultActiveKey="deposit" onChange={onTabChange}>
+      <Tabs style={{marginTop: "15px"}} defaultActiveKey="DEPOSIT" onChange={onTabChange}>
         <TabPane
-          tab={<Button className={activeTab === 'deposit' ? 'active-tab' : ''}>Deposit</Button>}
-          key="deposit"
+          tab={<Button className={activeTab === 'DEPOSIT' ? 'active-tab' : ''}>Deposit</Button>}
+          key="DEPOSIT"
         />
         <TabPane
-          tab={<Button className={activeTab === 'withdrawal' ? 'active-tab' : ''}>Withdrawal</Button>}
-          key="withdrawal"
+          tab={<Button className={activeTab === 'WITHDRAW' ? 'active-tab' : ''}>Withdrawal</Button>}
+          key="WITHDRAW"
         />
       </Tabs>
 
@@ -63,14 +70,14 @@ const TransactionPage = () => {
           >
             <List.Item.Meta
               avatar={
-                transaction.status === 'success' ? (
+                transaction.approvalStatus === 'APPROVED' ? (
                   <CheckCircleOutlined style={{ color: '#4caf50', fontSize: '24px' }} />
                 ) : (
                   <QuestionCircleOutlined style={{ color: '#ff5252', fontSize: '24px' }} />
                 )
               }
-              title={`#${transaction.id}`}
-              description={transaction.date}
+              title={`#${transaction?.id}`}
+              description={transaction?.createdAt.split("T")[0]}
             />
             <div className="transaction-amount">{transaction.amount}</div>
           </List.Item>

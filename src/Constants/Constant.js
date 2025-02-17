@@ -29,5 +29,9 @@ export const GET_ROLES_LIST = BASE_URL + "/api/role/all"
 
 //payments
 
-export const PAYMENTS = BASE_URL + "/api/payments"
+export const PAYMENTS = BASE_URL + "/api/payments";
+
+//transactions
+
+export const GET_USER_TRANSACTIONS = BASE_URL + "/api/transactions/get-all-transactions-by-user"
 

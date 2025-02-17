@@ -1,9 +1,57 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../UserAuction/UserAuctionPage.scss'
 import Footer from '../Footer/Footer';
 import { Badge, Button, Card } from 'antd';
+import ChatBox from '../Chatbox/Chatbox';
+import { useParams } from 'react-router-dom';
+import { matchDetailsService } from '../../Service/MatchDetailsService';
 
 const USerAuctionPage = () => {
+  const { matchId } = useParams();
+
+  const [playersTeam1, setPlayersTeam1] = useState([]);
+  const [playersTeam2, setPlayersTeam2] = useState([]);
+  const [matchData, setMatchDetails] = useState(null);
+
+
+  useEffect(() => {
+    if (matchId) {
+      getMatchDetailsById();
+    }
+  }, [matchId]);
+
+  const getMatchDetailsById = () => {
+    matchDetailsService.getMtachDetailsById(matchId)
+      .then(response => {
+        setMatchDetails(response?.data);
+      })
+      .catch(error => {
+        console.log('Error fetching match details:', error);
+      });
+  };
+
+  useEffect(() => {
+    if (matchId) {
+      getPlayerDetailsByMatchId();
+    }
+  }, [matchId]);
+
+  const getPlayerDetailsByMatchId = () => {
+    matchDetailsService.getMatchPlayerDetails(matchId)
+      .then(response => {
+        const teamOneData = response?.data?.filter(player => player?.teamName === matchData?.teamOneName)
+        const teamTwoData = response?.data?.filter(player => player?.teamName === matchData?.teamTwoName)
+        const flattenedPlayers1 = teamOneData?.flatMap(item => item?.playerDetailsResponseList);
+        const flattenedPlayers2 = teamTwoData?.flatMap(item => item?.playerDetailsResponseList);
+
+        setPlayersTeam1(flattenedPlayers1)
+        setPlayersTeam2(flattenedPlayers2)
+      })
+      .catch(error => {
+        console.log('Error fetching player details:', error);
+      });
+  };
+
   const nextPlayers = [
     { name: 'Rajat Patidar', image: 'player_image_url' },
     { name: 'Faf Du Plessis', image: 'player_image_url' },
@@ -59,27 +107,7 @@ const USerAuctionPage = () => {
         </div>
       </div>
 
-{/* 
-      <section className="bidding-section">
-        <Card className="player-details">
-          <img src="rajat.jpg" alt="Rajat Patidar" />
-          <div>
-            <h3>Rajat Patidar</h3>
-            <p>Starting Price: ₹1000</p>
-          </div>
-        </Card>
-
-        <div className="bids-list">
-          {bids.map((bid, index) => (
-            <Card key={index} className="bid-card">
-              <p>{bid.phone}</p>
-              <p>{bid.name}</p>
-              <Badge count={bid.initial} />
-              <p className="bid-price">₹{bid.price}</p>
-            </Card>
-          ))}
-        </div>
-      </section> */}
+      <ChatBox />
 
       <footer className="bidding-footer">
         <Button>+50</Button>
@@ -88,8 +116,8 @@ const USerAuctionPage = () => {
         <Button>+500</Button>
       </footer>
 
-     
-      <Footer/>
+
+      <Footer />
     </div>
   );
 };

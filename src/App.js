@@ -40,13 +40,13 @@ function App() {
       }}
     >
       <Router> 
-        {/* {!isAuthenticated ? (
+        {!isAuthenticated ? (
           <Routes>
             <Route path="/registration" element={<Registration />} />
             <Route path="/" element={<LoginPage setIsAuthenticated={setIsAuthenticated} />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
-        ) : ( */}
+        ) : (
           <>
             <Header setIsAuthenticated={setIsAuthenticated} />
             <Routes>
@@ -55,7 +55,7 @@ function App() {
               <Route path="/rules" element={<Rules />} />
               <Route path="/auction-type/:matchId" element={<AuctionTypePage />} />
               <Route path="/depositpage" element={<DepositPage />} />
-              <Route path="/user-auctionpage" element={<USerAuctionPage />} />
+              <Route path="/user-auctionpage/:matchId" element={<USerAuctionPage />} />
               <Route path="/admin-auctionpage" element={<AdminAuctionPage />} />
               <Route path="/match-countdown/:matchId" element={<CountdownPage />} />
               <Route path="/payments-process" element={<PaymentsProcess />} />
@@ -73,7 +73,7 @@ function App() {
             </Routes>
             <Footer />
           </>
-        {/* )} */}
+         )} 
       </Router>
     </div>
   );

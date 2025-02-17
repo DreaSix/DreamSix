@@ -17,6 +17,7 @@ const LoginPage = ({setIsAuthenticated}) => {
       .then(response => {
         Cookies.set("jwtToken", response?.data?.accessToken)
         Cookies.set("userId", response?.data?.userId)
+        Cookies.set("username", response?.data?.username)
         setIsAuthenticated(response?.data?.accessToken)
         navigate("/homepage")
       })

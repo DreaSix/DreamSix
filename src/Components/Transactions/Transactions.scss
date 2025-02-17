@@ -1,4 +1,5 @@
 .transaction-page-container {
+  padding-top: 15px;
    
   
     .ant-tabs-nav {
@@ -58,6 +59,7 @@
   @media (max-width: 576px) {
     .transaction-page-container {
       padding: 15px;
+      padding-top: 15px;
   
       .ant-btn {
         width: 100px;
