@@ -8,6 +8,7 @@ const { Text } = Typography;
 
 const PaymentStatus = () => {
   return (
+    <main>
     <div>
         <Header/>
     <div className="payment-details-container">
@@ -50,6 +51,7 @@ const PaymentStatus = () => {
     </div>
     <Footer/>
     </div>
+    </main>
   );
 };
 
