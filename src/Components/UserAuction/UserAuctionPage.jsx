@@ -34,7 +34,7 @@ const USerAuctionPage = () => {
     if (matchId) {
       getPlayerDetailsByMatchId();
     }
-  }, [matchId]);
+  }, [matchData]);
 
   const getPlayerDetailsByMatchId = () => {
     matchDetailsService.getMatchPlayerDetails(matchId)

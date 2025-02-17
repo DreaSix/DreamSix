@@ -60,7 +60,7 @@ const CountdownPage = () => {
     if (matchId) {
       getPlayerDetailsByMatchId();
     }
-  }, [matchId]);
+  }, [matchData]);
 
   const getPlayerDetailsByMatchId = () => {
     matchDetailsService.getMatchPlayerDetails(matchId)
@@ -69,6 +69,7 @@ const CountdownPage = () => {
         const teamTwoData = response?.data?.filter(player => player?.teamName === matchData?.teamTwoName)
         const flattenedPlayers1 = teamOneData?.flatMap(item => item?.playerDetailsResponseList);
         const flattenedPlayers2 = teamTwoData?.flatMap(item => item?.playerDetailsResponseList);
+
 
         setPlayersTeam1(flattenedPlayers1)
         setPlayersTeam2(flattenedPlayers2)
