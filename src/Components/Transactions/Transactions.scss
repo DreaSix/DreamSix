@@ -1,5 +1,5 @@
 .transaction-page-container {
-   
+   margin-top: 20px;
   
     .ant-tabs-nav {
       display: flex;
@@ -7,7 +7,7 @@
   
       .ant-btn {
         width: 120px;
-        height: 40px;
+        height: 35px;
         font-size: 16px;
         font-weight: bold;
         background-color: #fff;
@@ -22,7 +22,7 @@
     }
   
     .transaction-list {
-      margin-top: 20px;
+      margin-top:2px;
   
       .ant-list-item-meta {
         align-items: center;
@@ -48,7 +48,7 @@
         background-color: #060606;
         border-radius: 8px;
         padding: 16px;
-        margin-bottom: 12px;
+        margin-bottom: 2px;
         color: #fbf9f9;
       }
     }
