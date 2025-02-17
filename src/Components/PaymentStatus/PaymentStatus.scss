@@ -2,15 +2,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding:20px;
     height: 100vh;
     
   
     .payment-card {
-      width: 100%;
-      max-width: 500px;
-      padding: 20px;
-      background-color: #070707;
+      margin-top: 20px;
+      width: 100%;  
+      max-width: 400px;
+      background-color: #001529;
       border-radius: 8px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
