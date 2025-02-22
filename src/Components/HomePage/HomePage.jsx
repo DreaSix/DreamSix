@@ -1,13 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, Carousel, Col, Row } from "antd";
+import { Button, Card, Carousel, Col, Row, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
 import "./Homepage.scss";
 import { matchDetailsService } from "../../Service/MatchDetailsService";
 
 const HomePage = () => {
+  const { Text } = Typography;
+
   const [matches, setMatches] = useState([])
+
+  const [winnersList, setWinnersList] = useState([])
+
+  useEffect(() => {
+    getWinnersList()
+  }, [])
+
+  const getWinnersList = () => {
+    matchDetailsService.getWinners()
+      .then(response => {
+        setWinnersList(response?.data)
+      })
+      .catch(error => {
+        console.log('error', error)
+      })
+  }
   const navigate = useNavigate();
 
   const onClickMatchImage = (matchId) => {
@@ -60,8 +76,8 @@ const HomePage = () => {
                       }}
                     />
                     <div className="match-details">
-                      <p>{match.details}</p> 
-                      <p className="countdown">{match.countdown}</p> 
+                      <p>{match.details}</p>
+                      <p className="countdown">{match.countdown}</p>
                     </div>
                   </Card>
                 </div>
@@ -96,26 +112,24 @@ const HomePage = () => {
           {/* Recent Winners */}
           <section className="recent-winners">
             <h2>DreamSix Recent Winners</h2>
-            {[{ name: "Aditya Chatterjee", match: "IND v AUS", amount: "₹45,000" },
-            { name: "Rahul Gupta", match: "ENG v SA", amount: "₹30,000" },
-            { name: "Aditya Chatterjee", match: "IND v AUS", amount: "₹45,000" },
-            ].map((winner, index) => (
-              <Card key={index} className="winner-card">
-                <Row align="middle" justify="space-between">
+            {winnersList?.map(winner => (
+              <Card className="winner-card">
+                <Row align="middle">
                   <Col>
-                    <div className="winner-info">
-                      <img
-                        src="https://tse3.mm.bing.net/th?id=OIP.szlODdPxBbApegAVzrKzXwHaHa&pid=Api&P=0&h=180"
-                        alt={winner.name}
-                      />
-                      <div>
-                        <h3>{winner.name}</h3>
-                        <span>{winner.match}</span>
-                      </div>
+                    <div className="winner-badge">
+                      <img src={"http://pluspng.com/img-png/user-png-icon-download-icons-logos-emojis-users-2240.png"} alt="Winner" />
                     </div>
                   </Col>
                   <Col>
-                    <span className="amount">{winner.amount}</span>
+                    <Text className="winner-name">{winner?.winnerName}</Text>
+                    <br />
+                    <Text className="winner-match">{winner?.matchDetails?.matchName}</Text>
+                  </Col>
+                  <Col flex="auto" />
+                  <Col>
+                    <Text className="winner-prize">₹ {winner?.winnerAmount}</Text>
+                    <br />
+                    <Button className="top-sixer-button">{winner?.matchDetails?.matchAction}</Button>
                   </Col>
                 </Row>
               </Card>

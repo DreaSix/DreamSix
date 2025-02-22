@@ -15,9 +15,13 @@ export const GET_MATCH_DETAILS_BY_ID = BASE_URL + "/api/match-details/";
 export const SAVE_TEAM_PLAYERS = BASE_URL + "/api/player-details/save-team";
 
 export const GET_MATCH_PLAYER_DETAILS = BASE_URL + "/api/player-details/";
+export const GET_MATCH_PLAYER_DETAILS_ENDPOINT = "/matchDetails"
 
 export const ADD_DEPOSITE = BASE_URL + "/api/transactions"
 export const ADD_WITHDRAW = BASE_URL + "/api/withdraw";
+
+export const  MATCH_WINNER = BASE_URL + "/api/winner-details";
+
 
 //change password
 

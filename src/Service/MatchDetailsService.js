@@ -1,4 +1,4 @@
-import { ADD_DEPOSITE, ADD_WITHDRAW, GET_MATCH_DETAILS, GET_MATCH_DETAILS_BY_ID, GET_MATCH_PLAYER_DETAILS, SAVE_TEAM_PLAYERS } from "../Constants/Constant"
+import { ADD_DEPOSITE, ADD_WITHDRAW, GET_MATCH_DETAILS, GET_MATCH_DETAILS_BY_ID, GET_MATCH_PLAYER_DETAILS, GET_MATCH_PLAYER_DETAILS_ENDPOINT, MATCH_WINNER, SAVE_TEAM_PLAYERS } from "../Constants/Constant"
 import { GetAPIRequest, PostAPIRequest } from "./Api"
 
 const getAllMatches = () => {
@@ -21,7 +21,7 @@ const getMtachDetailsById = (matchId) => {
   }
   const getMatchPlayerDetails = (matchId) => {
     return GetAPIRequest({
-        url: GET_MATCH_PLAYER_DETAILS + matchId,
+        url: GET_MATCH_PLAYER_DETAILS + matchId + GET_MATCH_PLAYER_DETAILS_ENDPOINT,
   });
 };
 
@@ -39,11 +39,18 @@ const addWithdraw = (payload) => {
     })
 }
 
+const getWinners = () => {
+    return GetAPIRequest({
+      url: MATCH_WINNER,
+    });
+  };
+
 export const matchDetailsService = {
     getAllMatches,
     saveTeamPlayers,
     getMtachDetailsById,
     getMatchPlayerDetails,
     addDeposite,
-    addWithdraw
+    addWithdraw,
+    getWinners
 }

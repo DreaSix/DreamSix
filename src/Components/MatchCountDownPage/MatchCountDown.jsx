@@ -9,8 +9,8 @@ const CountdownPage = () => {
   const navigate = useNavigate();
 
   const [matchData, setMatchDetails] = useState(null);
-  const [playersTeam1, setPlayersTeam1] = useState([]);
-  const [playersTeam2, setPlayersTeam2] = useState([]);
+  const [playersTeam1, setPlayersTeam1] = useState({});
+  const [playersTeam2, setPlayersTeam2] = useState({});
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
@@ -65,10 +65,14 @@ const CountdownPage = () => {
   const getPlayerDetailsByMatchId = () => {
     matchDetailsService.getMatchPlayerDetails(matchId)
       .then(response => {
-        const teamOneData = response?.data?.filter(player => player?.teamName === matchData?.teamOneName)
-        const teamTwoData = response?.data?.filter(player => player?.teamName === matchData?.teamTwoName)
-        const flattenedPlayers1 = teamOneData?.flatMap(item => item?.playerDetailsResponseList);
-        const flattenedPlayers2 = teamTwoData?.flatMap(item => item?.playerDetailsResponseList);
+        const teamOneData = response?.data?.find(
+          (player) => player?.teamName === matchData?.teamOneName
+        );
+        const flattenedPlayers1 = teamOneData?.playersDtoMap;
+        const teamTwoData = response?.data?.find(
+          (player) => player?.teamName === matchData?.teamTwoName
+        );
+        const flattenedPlayers2 = teamTwoData?.playersDtoMap;
 
 
         setPlayersTeam1(flattenedPlayers1)
@@ -127,24 +131,30 @@ const CountdownPage = () => {
             <tbody>
               <tr>
                 <td>
-                  <div className="player-list">
-                    {playersTeam1.map((player, index) => (
-                      <div key={index} className="player-item">
+                  {playersTeam1 && (
+                    <div className="player-list">
+                    {Object.entries(playersTeam1).map(
+                        ([playerId, player]) => (
+                      <div key={playerId} className="player-item">
                         <img src={`data:image/jpeg;base64,${player?.playerImage}`} alt={player.playerName} className="player-icon" />
                         <span>{player.playerName}</span>
                       </div>
                     ))}
                   </div>
+                  )}
                 </td>
                 <td>
-                  <div className="player-list">
-                    {playersTeam2.map((player, index) => (
-                      <div key={index} className="player-item">
+                  {playersTeam2 && (
+                    <div className="player-list">
+                    {Object.entries(playersTeam2).map(
+                        ([playerId, player]) => (
+                      <div key={playerId} className="player-item">
                         <img src={`data:image/jpeg;base64,${player?.playerImage}`} alt={player.playerName} className="player-icon" />
                         <span>{player.playerName}</span>
                       </div>
                     ))}
                   </div>
+                  )}
                 </td>
               </tr>
             </tbody>

@@ -2,28 +2,28 @@ import React, { useState, useEffect } from "react";
 import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 import Cookies from "js-cookie";
+import { Button } from "antd"; // Using Ant Design buttons
 
 import "./Chatbox.scss";
 
 const ChatBox = () => {
   const [messages, setMessages] = useState([]);
-  const [message, setMessage] = useState("");
   const [username, setUsername] = useState(Cookies.get("username"));
   const [client, setClient] = useState(null);
 
   useEffect(() => {
-    const socket = new SockJS("http://localhost:8080/ws"); // Use SockJS endpoint
+    const socket = new SockJS("http://localhost:8080/ws");
     const stompClient = new Client({
-      webSocketFactory: () => socket, // SockJS integration
-      reconnectDelay: 5000, // Reconnect after 5 seconds if connection fails
+      webSocketFactory: () => socket,
+      reconnectDelay: 5000,
       onConnect: () => {
         console.log("Connected to WebSocket");
 
         stompClient.subscribe("/topic/public", (message) => {
           const newMessage = JSON.parse(message.body);
-          console.log('newMessage', newMessage);
+          console.log("newMessage", newMessage);
 
-          // Sort messages by timestamp in ascending order (oldest first)
+          // Sort messages by timestamp in ascending order
           const sortedMessages = [...newMessage?.responseDTOList].sort(
             (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
           );
@@ -45,16 +45,20 @@ const ChatBox = () => {
     };
   }, []);
 
+  const sendMessage = (amount) => {
+    if (client && client.connected) {
+      // Get the last message's amount
+      const lastMessage =
+        messages.length > 0 ? messages[messages.length - 1] : null;
+      const lastAmount = lastMessage ? parseInt(lastMessage.message) || 0 : 0;
 
-  console.log('messages', messages)
+      // Calculate new amount
+      const newAmount = lastAmount + amount;
 
-  const sendMessage = () => {
-    if (message.trim() !== "" && client && client.connected) {
-      
       const messageData = {
         username,
         bidId: "5d47ed3a-8372-4e72-87d3-55383bba1cad",
-        messageContent: message,
+        messageContent: newAmount.toString(),
       };
 
       client.publish({
@@ -62,27 +66,61 @@ const ChatBox = () => {
         body: JSON.stringify(messageData),
       });
 
-      setMessage("");
+      // Append the new message to the state
+      setMessages([
+        ...messages,
+        { username, messageContent: newAmount.toString() },
+      ]);
     } else {
       console.error("Cannot send message: STOMP connection not active.");
     }
   };
 
+  console.log("messages", messages);
+
   return (
-    <div className="chat-container">
-      <h3>Live Chat</h3>
-      <div className="chat-box">
-        {messages.map((msg, index) => (
+    <main>
+      <body className="chat-container">
+      <div className="bids-section">
+        {messages.map((bid, index) =>
+          bid?.username?.username === username ? (
+            <div className="bid-card" key={index}>
+              <div className="bid-user">{bid?.name?.charAt(0)}</div>
+              <div className="bid-info">
+                <span className="bid-name">{bid?.name}</span>
+                <span className="bid-amount">{bid?.message}</span>
+              </div>
+              
+            </div>
+          ) : (
+            <div className="bid-card" key={index}>
+              <div className="bid-user">{bid?.name?.charAt(0)}</div>
+              <div className="bid-info">
+                <span className="bid-name">{bid?.name}</span>
+                <span className="bid-amount">{bid?.message}</span>
+              </div>
+            </div>
+          )
+        )}
+      </div>
+      {/* {messages.map((msg, index) => (
           <div key={index} className={`chat-message ${msg.username === username ? "own" : ""}`}>
             <strong>{msg.username}:</strong> {msg.message}
           </div>
+        ))} */}
+      <div className="chat-buttons bidding-footer">
+        {[50, 100, 200, 500].map((amount) => (
+          <Button
+            key={amount}
+            className="send-btn"
+            onClick={() => sendMessage(amount)}
+          >
+            +{amount}
+          </Button>
         ))}
       </div>
-      <div className="chat-input">
-        <input type="text" placeholder="Type a message..." value={message} onChange={(e) => setMessage(e.target.value)} />
-        <button onClick={sendMessage}>Send</button>
-      </div>
-    </div>
+    </body>
+    </main>
   );
 };
 

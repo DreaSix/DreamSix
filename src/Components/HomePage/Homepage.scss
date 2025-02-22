@@ -88,6 +88,45 @@
     .recent-winners {
       margin-bottom: 40px;
 
+      .winner-card {
+        background-color: #161b22;
+        border-radius: 10px;
+  
+        .winner-badge {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          overflow: hidden;
+          margin-right:10px;
+  
+          img {
+            width: 100%;
+          }
+        }
+  
+        .winner-name {
+          color: #ffffff;
+          font-weight: bold;
+        }
+  
+        .winner-match {
+          color: #aaa;
+        }
+  
+        .winner-prize {
+          color: #ffffff;
+          font-weight: bold;
+        }
+  
+        .top-sixer-button {
+          background: linear-gradient(45deg, #ff7a45, #40a9ff);
+          color: #fff;
+          border: none;
+          font-weight: bold;
+          border-radius: 8px;
+        }
+      }
+
       h2 {
         font-size: 22px;
         color: #fdfcfd;
