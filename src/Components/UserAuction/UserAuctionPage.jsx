@@ -10,8 +10,10 @@ const USerAuctionPage = () => {
   const { matchId } = useParams();
   const [showNextPlayers, setShowNextPlayers] = useState(false);
   const [matchData, setMatchDetails] = useState(null);
-  const [nextPlayers, setNextPlayers] = useState({})
-  const [soldPlayers, setSoldPlayers] = useState({})
+  const [nextPlayers, setNextPlayers] = useState({});
+  const [soldPlayers, setSoldPlayers] = useState({});
+  const [selectedPlayer, setSelectedPlayer] = useState();
+  const [currentBidId, setCurrentBidId] = useState();
 
 
   useEffect(() => {
@@ -51,6 +53,15 @@ const USerAuctionPage = () => {
         const soldPlayers = response.data.flatMap(match =>
           Object.values(match?.playersDtoMap || {}).filter(player => player?.status === "SOLD")
         );
+
+        const biddingPlayer = response.data.flatMap((match) =>
+          Object.values(match?.playersDtoMap || {}).filter(
+            (player) => player?.status === "BIDDING"
+          )
+        );
+
+        setCurrentBidId(biddingPlayer[0]?.bidId)
+        setSelectedPlayer(biddingPlayer[0])
 
         setNextPlayers(unSoldPlayers)
         setSoldPlayers(soldPlayers)
@@ -122,8 +133,24 @@ const USerAuctionPage = () => {
           )}
         </div>
 
+        {selectedPlayer && (
+          <div className="player-info">
+            <img
+              src={`data:image/jpeg;base64,${selectedPlayer?.playerImage}`}
+              alt={selectedPlayer?.playerName}
+              className="selected-player-img"
+            />
+            <div className="player-details">
+              <span className="selected-player-name">{selectedPlayer?.playerName}</span>
+              <span className="starting-price">
+                Starting Price: <strong>Rs. {selectedPlayer?.basePrice}</strong>
+              </span>
+            </div>
+          </div>
+        )}
 
-      <ChatBox />
+
+      <ChatBox currentBidId={currentBidId}/>
 
       {/* <footer className="bidding-footer">
         <Button>+50</Button>

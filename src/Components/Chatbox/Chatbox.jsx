@@ -6,7 +6,7 @@ import { Button } from "antd"; // Using Ant Design buttons
 
 import "./Chatbox.scss";
 
-const ChatBox = () => {
+const ChatBox = ({currentBidId}) => {
   const [messages, setMessages] = useState([]);
   const [username, setUsername] = useState(Cookies.get("username"));
   const [client, setClient] = useState(null);
@@ -57,7 +57,8 @@ const ChatBox = () => {
 
       const messageData = {
         username,
-        bidId: "5d47ed3a-8372-4e72-87d3-55383bba1cad",
+        userId: Cookies.get("userId"),
+        bidId: currentBidId,
         messageContent: newAmount.toString(),
       };
 
