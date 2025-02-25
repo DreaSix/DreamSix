@@ -26,6 +26,7 @@ import RegisterProcess from "./Components/Registration/RegisterProcess";
 import Withdrawl from "./Components/Withdrawl/Withdrawl";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
+import OtpVerification from "./Components/OtpVerification/OtpVerification";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(Cookies.get("jwtToken"))  
@@ -70,6 +71,7 @@ function App() {
               <Route path="/players-final-list/:matchId" element={<PlayersFinalList />} />
               <Route path="/withdrawl" element={<Withdrawl />} />
               <Route path="*" element={<Navigate to="/homepage" />} />
+              <Route path="/otpverification" element={<OtpVerification/> } />
             </Routes>
             <Footer />
           </>

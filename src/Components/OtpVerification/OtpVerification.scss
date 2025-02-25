@@ -1,0 +1,80 @@
+.otp-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(to bottom, #76c7c0, #ffffff);
+    padding: 20px;
+    text-align: center;
+  
+    h2 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+  
+    p {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+  
+    .otp-inputs {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+  
+      .otp-box {
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        font-size: 18px;
+        border-radius: 5px;
+      }
+    }
+  
+    .confirm-btn {
+      width: 100%;
+      max-width: 200px;
+      height: 40px;
+      font-size: 16px;
+      border-radius: 20px;
+      background-color: #1c3a56;
+      color: white;
+    }
+  
+    .login-link {
+      margin-top: 10px;
+      font-size: 14px;
+  
+      a {
+        color: #1c3a56;
+        text-decoration: none;
+        font-weight: bold;
+      }
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .otp-container {
+      padding: 10px;
+    }
+  
+    .otp-inputs {
+      gap: 5px;
+  
+      .otp-box {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+      }
+    }
+  
+    .confirm-btn {
+      font-size: 14px;
+      height: 36px;
+    }
+  }
+  
