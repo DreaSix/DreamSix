@@ -11,6 +11,11 @@ const Registration = () => {
   const navigate = useNavigate();
   const [roleList, setRoleList] = useState([]);
 
+  const handleOTP = () => {
+    console.log("aaa")
+    navigate("/otpverification");
+  };
+
   useEffect(() => {
     getRoleList();
   }, []);
@@ -65,7 +70,7 @@ const Registration = () => {
           <Input.Password placeholder="Re-Enter Password" type="password" />
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit" className="register-button">
+          <Button type="primary" htmlType="submit" className="register-button" onClick={handleOTP}>
             Register
           </Button>
         </Form.Item>
