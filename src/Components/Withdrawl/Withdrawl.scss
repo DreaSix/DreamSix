@@ -1,19 +1,19 @@
 .withdraw-funds {
     padding: 20px;
     max-width: 600px;
-    margin: auto;
+    margin-top: 40px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   
     h2 {
       font-size: 24px;
-      color: #fefdfd;
+      color: #050404;
       text-align: center;
     }
   
     .instructions {
       margin: 10px 0;
-      color: #e8d9d7;   
+      color: #e13030;   
       font-size: 14px;
       list-style: none;
       padding: 0;   
@@ -25,14 +25,14 @@
   
     h3 {
       font-size: 18px;
-      color: #f9fbfb;
+      color: #070707;
       margin-bottom: 20px;
     }
   
     .account-tabs {
       .ant-tabs-tab {
         font-size: 14px;
-        color: white;
+        color: rgb(2, 2, 2);
       }
   
       .ant-tabs-tab-active {
@@ -58,7 +58,7 @@
   
       .hint {
         font-size: 12px;
-        color: #ebf591;
+        color: #ed3737;
       }
   
       .proceed-btn {
@@ -76,16 +76,16 @@
   
     .previous-account-card {
       margin-bottom: 20px;
-      background-color: #080808;
+      border:0.5px solid black;
       border-radius: 8px;
       padding: 15px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      color:white;
+     color:"black";
   
       .account-title {
         font-size: 16px;
         margin-bottom: 10px;
-        color: #fcf9f9;
+        color: #050505;
       }
   
       .delete-icon {
@@ -101,7 +101,7 @@
       p {
         margin: 0;
         font-size: 14px;
-        color: #f8f5f5;
+        color: #000000;
       }
     }
   }
