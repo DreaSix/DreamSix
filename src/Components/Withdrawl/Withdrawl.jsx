@@ -71,7 +71,6 @@ const Withdrawl = () => {
     <main>
 
       <div className="withdraw-funds">
-        <h2>Withdraw Funds</h2>
         <ul className="instructions">
           <li>1. "Your Deposit Is Being Processed."</li>
           <li>2 "Estimated Time: 2-5 Minutes."</li>
@@ -86,7 +85,7 @@ const Withdrawl = () => {
           centered
           className="account-tabs"
         >
-          <TabPane tab="Create new account" key="newAccount">
+          <TabPane tab="Create Bank account" key="newAccount">
             <Form
               form={form}
               name="withdrawBankForm"
@@ -98,7 +97,7 @@ const Withdrawl = () => {
                 label="Bank Name"
                 rules={[{ required: true, message: "Please enter your bank name!" }]}
               >
-                <Input placeholder="Enter bank name" />
+                <Input  style={{border:"0.3px solid black"}} placeholder="Enter bank name" />
               </Form.Item>
 
               <Form.Item
@@ -106,7 +105,7 @@ const Withdrawl = () => {
                 label="Account Holder Name"
                 rules={[{ required: true, message: "Please enter account holder name!" }]}
               >
-                <Input placeholder="Enter account holder name" />
+                <Input  style={{border:"0.3px solid black"}}  placeholder="Enter account holder name" />
               </Form.Item>
 
               <Form.Item
@@ -114,7 +113,7 @@ const Withdrawl = () => {
                 label="Account Number"
                 rules={[{ required: true, message: "Please enter account number!" }]}
               >
-                <Input placeholder="Enter account number" />
+                <Input  style={{border:"0.3px solid black"}} placeholder="Enter account number" />
               </Form.Item>
 
               <Form.Item
@@ -125,11 +124,11 @@ const Withdrawl = () => {
               {pattern: /^[A-Z]{4}0[A-Z0-9]{6}$/, message: "Enter a valid IFSC code!" }
               ]}
       >
-              <Input placeholder="Enter IFSC code" />
+              <Input  style={{border:"0.3px solid black"}} placeholder="Enter IFSC code" />
             </Form.Item>
 
             <Form.Item>
-              <Button type="primary" htmlType="submit" className="w-full">
+              <Button style={{backgroundColor:"#ffc107"}} htmlType="submit" className="w-full">
                 Submit
               </Button>
             </Form.Item>
@@ -157,7 +156,7 @@ const Withdrawl = () => {
 
           <form className="form">
             <label>Amount*</label>
-            <Input placeholder="Enter Amount" type="number" />
+            <Input  style={{border:"0.3px solid black"}} placeholder="Enter Amount" type="number" />
             <p className="hint">Minimum Withdrawal: ₹100</p>
 
             <Button type="primary" className="proceed-btn" onClick={onClickProceed}>

@@ -113,6 +113,7 @@ const DepositPage = () => {
       <div className="deposit-form">
         <h3>Amount*</h3>
         <Input
+        style={{border:"0.3px solid black"}}
           placeholder="Enter Amount"
           value={amount}
           onChange={(e) => handleAmountChange(e.target.value)}
@@ -173,8 +174,9 @@ const DepositPage = () => {
             maxCount={1}
             accept="image/*"
             onChange={handleFileUpload}
+           
         >
-          <Button icon={<UploadOutlined />}>Upload or drop a file right here</Button>
+          <Button  style={{border:"0.3px solid black"}} icon={<UploadOutlined />}>Upload or drop a file right here</Button>
         </Upload>
 
         <h3>Enter UTR Number</h3>
@@ -182,6 +184,7 @@ const DepositPage = () => {
           placeholder="10 or 12 Digit UTR Number"
           value={utrNumber}
           onChange={handleUtrChange}
+          style={{border:"0.3px solid black"}}
         />
         <p className="utr-warning">
           Kindly Enter UTR Number Manually For Fast Deposit
