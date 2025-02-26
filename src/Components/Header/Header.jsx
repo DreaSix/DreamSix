@@ -19,7 +19,7 @@ const Header = ({setIsAuthenticated}) => {
   const getUserDetails = () => {
     userService.getUser(Cookies.get("userId"))
       .then(response => {
-        setUserWallet(response?.data?.userWallet)
+        setUserWallet(response?.data?.balance)
       })
       .catch(error => {
         console.log('error', error)

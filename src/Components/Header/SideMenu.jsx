@@ -69,7 +69,7 @@ const SideMenu = ({setIsAuthenticated}) => {
           </div>
           <div style={{display:"flex", alignItems:"center", justifyContent:"space-between", color:"white"}}>
             <p>Available Balance: </p>
-            <p>₹ {userDetails?.userWallet}</p>
+            <p>₹ {userDetails?.balance}</p>
           </div>
           <hr/>
           <div style={{marginTop:"10px", marginBottom:"10px", color:"white"}} className="balance-actions">

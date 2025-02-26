@@ -12,7 +12,6 @@ const Registration = () => {
   const [roleList, setRoleList] = useState([]);
 
   const handleOTP = () => {
-    console.log("aaa")
     navigate("/otpverification");
   };
 

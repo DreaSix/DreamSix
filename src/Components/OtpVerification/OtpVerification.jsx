@@ -3,6 +3,7 @@ import { Input, Button } from "antd";
 import "./OtpVerification.scss";
 
 const OtpVerification = () => {
+  console.log('first')
   const [otp, setOtp] = useState(new Array(6).fill(""));
 
   const handleChange = (e, index) => {
