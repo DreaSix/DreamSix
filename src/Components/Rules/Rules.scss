@@ -1,132 +1,122 @@
-.rules-container{
-    color:#ccc;
+.rules-container {
+  color:#080808;
 
-    .rules{
+  .rules {
       margin-top: 90px;
-    }
+  }
 
+  h1 {
+      font-size: 24px; 
+      margin: 20px 0; 
+      padding: 0 15px; 
+      color: #dcfd1e; 
+  }
+
+  @media (max-width: 600px) {
       h1 {
-        font-size: 24px; 
-        margin: 20px 0; 
-        padding: 0 15px; 
-        color: #d6fa07; 
-    }
-
-      @media (max-width: 600px) {
-        h1 {
-            font-size: 20px; 
-            margin: 15px 0; 
-        }
-    }
-
-    
-      .button-container {
-        display: flex;
-        gap: 15px; 
-        margin: 20px 10px ; 
-        flex-wrap: wrap; 
-        text-align: center;
+          font-size: 20px; 
+          margin: 15px 0; 
       }
+  }
 
-      .option-container{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      
+  .button-container {
+      display: flex;
+      gap: 15px; 
+      margin: 20px 10px; 
+      flex-wrap: wrap; 
+      text-align: center;
+  }
+
+  .option-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .language-button {
+      background-color: #f0f0f0; 
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 50%; 
+      width: 60px;
+      height: 60px;
+      font-size: 18px;
+      margin-right: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+  }
+
+  .language-button.selected {
+      background-color: yellow; 
+  }
+
+  @media (max-width: 600px) {
       .language-button {
-        background-color: #f0f0f0; 
-        color: #000;
-        font-weight: bold;
-        border: none;
-        border-radius: 50%; 
-        width: 60px;
-        height: 60px;
-        font-size: 18px;
-        margin-right: 20px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
-      
-      .language-button.selected {
-        background-color: yellow; 
-      }
-      
-      /* Mobile Styles */
-      @media (max-width: 600px) {
-        .language-button {
           width: 50px; 
           height: 50px; 
           font-size: 16px; 
-        }
-      
-        .button-container {
+      }
+
+      .button-container {
           gap: 10px; 
-        }
-      
-        // .language-header {
-        //   flex-direction: column; 
-        // }
-      
-        // .language-actions {
-        //   margin-top: 10px; 
-        // }
-      
-        // .language-balance {
-        //   font-size: 14px; 
-        // }
       }
+  }
 
-      .option-label{
-        font-size: 13px;
-      }
+  .option-label {
+      font-size: 13px;
+  }
 
-      .tabs {
-        display: flex;
-        justify-content: space-around;
-        border-bottom: 2px solid #ccc;
-        margin-top: 20px;
-      }
-      
+  // Custom Tabs styling applied here
+  .tabs {
+      display: flex;
+      justify-content:space-around;
+      border-bottom: 2px solid #7c7474;
+      margin-top: 20px;
+
       .tab {
-        padding: 10px 20px;
-        cursor: pointer;
-        transition: background-color 0.3s;
+          border-radius: 4px;
+          padding: 10px 20px;
+          cursor: pointer;
+          transition: background-color 0.3s, color 0.3s;
+          font-weight: bold;
+          color: rgb(14, 14, 14);
+
+          &.active {
+              background-color: #f7eb0f;
+              padding: 10px;
+              border-radius: 5px;
+              border: 0.5px solid black;
+          }
+
+          &:hover {
+              background-color: #fada09; 
+              color:#000;
+          }
       }
-      
-      .tab.active {
-        border-bottom: 2px solid yellow; 
-        font-weight: bold;
+  }
+
+  .rules-section {
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid #c2b8b8;
+      border-radius: 5px;
+      margin-bottom: 50px;
+  }
+
+  .rule {
+      margin-bottom: 15px;
+
+      h3 {
+          margin: 0;
+          font-size: 15px;
+          color: #ed3939;
       }
-      
-      .tab:hover {
-        background-color: #d6f719; 
-        color:#000;
+
+      p {
+          margin: 5px 0 0;
+          font-size: 14px;
+          color: #000000;
       }
-      
-      
-      .rules-section {
-        margin-top: 20px;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        margin-bottom: 50px;
-      }
-      
-      .rule {
-        margin-bottom: 15px;
-      }
-      
-      .rule h3 {
-        margin: 0;
-        font-size: 15px;
-        color: #ed3939;
-      }
-      
-      .rule p {
-        margin: 5px 0 0;
-        font-size: 14px;
-        color: #f1ecec;
-      }
-      
+  }
 }

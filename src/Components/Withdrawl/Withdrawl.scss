@@ -30,13 +30,17 @@
     }
   
     .account-tabs {
+
       .ant-tabs-tab {
         font-size: 14px;
-        color: rgb(2, 2, 2);
+        color: rgb(2, 0, 0);
       }
   
       .ant-tabs-tab-active {
-        color: #ffc107;
+        background-color: #f7eb0f;
+        padding: 10px;
+        border-radius: 5px;
+        border: 0.5px solid black;
         
       }
   
