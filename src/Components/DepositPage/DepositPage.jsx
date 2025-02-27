@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Input, Upload, Radio, message } from "antd";
+import { Button, Input, Upload, Radio, message, Checkbox } from "antd";
 import { CopyOutlined, UploadOutlined } from "@ant-design/icons";
 import './DepositPage.scss'
 import Header from "../Header/Header";
@@ -69,7 +69,7 @@ const DepositPage = () => {
       matchDetailsService.addDeposite(formData)
         .then(response => {
           console.log('response', response)
-          navigate("/payments-process")
+          navigate("/transactions")
         })
         .catch(error => {
           console.log('error', error)
@@ -189,6 +189,8 @@ const DepositPage = () => {
         <p className="utr-warning">
           Kindly Enter UTR Number Manually For Fast Deposit
         </p>
+
+        <p><Checkbox/> I agree to the <a href="/terms&conditions">terms & conditions </a></p>
 
         <Button onClick={OnchangePayment} type="primary" className="proceed-button" >
           Proceed
