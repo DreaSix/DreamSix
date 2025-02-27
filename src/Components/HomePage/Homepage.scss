@@ -16,9 +16,9 @@
       }
 
       .match-cards {
-        border: none;
-        background: #001529;
-        color: #fff;
+        border:0.2px solid black;
+        // background: #001529;
+        color: #0e0e0e;
 
         .match-image {
           cursor: pointer;
@@ -63,13 +63,13 @@
       .green-button {
         background-color: #2ca430;
         color: white;
-        border: 0.5px solid white;
+        border: 0.5px solid rgb(8, 8, 8);
       }
     
       .red-button {
         background-color: #e23125;
         color: white;
-        border: 0.5px solid white;
+        border: 0.5px solid rgb(2, 2, 2);
       }
     
       .blue-button {
