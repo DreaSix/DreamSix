@@ -17,8 +17,10 @@ export const SAVE_TEAM_PLAYERS = BASE_URL + "/api/player-details/save-team";
 export const GET_MATCH_PLAYER_DETAILS = BASE_URL + "/api/player-details/";
 export const GET_MATCH_PLAYER_DETAILS_ENDPOINT = "/matchDetails"
 
-export const ADD_DEPOSITE = BASE_URL + "/api/transactions"
+export const ADD_DEPOSITE = BASE_URL + "/api/transactions";
+export const ADD_WITHDRAW_TRANSACTION = ADD_DEPOSITE + "/withdraw/request";
 export const ADD_WITHDRAW = BASE_URL + "/api/withdraw";
+export const GET_USER_WITHDRAW_ACCOUNTS = "/get-by-user";
 
 export const  MATCH_WINNER = BASE_URL + "/api/winner-details";
 
