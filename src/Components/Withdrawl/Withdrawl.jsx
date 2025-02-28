@@ -74,7 +74,7 @@ const Withdrawl = () => {
       .addWithdraw(payload)
       .then((response) => {
         message.success("Withdraw Added Successfully");
-        navigate("/payments-process");
+        navigate("/transaction");
       })
       .catch((error) => {
         console.log("error", error);
@@ -103,7 +103,7 @@ const Withdrawl = () => {
           .createWithdrawRequest(payload)
           .then((response) => {
             message.success("Withdraw Added Successfully");
-            navigate("/payments-process");
+            navigate("/transactions");
           })
           .catch((error) => {
             console.log("error", error);

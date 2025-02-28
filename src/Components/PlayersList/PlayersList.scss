@@ -1,6 +1,6 @@
 .match-page {
   padding: 10px;
-  margin-top: 80px;
+  margin-top: 30px;
 
   .tabs-wrapper {
     margin-top: 10px; // Ensure tabs are under the header
@@ -14,18 +14,18 @@
     border-radius: 8px;
   }
 
-  .match-details {
-    display: flex;
-    justify-content: space-between;
+  // .match-details {
+  //   display: flex;
+  //   justify-content: space-between;
 
-    h3 {
-      font-size: 16px;
-      margin-bottom: 8px;
-    }
+  //   h3 {
+  //     font-size: 16px;
+  //     margin-bottom: 8px;
+  //   }
 
-    .countdown {
-      font-size: 14px;
-      color: red;
-    }
-  }
+  //   .countdown {
+  //     font-size: 14px;
+  //     color: red;
+  //   }
+  // }
 }

@@ -190,7 +190,7 @@ const DepositPage = () => {
           Kindly Enter UTR Number Manually For Fast Deposit
         </p>
 
-        <p><Checkbox/> I agree to the <a href="/terms&conditions">terms & conditions </a></p>
+        <p><Checkbox/> I agree to the <a style={{color:"white"}} href="/terms&conditions">terms & conditions </a></p>
 
         <Button onClick={OnchangePayment} type="primary" className="proceed-button" >
           Proceed
