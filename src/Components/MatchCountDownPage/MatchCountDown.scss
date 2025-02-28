@@ -31,12 +31,12 @@
       align-items: center;
       padding: 10px;
       font-size: 16px;
-      color: white;
+      color: rgb(0, 0, 0);
 
       .top-sixer {
         background: linear-gradient(to right, rgb(26, 176, 235), rgb(242, 122, 142));
         font-weight: bold;
-        color: white;
+        color: rgb(3, 0, 0);
         border-radius: 50px;
         height: 30px;
         width: 90px;
@@ -58,7 +58,7 @@
     width: 100%;
     border-collapse: collapse;
     /* Ensures borders are merged */
-    color: white;
+    color: rgb(0, 0, 0);
 
   }
 
@@ -68,7 +68,7 @@
     justify-content: space-between;
     margin-right: 15px;
     margin-left: 15px;
-    color:yellow;
+    color:rgb(0, 0, 0);
 
   }
 
@@ -106,7 +106,7 @@
   }
 
   .header-name {
-    color: white;
+    color: rgb(0, 0, 0);
   }
 
 }

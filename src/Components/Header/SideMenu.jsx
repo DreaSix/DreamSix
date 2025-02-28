@@ -53,7 +53,7 @@ const SideMenu = ({setIsAuthenticated}) => {
       <Button type="text" onClick={showDrawer} className="menu-icon-button">
         <MenuOutlined className="menu-icon" />
       </Button>
-      <Drawer placement="left" width="70%" onClose={onClose} open={visible} style={{backgroundColor:"#001529", color:"white"}}>
+      <Drawer placement="left" width="70%" onClose={onClose} open={visible} style={{backgroundColor:"#0f4c5c", color:"white"}}>
         {/* User Info */}
         <div className="user-info" style={{display:"flex", alignItems:"center"}}>
           <Avatar style={{marginRight:"15px", border:"1px solid yellow"}} icon={<UserOutlined />} size={32} />
