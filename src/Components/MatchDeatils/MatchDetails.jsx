@@ -37,12 +37,12 @@ const MatchPage = () => {
                 src={`data:image/jpeg;base64,${match?.matchImage}`}
                 alt={`${match.teamOneName} vs ${match.teamTwoName}`}
               />
-              <div className="match-info">
+              {/* <div className="match-info">
                 <h3>
                   {match.teamOneName} vs {match.teamTwoName}
                 </h3>
                 <p>{match.countdown}</p>
-              </div>
+              </div> */}
             </Card>
           ))
         ) : (

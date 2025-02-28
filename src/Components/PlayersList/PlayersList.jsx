@@ -83,12 +83,12 @@ const PlayersList = () => {
                 alt={`${match.teamOneName} vs ${match.teamTwoName}`}
                 className="match-image"
               />
-              <div className="match-info">
+              {/* <div className="match-info">
                 <h3>
                   {match.teamOneName} vs {match.teamTwoName}
                 </h3>
                 <p>{match.countdown}</p>
-              </div>
+              </div> */}
             </Card>
           ))}
         </div>

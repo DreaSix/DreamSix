@@ -17,11 +17,12 @@
 
       .match-cards {
         border:0.2px solid black;
-        // background: #001529;
+        background: #fbfbfb;
         color: #0e0e0e;
 
         .ant-card-body {
-          padding: 0; // This removes default padding of Ant Design Card body
+          padding: 3px;
+           // This removes default padding of Ant Design Card body
         }
 
         .match-image {
@@ -33,7 +34,7 @@
           display: flex;
           justify-content: space-between; /* Align details to the left and countdown to the right */
           align-items: center; /* Vertically align items */
-          margin-top: 10px;
+        
         
           p {
             margin: 0;
@@ -67,13 +68,13 @@
       .green-button {
         background-color: #2ca430;
         color: white;
-        border: 0.5px solid rgb(8, 8, 8);
+        border: 1.5px solid rgb(248, 243, 243);
       }
     
       .red-button {
         background-color: #e23125;
         color: white;
-        border: 0.5px solid rgb(2, 2, 2);
+        border: 1px solid rgb(251, 248, 248);
       }
     
       .blue-button {
