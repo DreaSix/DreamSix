@@ -1,38 +1,37 @@
 .top-sixer-scorer-page {
   display: flex;
   justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  padding: 10px;
-  min-height: calc(100vh - 150px); // Adjusting for header and footer height
-  margin-top: 50px;
+  align-items: flex-start;
+  flex-wrap: wrap; // Default wrap so it's mobile friendly too
+  gap: 16px; // Spacing between cards
+  padding:2px;
+  margin-top: 70px;
 
   .option-section {
-  
+    text-align: center;
+    flex: 0 1 calc(20% - 16px); // For desktop: 5 cards per row
+    max-width: 150px;
+    margin: 0;
 
     h2 {
-      font-size: 24px;
-      font-weight: bold;
-      color: #f4f6f8; // Matches the DreamSix theme
-      margin-bottom: 15px;
-      margin-left: 22px;
+      color:white;
+      font-size: 14px;
+      margin-bottom: 8px;
+      white-space: nowrap; // To prevent text from wrapping
     }
 
     .card {
-      width: 300px;
-      height: 300px;
-      border: 2px solid #001529;
-      border-radius: 10px;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s, box-shadow 0.3s;
       cursor: pointer;
+      width: 100%;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f5f5f5;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 
-      &:hover {
-        transform: scale(1.05);
-        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
-      }
-
-      .team-image {
+      img {
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -42,17 +41,43 @@
   }
 }
 
-// Mobile responsiveness
+// Mobile Responsive (screen width below 768px)
 @media (max-width: 768px) {
   .top-sixer-scorer-page {
-    flex-direction: column;
-    align-items: stretch;
+    gap: 12px; // Reduce gap for smaller screens
+    padding: 8px;
 
     .option-section {
+      flex: 0 1 calc(45% - 12px); // 2 cards per row
+      max-width: 140px;
+
+      h2 {
+        font-size: 12px; // Smaller heading
+      }
+
       .card {
-        width: 90%;
-        height: auto; // Allow the card to adjust height dynamically
-        margin: 0 auto;
+        height: 100px; // Smaller height
+      }
+    }
+  }
+}
+
+// Very Small Screens (below 480px)
+@media (max-width: 480px) {
+  .top-sixer-scorer-page {
+    gap: 8px;
+    padding: 8px;
+
+    .option-section {
+      flex: 0 1 calc(50% - 8px); // 2 cards per row
+      max-width: 130px;
+
+      h2 {
+        font-size: 11px;
+      }
+
+      .card {
+        height: 90px;
       }
     }
   }
