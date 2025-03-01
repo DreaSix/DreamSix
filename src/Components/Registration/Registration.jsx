@@ -69,7 +69,7 @@ const Registration = () => {
           <Input.Password placeholder="Re-Enter Password" type="password" />
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit" className="register-button" onClick={handleOTP}>
+          <Button type="primary" htmlType="submit" className="register-button">
             Register
           </Button>
         </Form.Item>
