@@ -57,9 +57,10 @@ const getWinners = () => {
     });
   };
 
-const createWithdrawRequest = () => {
+const createWithdrawRequest = (payload) => {
     return PostAPIRequest({
-        url: ADD_WITHDRAW_TRANSACTION
+        url: ADD_WITHDRAW_TRANSACTION,
+        data: payload
     })
 }
 

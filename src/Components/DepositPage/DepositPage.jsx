@@ -163,6 +163,8 @@ const DepositPage = () => {
             <p>UPI Phone No: <span>{selectedPayment?.upiPhone}</span>
               <Button icon={<CopyOutlined />} onClick={() => copyToClipboard(selectedPayment.upiPhone)} />
             </p>
+            <p>QR code: </p>
+            <img src={`data:image/jpeg;base64,${selectedPayment?.qrCodeUrl}`} alt="QR code" className="qrCode" />
           </>
         )}
       </div>

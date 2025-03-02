@@ -1,18 +1,8 @@
 import React, { useEffect, useState } from "react";
-import {
-  Input,
-  Select,
-  Tabs,
-  Button,
-  Card,
-  Row,
-  Col,
-  Form,
-  message,
-} from "antd";
+import { Input, Tabs, Button, Card, Row, Col, Form, message } from "antd";
 import { CheckCircleOutlined, DeleteOutlined } from "@ant-design/icons";
 import "./Withdrawl.scss";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { matchDetailsService } from "../../Service/MatchDetailsService";
 import { userService } from "../../Service/UserService";
@@ -20,21 +10,19 @@ import { userService } from "../../Service/UserService";
 const { TabPane } = Tabs;
 
 const Withdrawl = () => {
-  const [form] = Form.useForm();
+  const [newAccountForm] = Form.useForm(); // Form instance for 'Create Bank Account'
+  const [withdrawForm] = Form.useForm(); // Form instance for 'Use Previous Account'
 
   const [userWallet, setUserWallet] = useState(0);
   const [activeTab, setActiveTab] = useState("newAccount");
-  const [amount, setAmount] = useState();
-  const [allWithdraws, setAllWithdraws] = useState();
-  const [upiId, setUpiId] = useState();
-  const [selectedAccount, setSelectedAccount] = useState();
+  const [allWithdraws, setAllWithdraws] = useState([]);
+  const [selectedAccount, setSelectedAccount] = useState(null);
 
-  const handleTabChange = (key) => {
-    setActiveTab(key);
-  };
+  const navigate = useNavigate();
 
   useEffect(() => {
     getAllWithdraws();
+    getUserDetails();
   }, []);
 
   const getAllWithdraws = () => {
@@ -43,14 +31,10 @@ const Withdrawl = () => {
       .then((response) => {
         setAllWithdraws(response?.data);
       })
-      .catch((error) => {
-        console.log("error", error);
-      });
+      .catch((error) =>
+        console.error("Error fetching withdraw accounts", error)
+      );
   };
-
-  useEffect(() => {
-    getUserDetails();
-  }, []);
 
   const getUserDetails = () => {
     userService
@@ -58,12 +42,11 @@ const Withdrawl = () => {
       .then((response) => {
         setUserWallet(response?.data?.balance);
       })
-      .catch((error) => {
-        console.log("error", error);
-      });
+      .catch((error) => console.error("Error fetching user details", error));
   };
 
-  const handleSubmit = (values) => {
+  // Form submission for "Create Bank Account"
+  const handleNewAccountSubmit = (values) => {
     const payload = {
       ...values,
       paymentOption: "Withdraw",
@@ -72,95 +55,66 @@ const Withdrawl = () => {
 
     matchDetailsService
       .addWithdraw(payload)
-      .then((response) => {
-        message.success("Withdraw Added Successfully");
-        navigate("/transaction");
+      .then(() => {
+        message.success("Bank account added successfully!");
+        newAccountForm.resetFields();
+        getAllWithdraws();
       })
       .catch((error) => {
-        console.log("error", error);
+        console.error("Error adding withdraw account", error);
+        message.error("Failed to add withdraw account.");
       });
   };
 
-  const navigate = useNavigate();
+  const handleWithdrawSubmit = (values) => {
 
-  const onClickProceed = () => {
-    form
-      .validateFields()
+    const payload = {
+      withdrawBankId: selectedAccount?.id,
+      ...values,
+    };
+    
+    matchDetailsService
+      .createWithdrawRequest(payload)
       .then(() => {
-        const { amount } = form.getFieldsValue();
-
-        if (!amount) {
-          message.error("Please enter a valid amount!");
-          return;
-        }
-
-        const payload = {
-          amount: amount,
-          withdrawBankId: selectedAccount?.id,
-        };
-
-        matchDetailsService
-          .createWithdrawRequest(payload)
-          .then((response) => {
-            message.success("Withdraw Added Successfully");
-            navigate("/transactions");
-          })
-          .catch((error) => {
-            console.log("error", error);
-            message.error("Failed to process withdrawal.");
-          });
+        message.success("Withdraw request submitted successfully!");
+        navigate("/transactions");
       })
-      .catch((error) => console.log("Validation Error:", error));
-  };
-
-  const handleWheel = (e) => {
-    e.target.blur();
-    setTimeout(() => {
-      e.target.focus();
-    }, 0);
-    e.preventDefault();
+      .catch((error) => {
+        console.error("Error processing withdrawal", error);
+        message.error("Failed to process withdrawal.");
+      });
   };
 
   const handleDeleteAccount = (id) => {
     matchDetailsService
       .deleteWithdrawAccount(id)
-      .then((response) => {
-        console.log("response", response);
+      .then(() => {
+        message.success("Withdraw account deleted successfully.");
         getAllWithdraws();
       })
       .catch((error) => {
-        console.log("error", error);
+        console.error("Error deleting withdraw account", error);
+        message.error("Failed to delete withdraw account.");
       });
-  };
-
-  const handleSelectAccount = (withdraw) => {
-    setSelectedAccount(withdraw);
   };
 
   return (
     <main>
       <div className="withdraw-funds">
-        <ul className="instructions">
-          <li>1. "Your Deposit Is Being Processed."</li>
-          <li>2 "Estimated Time: 2-5 Minutes."</li>
-          <li>
-            3. "You Will Receive A Confirmation Once The Deposit Is Complete."
-          </li>
-        </ul>
-
         <h3>Please fill in all required fields</h3>
 
         <Tabs
           defaultActiveKey="newAccount"
-          onChange={handleTabChange}
+          onChange={setActiveTab}
           centered
           className="account-tabs"
         >
-          <TabPane tab="Create Bank account" key="newAccount">
+          {/* New Bank Account Form */}
+          <TabPane tab="Create Bank Account" key="newAccount">
             <Form
-              form={form}
-              name="withdrawBankForm"
-              onFinish={handleSubmit}
+              form={newAccountForm}
+              name="newAccountForm"
+              onFinish={handleNewAccountSubmit}
               layout="vertical"
             >
               <Form.Item
@@ -170,10 +124,7 @@ const Withdrawl = () => {
                   { required: true, message: "Please enter your bank name!" },
                 ]}
               >
-                <Input
-                  style={{ border: "0.3px solid black" }}
-                  placeholder="Enter bank name"
-                />
+                <Input placeholder="Enter bank name" />
               </Form.Item>
 
               <Form.Item
@@ -186,10 +137,7 @@ const Withdrawl = () => {
                   },
                 ]}
               >
-                <Input
-                  style={{ border: "0.3px solid black" }}
-                  placeholder="Enter account holder name"
-                />
+                <Input placeholder="Enter account holder name" />
               </Form.Item>
 
               <Form.Item
@@ -199,10 +147,7 @@ const Withdrawl = () => {
                   { required: true, message: "Please enter account number!" },
                 ]}
               >
-                <Input
-                  style={{ border: "0.3px solid black" }}
-                  placeholder="Enter account number"
-                />
+                <Input placeholder="Enter account number" />
               </Form.Item>
 
               <Form.Item
@@ -216,31 +161,26 @@ const Withdrawl = () => {
                   },
                 ]}
               >
-                <Input
-                  style={{ border: "0.3px solid black" }}
-                  placeholder="Enter IFSC code"
-                />
+                <Input placeholder="Enter IFSC code" />
               </Form.Item>
 
               <Form.Item>
-                <Button
-                  style={{ backgroundColor: "#ffc107" }}
-                  htmlType="submit"
-                  className="w-full"
-                >
+                <Button type="primary" htmlType="submit">
                   Submit
                 </Button>
               </Form.Item>
             </Form>
           </TabPane>
 
+          {/* Use Previous Account Form */}
           <TabPane tab="Use Previous Account" key="previousAccount">
-            {allWithdraws &&
-              allWithdraws?.map((withdraw) => (
+            {allWithdraws.length > 0 ? (
+              allWithdraws.map((withdraw) => (
                 <Card
-                  onClick={() => handleSelectAccount(withdraw)}
+                  key={withdraw.id}
+                  onClick={() => setSelectedAccount(withdraw)}
                   className={`previous-account-card ${
-                    selectedAccount && "selected"
+                    selectedAccount?.id === withdraw.id ? "selected" : ""
                   }`}
                 >
                   <Row>
@@ -249,80 +189,69 @@ const Withdrawl = () => {
                         <CheckCircleOutlined
                           style={{ color: "green", marginRight: "8px" }}
                         />
-                        Primary Account
+                        {withdraw.bankName}
                       </h4>
                       <p>
-                        <b>Account Name : </b> {withdraw?.bankName}
+                        <b>Holder Name:</b> {withdraw.accountHolderName}
                       </p>
                       <p>
-                        <b>Holder Name : </b> {withdraw?.accountHolderName}
+                        <b>Account:</b> {withdraw.accountNumber}
                       </p>
                       <p>
-                        <b>Account : </b> {withdraw?.accountNumber}
-                      </p>
-                      <p>
-                        <b>IFSC : </b> {withdraw?.ifscCode}
+                        <b>IFSC:</b> {withdraw.ifscCode}
                       </p>
                     </Col>
                     <Col span={2}>
                       <DeleteOutlined
-                        onClick={() => handleDeleteAccount(withdraw?.id)}
+                        onClick={() => handleDeleteAccount(withdraw.id)}
                         className="delete-icon"
                       />
                     </Col>
                   </Row>
                 </Card>
-              ))}
+              ))
+            ) : (
+              <p>No saved accounts found.</p>
+            )}
 
-            <form className="form">
+            <Form
+              form={withdrawForm}
+              onFinish={handleWithdrawSubmit}
+              name="withdrawForm"
+              layout="vertical"
+            >
               <Form.Item
                 name="amount"
                 label="Amount"
-                validateTrigger="onBlur"
                 rules={[
                   { required: true, message: "Please enter an amount!" },
                   ({ getFieldValue }) => ({
                     validator(_, value) {
-                      if (!value) {
+                      if (!value)
+                        return Promise.reject("Please enter an amount!");
+                      if (value <= 0)
+                        return Promise.reject("Amount must be greater than ₹0");
+                      if (value > userWallet)
                         return Promise.reject(
-                          new Error("Please enter an amount!")
+                          `Amount cannot exceed your balance of ₹${userWallet}`
                         );
-                      }
-                      if (value <= 0) {
-                        return Promise.reject(
-                          new Error("Amount must be greater than ₹0")
-                        );
-                      }
-                      if (value > userWallet) {
-                        return Promise.reject(
-                          new Error(
-                            `Amount cannot exceed your balance of ₹${userWallet}`
-                          )
-                        );
-                      }
                       return Promise.resolve();
                     },
                   }),
                 ]}
               >
                 <Input
-                  style={{ border: "0.3px solid black" }}
                   placeholder={`Enter amount (Max: ₹${userWallet})`}
                   type="number"
-                  onWheel={(e) => e.target.blur()} // Prevent scroll input change
                 />
               </Form.Item>
 
               <p className="hint">Minimum Withdrawal: ₹100</p>
 
-              <Button
-                type="primary"
-                className="proceed-btn"
-                onClick={onClickProceed}
-              >
+              <Button htmlType="submit" >
                 Proceed
               </Button>
-            </form>
+            </Form>
           </TabPane>
         </Tabs>
       </div>
