@@ -32,8 +32,9 @@ const TransactionPage = () => {
 
   const navigate = useNavigate();
 
-  const OnpaymentStatus  = () => {
-    navigate("/payment-status");
+  const OnpaymentStatus  = (id) => {
+    console.log('id', id)
+    navigate(`/payment-status/${id}`);
   };
 
   const onTabChange = (key) => {
@@ -65,7 +66,7 @@ const TransactionPage = () => {
         renderItem={(transaction) => (
           <List.Item
             actions={[
-              <RightOutlined onClick={OnpaymentStatus} key="arrow" style={{ color: '#fff' }} />,
+              <RightOutlined onClick={() => OnpaymentStatus(transaction?.id)} key="arrow" style={{ color: '#fff' }} />,
             ]}
           >
             <List.Item.Meta

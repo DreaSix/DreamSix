@@ -64,7 +64,7 @@ function App() {
               <Route path="/change-password" element={<ChangePassword />} />
               <Route path="/transactions" element={<TransactionPage />} />
               <Route path="/player-details" element={<PlayerDetails />} />
-              <Route path="/payment-status" element={<PaymentStatus />} />
+              <Route path="/payment-status/:id" element={<PaymentStatus />} />
               <Route path="/bets" element={<MyBets />} />
               <Route path="/contact-us" element={<ContactUs />} />
               <Route path="/matchs-page" element={<MatchPage />} />
