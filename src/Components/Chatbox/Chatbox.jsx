@@ -12,21 +12,68 @@ const ChatBox = ({currentBidId}) => {
   const [username, setUsername] = useState(Cookies.get("username"));
   const [client, setClient] = useState(null);
 
+  useEffect(() => {
+    if (!currentBidId) return; 
+    const accessToken = Cookies.get("jwtToken")
+    const fetchOldMessages = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/api/chat/chat/getMatchMessages/${currentBidId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`, // Add access token to headers
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        console.log('response?.data', response?.data?.data)
+        const sortedMessages = response?.data?.data?.responseDTOList.sort(
+          (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
+        );
+        console.log('sortedMessages', sortedMessages)
+        setMessages(sortedMessages);
+      } catch (error) {
+        console.error("Error fetching old messages:", error);
+      }
+    };
+
+    fetchOldMessages();
+
+    const socket = new SockJS("http://localhost:8080/ws");
+    const stompClient = new Client({
+      webSocketFactory: () => socket,
+      reconnectDelay: 5000,
+      onConnect: () => {
+        console.log("Connected to WebSocket");
+
+        stompClient.subscribe(`/topic/public`, (message) => {
+          const newMessage = JSON.parse(message.body);
+          console.log("Received Message:", newMessage);
+
+          setMessages((prevMessages) => {
+            const updatedMessages = [...prevMessages, newMessage].sort(
+              (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
+            );
+            return updatedMessages;
+          });
+        });
+
+        setClient(stompClient);
+      },
+      onStompError: (error) => {
+        console.error("STOMP Error:", error);
+      },
+    });
+
+    stompClient.activate();
+
+    return () => {
+      if (stompClient) {
+        stompClient.deactivate();
+      }
+    };
+  }, [currentBidId]);
+
   // useEffect(() => {
-  //   const fetchOldMessages = async () => {
-  //     try {
-  //       const response = await axios.get(`http://localhost:8080/api/chat/messages/${currentBidId}`);
-  //       const sortedMessages = response.data.sort(
-  //         (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
-  //       );
-  //       setMessages(sortedMessages);
-  //     } catch (error) {
-  //       console.error("Error fetching old messages:", error);
-  //     }
-  //   };
-
-  //   fetchOldMessages();
-
   //   const socket = new SockJS("http://localhost:8080/ws");
   //   const stompClient = new Client({
   //     webSocketFactory: () => socket,
@@ -38,10 +85,11 @@ const ChatBox = ({currentBidId}) => {
   //         const newMessage = JSON.parse(message.body);
   //         console.log("newMessage", newMessage);
 
-  //         setMessages((prevMessages) => {
-  //           const updatedMessages = [...prevMessages, newMessage];
-  //           return updatedMessages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
-  //         });
+  //         const sortedMessages = [...newMessage?.responseDTOList].sort(
+  //           (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
+  //         );
+
+  //         setMessages(sortedMessages);
   //       });
 
   //       setClient(stompClient);
@@ -56,64 +104,43 @@ const ChatBox = ({currentBidId}) => {
   //   return () => {
   //     stompClient.deactivate();
   //   };
-  // }, [currentBidId]);
-
-  useEffect(() => {
-    const socket = new SockJS("http://localhost:8080/ws");
-    const stompClient = new Client({
-      webSocketFactory: () => socket,
-      reconnectDelay: 5000,
-      onConnect: () => {
-        console.log("Connected to WebSocket");
-
-        stompClient.subscribe("/topic/public", (message) => {
-          const newMessage = JSON.parse(message.body);
-          console.log("newMessage", newMessage);
-
-          const sortedMessages = [...newMessage?.responseDTOList].sort(
-            (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
-          );
-
-          setMessages(sortedMessages);
-        });
-
-        setClient(stompClient);
-      },
-      onStompError: (error) => {
-        console.error("STOMP Error:", error);
-      },
-    });
-
-    stompClient.activate();
-
-    return () => {
-      stompClient.deactivate();
-    };
-  }, []);
+  // }, []);
 
   const sendMessage = (amount) => {
     if (client && client.connected) {
-      const lastMessage =
-        messages.length > 0 ? messages[messages.length - 1] : null;
-      const lastAmount = lastMessage ? parseInt(lastMessage.message) || 0 : 0;
-
+      // Find the last valid numeric message
+      let lastAmount = 0;
+      for (let i = messages.length - 1; i >= 0; i--) {
+        console.log('messages[i]', messages[i])
+        const msg = messages[i]?.message?.trim();
+        console.log('msg', msg)
+        console.log('/^\d+$/.test(msg)', /^\d+$/.test(parseInt(msg)))
+        
+        if (msg && /^\d+$/.test(msg) && !["1", "2", "3"].includes(msg)) {
+          // msg is a valid number and not 1, 2, or 3
+          lastAmount = parseInt(msg, 10);
+          break;
+        }
+      }
+  
       const newAmount = lastAmount + amount;
-
+  
       const messageData = {
         username,
         userId: Cookies.get("userId"),
         bidId: currentBidId,
         messageContent: newAmount.toString(),
       };
-
+  
       client.publish({
         destination: "/app/chat/sendMessage",
         body: JSON.stringify(messageData),
       });
-
+      
+  
       setMessages([
         ...messages,
-        { username, messageContent: newAmount.toString() },
+        { username, message: newAmount.toString() },
       ]);
     } else {
       console.error("Cannot send message: STOMP connection not active.");
@@ -127,14 +154,13 @@ const ChatBox = ({currentBidId}) => {
       <body className="chat-container">
       <div className="bids-section">
         {messages.map((bid, index) =>
-          bid?.username?.username === username ? (
-            <div className="bid-card" key={index}>
-              <div className="bid-user">{bid?.name?.charAt(0)}</div>
+          bid?.username === username ? (
+            <div className="own-bid-card" key={index}>
               <div className="bid-info">
                 <span className="bid-name">{bid?.name}</span>
                 <span className="bid-amount">{bid?.message}</span>
               </div>
-              
+              <div className="bid-user">{bid?.name?.charAt(0)}</div>
             </div>
           ) : (
             <div className="bid-card" key={index}>
