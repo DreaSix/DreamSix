@@ -37,7 +37,9 @@ const ChatBox = ({currentBidId}) => {
     };
 
     fetchOldMessages();
+  }, [currentBidId]);
 
+  useEffect(() => {
     const socket = new SockJS("http://localhost:8080/ws");
     const stompClient = new Client({
       webSocketFactory: () => socket,
@@ -45,16 +47,15 @@ const ChatBox = ({currentBidId}) => {
       onConnect: () => {
         console.log("Connected to WebSocket");
 
-        stompClient.subscribe(`/topic/public`, (message) => {
+        stompClient.subscribe("/topic/public", (message) => {
           const newMessage = JSON.parse(message.body);
-          console.log("Received Message:", newMessage);
+          console.log("newMessage", newMessage);
 
-          setMessages((prevMessages) => {
-            const updatedMessages = [...prevMessages, newMessage].sort(
-              (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
-            );
-            return updatedMessages;
-          });
+          const sortedMessages = [...newMessage?.responseDTOList].sort(
+            (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
+          );
+
+          setMessages(sortedMessages);
         });
 
         setClient(stompClient);
@@ -67,54 +68,16 @@ const ChatBox = ({currentBidId}) => {
     stompClient.activate();
 
     return () => {
-      if (stompClient) {
-        stompClient.deactivate();
-      }
+      stompClient.deactivate();
     };
-  }, [currentBidId]);
-
-  // useEffect(() => {
-  //   const socket = new SockJS("http://localhost:8080/ws");
-  //   const stompClient = new Client({
-  //     webSocketFactory: () => socket,
-  //     reconnectDelay: 5000,
-  //     onConnect: () => {
-  //       console.log("Connected to WebSocket");
-
-  //       stompClient.subscribe("/topic/public", (message) => {
-  //         const newMessage = JSON.parse(message.body);
-  //         console.log("newMessage", newMessage);
-
-  //         const sortedMessages = [...newMessage?.responseDTOList].sort(
-  //           (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
-  //         );
-
-  //         setMessages(sortedMessages);
-  //       });
-
-  //       setClient(stompClient);
-  //     },
-  //     onStompError: (error) => {
-  //       console.error("STOMP Error:", error);
-  //     },
-  //   });
-
-  //   stompClient.activate();
-
-  //   return () => {
-  //     stompClient.deactivate();
-  //   };
-  // }, []);
+  }, []);
 
   const sendMessage = (amount) => {
     if (client && client.connected) {
       // Find the last valid numeric message
       let lastAmount = 0;
       for (let i = messages.length - 1; i >= 0; i--) {
-        console.log('messages[i]', messages[i])
         const msg = messages[i]?.message?.trim();
-        console.log('msg', msg)
-        console.log('/^\d+$/.test(msg)', /^\d+$/.test(parseInt(msg)))
         
         if (msg && /^\d+$/.test(msg) && !["1", "2", "3"].includes(msg)) {
           // msg is a valid number and not 1, 2, or 3
