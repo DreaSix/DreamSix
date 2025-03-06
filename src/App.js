@@ -28,6 +28,7 @@ import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import OtpVerification from "./Components/OtpVerification/OtpVerification";
 import TermsAndConditions from "./Components/Terms&Conditions/Terms&Conditions";
+import PlayerModal from "./Components/ReusableCode/SoldModal";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(Cookies.get("jwtToken"))  
@@ -74,6 +75,7 @@ function App() {
               <Route path="*" element={<Navigate to="/homepage" />} />
               <Route path="/otpverification" element={<OtpVerification/> } />
               <Route path="/terms&conditions" element={<TermsAndConditions /> } />
+              <Route path="/soldmodal" element={<PlayerModal /> } />
             </Routes>
             <Footer />
           </>
