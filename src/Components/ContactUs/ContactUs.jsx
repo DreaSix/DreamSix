@@ -4,19 +4,18 @@ import { Row, Col, Card, Button } from 'antd';
 import './ContactUs.scss';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import PlayerModal from '../ReusableCode/SoldModal'; // Import the modal component
+import PlayerModal from '../ReusableCode/SoldModal';
+import BiddingOverModal from '../ReusableCode/BiddingOverModal';
 
 const ContactUs = () => {
   const [isPlayerModalVisible, setIsPlayerModalVisible] = useState(false);
-
-  const showPlayerModal = () => setIsPlayerModalVisible(true);
-  const closePlayerModal = () => setIsPlayerModalVisible(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   return (
+    <main>
     <div>
-      <Header/>
+      <Header />
       <div className="contact-page">
-        {/* Contact Information Section */}
         <Row justify="center" className="contact-info">
           <Col span={24} style={{ textAlign: 'center' }}>
             <h2>Let’s Get In Touch</h2>
@@ -35,7 +34,6 @@ const ContactUs = () => {
           </Col>
         </Row>
 
-        {/* Social Media Section */}
         <Row justify="center" className="social-media">
           <Col span={24} style={{ textAlign: 'center' }}>
             <h3>Follow Us</h3>
@@ -48,18 +46,24 @@ const ContactUs = () => {
           </Col>
         </Row>
 
-        {/* Open Modal Button */}
         <div className="open-modal-btn">
-          <Button type="primary" onClick={showPlayerModal}>
-            Open Modal
+          <Button type="primary" onClick={() => setIsPlayerModalVisible(true)}>
+            Open Player Modal
           </Button>
         </div>
-      </div>
-      <Footer/>
 
-      {/* Player Modal - controlled by state */}
-      <PlayerModal visible={isPlayerModalVisible} onClose={closePlayerModal} />
+        <div>
+          <Button onClick={() => setIsModalVisible(true)}>Show Bidding Over Modal</Button>
+        </div>
+      </div>
+
+      <Footer />
+
+      Modals
+      <PlayerModal visible={isPlayerModalVisible} onClose={() => setIsPlayerModalVisible(false)} />
+      <BiddingOverModal visible={isModalVisible} onClose={() => setIsModalVisible(false)} />
     </div>
+    </main>
   );
 };
 

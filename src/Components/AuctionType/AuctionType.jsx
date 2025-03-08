@@ -26,8 +26,9 @@ const AuctionTypePage = () => {
     { label: 'Top Scorer', image: TopScorer },
     { label: 'Most Wickets', image: MostWickets },
     { label: 'Top Contest', image: TopContest },
-    // { label: 'Powerplay Scorer', image: PowerplayScorer },
-    // { label: 'Death Over Scorer', image: DeathOverScorer },
+    { label: 'Top Sixer', image: TopSix },
+    { label: 'Top Scorer', image: TopScorer },
+  
   ];
 
   return (
