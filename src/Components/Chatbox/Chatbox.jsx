@@ -85,8 +85,14 @@ const ChatBox = ({currentBidId}) => {
           break;
         }
       }
-  
-      const newAmount = lastAmount + amount;
+
+      let newAmount;
+
+      if (messages.length > 0){
+        newAmount = lastAmount + amount;
+      }else{
+        newAmount = 1000 + amount
+      }
   
       const messageData = {
         username,
