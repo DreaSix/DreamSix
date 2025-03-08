@@ -100,12 +100,12 @@ const HomePage = () => {
               >
                 Withdraw
               </Button>
-              {/* <Button
+              <Button
                 className="updates-button blue-button"
-                onClick={() => handleButtonClick("Updates")}
+                onClick={() =>  handleNavigation("/updates")}
               >
                 Updates
-              </Button> */}
+              </Button>
             </Col>
           </Row>
 

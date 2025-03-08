@@ -1,0 +1,77 @@
+.leaderboard-container {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 16px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  
+    h2 {
+      font-size: 20px;
+      color: #1C3A56;
+      margin-bottom: 10px;
+    }
+  }
+  
+  .leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 14px;
+  
+    thead {
+      background: #1C3A56;
+      color: white;
+  
+      th {
+        padding: 6px;
+        font-weight: bold;
+        text-align: center;
+      }
+    }
+  
+    tbody {
+      tr {
+        border-bottom: 1px solid #ddd;
+        text-align: center;
+        transition: background 0.3s ease;
+  
+        &:nth-child(even) {
+          background: #f2f2f2;
+        }
+  
+        &:hover {
+          background: rgba(28, 58, 86, 0.1);
+        }
+      }
+  
+      td {
+        padding: 4px;
+        height: 28px; // Reduced row height
+      }
+    }
+  
+    .top-player {
+      background: #ffd700 !important;
+      font-weight: bold;
+    }
+  }
+  
+  .fours {
+    color: #008000; // Green for 4s
+    font-weight: bold;
+  }
+  
+  .sixes {
+    color: #ff0000; // Red for 6s
+    font-weight: bold;
+  }
+  
+  .total-runs {
+    color: #1C3A56; // Dark blue for total runs
+    font-weight: bold;
+  }
+  
