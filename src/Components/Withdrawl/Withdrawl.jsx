@@ -101,8 +101,6 @@ const Withdrawl = () => {
   return (
     <main>
       <div className="withdraw-funds">
-        <h3>Please fill in all required fields</h3>
-
         <Tabs
           defaultActiveKey="newAccount"
           onChange={setActiveTab}
