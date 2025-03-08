@@ -15,6 +15,7 @@ const LoginPage = ({setIsAuthenticated}) => {
     }
     userService.loginUser(payload)
       .then(response => {
+        console.log('response?.data', response?.data)
         Cookies.set("jwtToken", response?.data?.accessToken)
         Cookies.set("userId", response?.data?.userId)
         Cookies.set("username", response?.data?.username)

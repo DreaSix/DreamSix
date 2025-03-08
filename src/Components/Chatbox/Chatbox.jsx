@@ -3,11 +3,12 @@ import axios from "axios";
 import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 import Cookies from "js-cookie";
-import { Button } from "antd"; // Using Ant Design buttons
+import { Button, message, Modal } from "antd"; // Using Ant Design buttons
 
 import "./Chatbox.scss";
 
-const ChatBox = ({currentBidId}) => {
+const ChatBox = ({currentBidId, userData}) => {
+  console.log('userData', userData)
   const [messages, setMessages] = useState([]);
   const [username, setUsername] = useState(Cookies.get("username"));
   const [client, setClient] = useState(null);
@@ -73,6 +74,8 @@ const ChatBox = ({currentBidId}) => {
   }, []);
 
   const sendMessage = (amount) => {
+    console.log('amount', amount)
+    
     if (client && client.connected) {
       // Find the last valid numeric message
       let lastAmount = 0;
@@ -92,6 +95,10 @@ const ChatBox = ({currentBidId}) => {
         newAmount = lastAmount + amount;
       }else{
         newAmount = 1000 + amount
+      }
+
+      if (newAmount > userData?.balance){
+        return message.error("Your balance is insufficient for bidding, please deposite for continue bidding")
       }
   
       const messageData = {
@@ -158,6 +165,37 @@ const ChatBox = ({currentBidId}) => {
           </Button>
         ))}
       </div>
+
+      {/* <Modal
+      open={visible}
+      onCancel={onClose}
+      footer={null}
+      className="customModal"
+    >
+      <Card className="playerCard">
+        <div className="cardContent">
+          <img
+            src={playerData.image}
+            alt={playerData.name}
+            className="playeImage"
+          />
+          <div className="playerInfo">
+            <p className="playerName">{playerData.name}</p>
+            <p className="playerSoldBy"> <span style={{color:"whitesmoke"}}> Sold By : </span>{playerData.soldBy}</p>
+            <p className="playerPrice"><span style={{color:"whitesmoke"}}> Sold By :</span> {playerData.soldPrice}</p>
+          </div>
+        </div>
+
+        <div className="buttonGroup">
+          <Button className="actionButton undoButton" onClick={onClose}>
+            Undo
+          </Button>
+          <Button className="actionButton doneButton" onClick={onClose}>
+            Done
+          </Button>
+        </div>
+      </Card>
+    </Modal> */}
     </body>
     </main>
   );

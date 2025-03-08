@@ -5,6 +5,9 @@ import { Badge, Button, Card } from 'antd';
 import ChatBox from '../Chatbox/Chatbox';
 import { useParams } from 'react-router-dom';
 import { matchDetailsService } from '../../Service/MatchDetailsService';
+import { userService } from '../../Service/UserService';
+import Cookies from "js-cookie";
+
 
 const USerAuctionPage = () => {
   const { matchId } = useParams();
@@ -14,6 +17,22 @@ const USerAuctionPage = () => {
   const [soldPlayers, setSoldPlayers] = useState({});
   const [selectedPlayer, setSelectedPlayer] = useState();
   const [currentBidId, setCurrentBidId] = useState();
+
+  const [userData, setUserData] = useState(0)
+  
+    useEffect(() => {
+      getUserDetails()
+    }, [])
+  
+    const getUserDetails = () => {
+      userService.getUser(Cookies.get("userId"))
+        .then(response => {
+          setUserData(response?.data)
+        })
+        .catch(error => {
+          console.log('error', error)
+        })
+    }
 
 
   useEffect(() => {
@@ -77,13 +96,14 @@ const USerAuctionPage = () => {
     <div className="player-page">
       <div className="header">
         <div className="header-left">
-          <img src="https://tse4.mm.bing.net/th?id=OIP.OzuHtcqMSQR6cmY0njCcfwHaG2&pid=Api&P=0&h=180" alt="team logo" className="team-logo" />
-          <div>
+          <img src={`data:image/jpeg;base64,${matchData?.matchImage}`} alt="team logo" className="team-logo" />
+          {/* <div>
             <h2>Narasimha</h2>
             <p className="status">Online</p>
-          </div>
+          </div> */}
         </div>
-        <button className="top-sixer-btn">Top Sixer</button>
+        <button className="top-sixer-btn">{matchData?.matchAction}</button>
+        <button className="top-sixer-btn">{userData?.balance ? userData?.balance :  0}</button>
       </div>
 
       <div className="players-section">
@@ -150,7 +170,7 @@ const USerAuctionPage = () => {
         )}
 
 
-      <ChatBox currentBidId={currentBidId}/>
+      <ChatBox currentBidId={currentBidId} userData={userData}/>
 
       {/* <footer className="bidding-footer">
         <Button>+50</Button>
