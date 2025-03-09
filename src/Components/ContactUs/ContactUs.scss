@@ -1,55 +1,36 @@
-.contact-page {
-    padding: 40px;
-    ;
-  
-    h2 {
-      font-size: 24px;
-      color: #fbfbfb;
-    }
-  
-    .email-link {
-      color: #d7e81a;
-      text-decoration: none;
-    }
-  
-    .contact-info {
-      margin-bottom: 40px;
-      color: #fbfbfb;
-  
-      .contact-card {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-        background-color: #090909;
-        border-radius: 10px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  
-        .phone-number {
-          margin-left: 15px;
-          font-size: 18px;
-          color: #fdfbfb;
-        }
-      }
-    }
-  
-    .social-media {
-      margin-bottom: 20px;
-      color: #fbfbfb;
-  
-      .social-icons-card {
-        display: flex;
-        justify-content: space-around;
-        padding: 20px;
-        background-color: #0c0c0c;
-        border-radius: 10px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  
-        .social-icon {
-          font-size: 32px;
-          color: #fbfbfb;
-        }
-      }
-    }
+.leaderboard-container {
+  max-width: 800px;
+  margin: 40px auto;
+  text-align: center;
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+
+  thead {
+    background-color: #1C3A56;
+    color: white;
   }
-  
+
+  th, td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  .top-player {
+    background-color: #FFD700;
+    font-weight: bold;
+  }
+}

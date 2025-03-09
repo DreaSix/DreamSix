@@ -1,129 +1,131 @@
 .withdraw-funds {
-    padding: 20px;
-    max-width: 600px;
-    margin-top: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  
-    h2 {
+  padding: 20px;
+  max-width: 600px;
+  margin-top: 40px;
+  border-radius: 10px;
+  // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  // background-color: #1c1c1c; // Optional, to make white labels stand out
+
+  h2 {
       font-size: 24px;
-      color: #050404;
+      color: #fff;
       text-align: center;
-    }
-  
-    .instructions {
+  }
+
+  .instructions {
       margin: 10px 0;
-      color: #e13030;   
+      color: #e13030;
       font-size: 14px;
       list-style: none;
-      padding: 0;   
-  
-      li {
-        margin-bottom: 5px;
-      }
-    }
-  
-    h3 {
-      font-size: 18px;
-      color: #070707;
-      margin-bottom: 20px;
-    }
-  
-    .account-tabs {
+      padding: 0;
 
+      li {
+          margin-bottom: 5px;
+      }
+  }
+
+  h3 {
+      font-size: 18px;
+      color: #fff;
+      margin-bottom: 20px;
+  }
+
+  .account-tabs {
       .ant-tabs-tab {
-        font-size: 14px;
-        color: rgb(2, 0, 0);
+          font-size: 14px;
+          color: #f9f4f4;
       }
-  
+
       .ant-tabs-tab-active {
-        background-color: #f7eb0f;
-        padding: 10px;
-        border-radius: 5px;
-        border: 0.5px solid black;
-        
+          background-color: #f7eb0f;
+          padding: 10px;
+          border-radius: 5px;
+          border: 0.5px solid black;
       }
-  
+
       .ant-tabs-ink-bar {
-        background-color: #ffc107;
+          background-color: #ffc107;
       }
-    }
-  
-    .form {
+  }
+
+  // Form field labels
+  .ant-form-item-label > label {
+      color: white !important;   // Making labels white
+      font-weight: bold;
+  }
+
+  .form {
       display: flex;
       flex-direction: column;
-      gap:12px;
-  
-      label {
-        font-size: 14px;
-        font-weight: bold;
-        color: #090909;
-      }
-  
+      gap: 12px;
+
       .hint {
-        font-size: 12px;
-        color: #ed3737;
+          font-size: 12px;
+          color: #ed3737;
       }
-  
-      .proceed-btn {
-        background-color: #ffc107;
-        color: #fff;
-        border: none;
-        height: 40px;
-        font-size: 16px;
-  
-        &:hover {
+  }
+
+  // Yellow buttons (Submit & Proceed)
+  button {
+      background-color: #ffc107;
+      color: #000;
+      border: none;
+      height: 40px;
+      font-size: 16px;
+      width:320px;
+      margin-left: 20px;
+      margin-top: 20px;
+
+      &:hover {
           background-color: #e0a800;
-        }
       }
-    }
-  
-    .previous-account-card {
+  }
+
+  // Previous Account Card Styles
+  .previous-account-card {
       margin-bottom: 20px;
-      border:0.5px solid black;
+      border: 0.5px solid black;
       border-radius: 8px;
       padding: 15px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-     color:"black";
-  
+      color: black;
+
       .account-title {
-        font-size: 16px;
-        margin-bottom: 10px;
-        color: #050505;
+          font-size: 16px;
+          margin-bottom: 10px;
+          color: #050505;
       }
-  
+
       .delete-icon {
-        font-size: 18px;
-        color: #e74c3c;
-        cursor: pointer;
-  
-        &:hover {
-          color: #c0392b;
-        }
+          font-size: 18px;
+          color: #e74c3c;
+          cursor: pointer;
+
+          &:hover {
+              color: #c0392b;
+          }
       }
-  
+
       p {
-        margin: 0;
-        font-size: 14px;
-        color: #000000;
+          margin: 0;
+          font-size: 14px;
+          color: #000;
       }
-    }
+  }
 
-    .selected{
+  .selected {
       background-color: skyblue;
-    }
   }
-  
+}
 
-  @media (max-width: 768px) {
-    .withdraw-funds {
+@media (max-width: 768px) {
+  .withdraw-funds {
       padding: 15px;
-  
+
       .form {
-        .proceed-btn {
-          width: 100%;
-        }
+          button {
+              width: 100%;
+          }
       }
-    }
   }
-    
+}
