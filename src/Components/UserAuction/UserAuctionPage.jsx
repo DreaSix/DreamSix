@@ -170,7 +170,7 @@ const USerAuctionPage = () => {
         )}
 
 
-      <ChatBox currentBidId={currentBidId} userData={userData}/>
+      <ChatBox currentBidId={currentBidId} selectedPlayer={selectedPlayer} userData={userData}/>
 
       {/* <footer className="bidding-footer">
         <Button>+50</Button>

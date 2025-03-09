@@ -3,15 +3,16 @@ import axios from "axios";
 import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 import Cookies from "js-cookie";
-import { Button, message, Modal } from "antd"; // Using Ant Design buttons
+import { Button, Card, message, Modal } from "antd"; // Using Ant Design buttons
 
 import "./Chatbox.scss";
 
-const ChatBox = ({currentBidId, userData}) => {
+const ChatBox = ({currentBidId, userData, selectedPlayer}) => {
   console.log('userData', userData)
   const [messages, setMessages] = useState([]);
   const [username, setUsername] = useState(Cookies.get("username"));
   const [client, setClient] = useState(null);
+  const [visible, setVisible] =useState(false)
 
   useEffect(() => {
     if (!currentBidId) return; 
@@ -72,6 +73,10 @@ const ChatBox = ({currentBidId, userData}) => {
       stompClient.deactivate();
     };
   }, []);
+
+  const onClose = () => {
+    setVisible(false)
+  }
 
   const sendMessage = (amount) => {
     console.log('amount', amount)
@@ -166,7 +171,7 @@ const ChatBox = ({currentBidId, userData}) => {
         ))}
       </div>
 
-      {/* <Modal
+      <Modal
       open={visible}
       onCancel={onClose}
       footer={null}
@@ -175,14 +180,14 @@ const ChatBox = ({currentBidId, userData}) => {
       <Card className="playerCard">
         <div className="cardContent">
           <img
-            src={playerData.image}
-            alt={playerData.name}
+            src={`data:image/jpeg;base64,${selectedPlayer?.playerImage}`}
+            alt={selectedPlayer?.playerName}
             className="playeImage"
           />
           <div className="playerInfo">
-            <p className="playerName">{playerData.name}</p>
-            <p className="playerSoldBy"> <span style={{color:"whitesmoke"}}> Sold By : </span>{playerData.soldBy}</p>
-            <p className="playerPrice"><span style={{color:"whitesmoke"}}> Sold By :</span> {playerData.soldPrice}</p>
+            <p className="playerName">{selectedPlayer?.playerName}</p>
+            <p className="playerSoldBy"> <span style={{color:"whitesmoke"}}> Sold By : </span>{selectedPlayer?.userResponseVO?.Name}</p>
+            <p className="playerPrice"><span style={{color:"whitesmoke"}}> Sold By :</span> {selectedPlayer?.soldPrice}</p>
           </div>
         </div>
 
@@ -195,7 +200,7 @@ const ChatBox = ({currentBidId, userData}) => {
           </Button>
         </div>
       </Card>
-    </Modal> */}
+    </Modal>
     </body>
     </main>
   );
