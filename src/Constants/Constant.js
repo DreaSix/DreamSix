@@ -24,6 +24,8 @@ export const GET_USER_WITHDRAW_ACCOUNTS = "/get-by-user";
 
 export const  MATCH_WINNER = BASE_URL + "/api/winner-details";
 
+export const USER_BIDS = GET_MATCH_PLAYER_DETAILS + "userBets/"
+
 
 //change password
 
