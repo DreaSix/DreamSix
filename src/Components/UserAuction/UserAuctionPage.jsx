@@ -96,6 +96,7 @@ const USerAuctionPage = () => {
   };
 
   return (
+    <main>
     <div className="player-page">
       <div className="header">
         <div className="header-left">
@@ -155,6 +156,7 @@ const USerAuctionPage = () => {
                     className="player-img"
                   />
                   <div className="player-name">{player.playerName}</div>
+                  <div>{player?.soldPrice}</div>
                 </div>
               ))}
             </div>
@@ -185,6 +187,8 @@ const USerAuctionPage = () => {
         selectedPlayer={selectedPlayer}
         userData={userData}
         matchId={matchId}
+        getPlayerDetailsByMatchId={getPlayerDetailsByMatchId}
+        setSelectedPlayer={setSelectedPlayer}
       />
 
       {/* <footer className="bidding-footer">
@@ -196,6 +200,7 @@ const USerAuctionPage = () => {
 
       <Footer />
     </div>
+    </main>
   );
 };
 

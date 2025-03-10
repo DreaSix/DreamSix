@@ -8,7 +8,7 @@ import { Button, Card, message, Modal } from "antd"; // Using Ant Design buttons
 import "./Chatbox.scss";
 import { useNavigate } from "react-router-dom";
 
-const ChatBox = ({ currentBidId, userData, selectedPlayer, matchId }) => {
+const ChatBox = ({ currentBidId, userData, selectedPlayer, matchId, getPlayerDetailsByMatchId, setSelectedPlayer }) => {
   const navigate = useNavigate();
   const [messages, setMessages] = useState([]);
   const [username, setUsername] = useState(Cookies.get("username"));
@@ -102,8 +102,9 @@ const ChatBox = ({ currentBidId, userData, selectedPlayer, matchId }) => {
         prevMessages.filter((msg) => msg.message !== "Sold")
       );
     } else if (lastMessage === "Done") {
-      setBiddingOverModal(true);
       setVisible(false);
+      getPlayerDetailsByMatchId()
+      setSelectedPlayer()
     }
   };
 
@@ -118,7 +119,6 @@ const ChatBox = ({ currentBidId, userData, selectedPlayer, matchId }) => {
   };
 
   const sendMessage = (amount) => {
-    console.log("amount", amount);
 
     if (client && client.connected) {
       // Find the last valid numeric message
@@ -172,7 +172,6 @@ const ChatBox = ({ currentBidId, userData, selectedPlayer, matchId }) => {
   console.log("messages", messages);
 
   return (
-    <main>
       <body className="chat-container">
         <div className="bids-section">
           {messages.map((bid, index) =>
@@ -195,7 +194,8 @@ const ChatBox = ({ currentBidId, userData, selectedPlayer, matchId }) => {
             )
           )}
 
-          <div className="chat-buttons bidding-footer">
+          {selectedPlayer && (
+            <div className="chat-buttons bidding-footer">
             {[50, 100, 200, 500].map((amount) => (
               <Button
                 key={amount}
@@ -206,6 +206,7 @@ const ChatBox = ({ currentBidId, userData, selectedPlayer, matchId }) => {
               </Button>
             ))}
           </div>
+          )}
         </div>
 
         <Modal
@@ -233,15 +234,6 @@ const ChatBox = ({ currentBidId, userData, selectedPlayer, matchId }) => {
                 </p>
               </div>
             </div>
-
-            {/* <div className="buttonGroup">
-              <Button className="actionButton undoButton" onClick={onClose}>
-                Undo
-              </Button>
-              <Button className="actionButton doneButton" onClick={onClose}>
-                Done
-              </Button>
-            </div> */}
           </Card>
         </Modal>
 
@@ -268,7 +260,6 @@ const ChatBox = ({ currentBidId, userData, selectedPlayer, matchId }) => {
           </Card>
         </Modal>
       </body>
-    </main>
   );
 };
 
