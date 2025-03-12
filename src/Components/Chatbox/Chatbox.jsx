@@ -105,6 +105,7 @@ const ChatBox = ({ currentBidId, userData, selectedPlayer, matchId, getPlayerDet
       setVisible(false);
       getPlayerDetailsByMatchId()
       setSelectedPlayer()
+      setMessages([])
     }
   };
 
