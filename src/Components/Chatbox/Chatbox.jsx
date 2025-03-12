@@ -8,7 +8,14 @@ import { Button, Card, message, Modal } from "antd"; // Using Ant Design buttons
 import "./Chatbox.scss";
 import { useNavigate } from "react-router-dom";
 
-const ChatBox = ({ currentBidId, userData, selectedPlayer, matchId, getPlayerDetailsByMatchId, setSelectedPlayer }) => {
+const ChatBox = ({
+  currentBidId,
+  userData,
+  selectedPlayer,
+  matchId,
+  getPlayerDetailsByMatchId,
+  setSelectedPlayer,
+}) => {
   const navigate = useNavigate();
   const [messages, setMessages] = useState([]);
   const [username, setUsername] = useState(Cookies.get("username"));
@@ -103,9 +110,9 @@ const ChatBox = ({ currentBidId, userData, selectedPlayer, matchId, getPlayerDet
       );
     } else if (lastMessage === "Done") {
       setVisible(false);
-      getPlayerDetailsByMatchId()
-      setSelectedPlayer()
-      setMessages([])
+      getPlayerDetailsByMatchId();
+      setSelectedPlayer();
+      setMessages([]);
     }
   };
 
@@ -120,7 +127,6 @@ const ChatBox = ({ currentBidId, userData, selectedPlayer, matchId, getPlayerDet
   };
 
   const sendMessage = (amount) => {
-
     if (client && client.connected) {
       // Find the last valid numeric message
       let lastAmount = 0;
@@ -173,30 +179,47 @@ const ChatBox = ({ currentBidId, userData, selectedPlayer, matchId, getPlayerDet
   console.log("messages", messages);
 
   return (
-      <body className="chat-container">
-        <div className="bids-section">
-          {messages.map((bid, index) =>
-            bid?.username === username ? (
-              <div className="own-bid-card" key={index}>
-                <div className="bid-info">
-                  <span className="bid-name">{bid?.name}</span>
-                  <span className="bid-amount">{bid?.message}</span>
-                </div>
-                <div className="bid-user">{bid?.name?.charAt(0)}</div>
-              </div>
-            ) : (
-              <div className="bid-card" key={index}>
-                <div className="bid-user">{bid?.name?.charAt(0)}</div>
-                <div className="bid-info">
-                  <span className="bid-name">{bid?.name}</span>
-                  <span className="bid-amount">{bid?.message}</span>
-                </div>
-              </div>
-            )
-          )}
+    <body className="chat-container">
+      <div className="bids-section">
+        {messages.map((bid, index) => {
+          const isAdminMessage =
+            isNaN(bid.message) || ["1", "2", "3"].includes(bid.message);
 
-          {selectedPlayer && (
-            <div className="chat-buttons bidding-footer">
+          return (
+            <div
+              key={index}
+              className={
+                bid?.username === username ? "own-bid-card" : "bid-card"
+              }
+            >
+              {bid?.username !== username && (
+                <div className="bid-user">{bid?.name?.charAt(0)}</div>
+              )}
+
+              <div className="bid-info">
+                <span className="bid-name">{bid?.name}</span>
+
+                {isAdminMessage ? (
+                  // Admin messages (string or "1", "2", "3") displayed in a tag
+                  <div className="admin-message">
+                    {/* <span className="admin-tag">Admin</span> */}
+                    <span className="bid-amount" style={{color: "black"}}>{bid?.message}</span>
+                  </div>
+                ) : (
+                  // Normal bid messages
+                  <span className="bid-amount" >{bid?.message}</span>
+                )}
+              </div>
+
+              {bid?.username === username && (
+                <div className="bid-user">{bid?.name?.charAt(0)}</div>
+              )}
+            </div>
+          );
+        })}
+
+        {selectedPlayer && (
+          <div className="chat-buttons bidding-footer">
             {[50, 100, 200, 500].map((amount) => (
               <Button
                 key={amount}
@@ -207,60 +230,57 @@ const ChatBox = ({ currentBidId, userData, selectedPlayer, matchId, getPlayerDet
               </Button>
             ))}
           </div>
-          )}
-        </div>
+        )}
+      </div>
 
-        <Modal
-          open={visible}
-          onCancel={onClose}
-          footer={null}
-          className="customModal"
-        >
-          <Card className="playerCard">
-            <div className="cardContent">
-              <img
-                src={`data:image/jpeg;base64,${selectedPlayer?.playerImage}`}
-                alt={selectedPlayer?.playerName}
-                className="playeImage"
-              />
-              <div className="playerInfo">
-                <p className="playerName">{selectedPlayer?.playerName}</p>
-                <p className="playerSoldBy">
-                  <span style={{ color: "whitesmoke" }}> Sold By: </span>
-                  {lastBid?.name}
-                </p>
-                <p className="playerPrice">
-                  <span style={{ color: "whitesmoke" }}> Sold Price: </span>
-                  {lastBid?.message}
-                </p>
-              </div>
+      <Modal
+        open={visible}
+        onCancel={onClose}
+        footer={null}
+        className="customModal"
+      >
+        <Card className="playerCard">
+          <div className="cardContent">
+            <img
+              src={`data:image/jpeg;base64,${selectedPlayer?.playerImage}`}
+              alt={selectedPlayer?.playerName}
+              className="playeImage"
+            />
+            <div className="playerInfo">
+              <p className="playerName">{selectedPlayer?.playerName}</p>
+              <p className="playerSoldBy">
+                <span style={{ color: "whitesmoke" }}> Sold By: </span>
+                {lastBid?.name}
+              </p>
+              <p className="playerPrice">
+                <span style={{ color: "whitesmoke" }}> Sold Price: </span>
+                {lastBid?.message}
+              </p>
             </div>
-          </Card>
-        </Modal>
+          </div>
+        </Card>
+      </Modal>
 
-        <Modal
-          open={biddingOverModal}
-          onCancel={onClose}
-          footer={null}
-          className="biddingOverModal"
-        >
-          <Card className="biddingCard">
-            <div className="stampContainer">
-              <div className="biddingOverStamp">BIDDING OVER</div>
-            </div>
-            <p className="finalListMessage">
-              ✅ Go to <strong>Players List</strong> to see the final list of
-              bid players!
-            </p>
-            <Button
-              className="playersListButton"
-              onClick={handleGoToPlayersList}
-            >
-              👉 Click here to go to Players List
-            </Button>
-          </Card>
-        </Modal>
-      </body>
+      <Modal
+        open={biddingOverModal}
+        onCancel={onClose}
+        footer={null}
+        className="biddingOverModal"
+      >
+        <Card className="biddingCard">
+          <div className="stampContainer">
+            <div className="biddingOverStamp">BIDDING OVER</div>
+          </div>
+          <p className="finalListMessage">
+            ✅ Go to <strong>Players List</strong> to see the final list of bid
+            players!
+          </p>
+          <Button className="playersListButton" onClick={handleGoToPlayersList}>
+            👉 Click here to go to Players List
+          </Button>
+        </Card>
+      </Modal>
+    </body>
   );
 };
 
