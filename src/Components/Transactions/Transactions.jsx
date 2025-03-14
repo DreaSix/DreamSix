@@ -74,7 +74,7 @@ const TransactionPage = () => {
                 transaction.approvalStatus === 'APPROVED' ? (
                   <CheckCircleOutlined style={{ color: '#4caf50', fontSize: '24px' }} />
                 ) : (
-                  <QuestionCircleOutlined style={{ color: '#ff5252', fontSize: '24px' }} />
+                  <QuestionCircleOutlined style={{ color: transaction?.approvalStatus === "PENDING" ? "orange" : "red", fontSize: '24px' }} />
                 )
               }
               title={`#${transaction?.id}`}

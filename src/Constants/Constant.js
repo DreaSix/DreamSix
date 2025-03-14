@@ -11,6 +11,7 @@ export const CREATE_USER = BASE_URL + "/api/user/create"
 
 export const GET_MATCH_DETAILS = BASE_URL + "/api/match-details";
 export const GET_MATCH_DETAILS_BY_ID = BASE_URL + "/api/match-details/";
+export const GET_MATCH_DETAILS_AUCTION_COMPLETED = GET_MATCH_DETAILS + "/get-matches";
 
 export const SAVE_TEAM_PLAYERS = BASE_URL + "/api/player-details/save-team";
 

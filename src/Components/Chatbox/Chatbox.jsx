@@ -23,6 +23,7 @@ const ChatBox = ({
   const [visible, setVisible] = useState(false);
   const [lastBid, setLastBid] = useState();
   const [biddingOverModal, setBiddingOverModal] = useState(false);
+  const [unSoldModal, setUnSoldModal] = useState(false)
 
   const handleGoToPlayersList = () => {
     navigate(`/players-final-list/${matchId}`); // Change the path as per your route
@@ -94,9 +95,9 @@ const ChatBox = ({
 
   const checkForSoldMessage = (sortedMessages) => {
     if (sortedMessages.length === 0) return;
-
+  
     const lastMessage = sortedMessages[sortedMessages.length - 1]?.message;
-
+  
     if (lastMessage === "Sold") {
       const lastValidBid = findLastValidBid(sortedMessages);
       if (lastValidBid) {
@@ -104,17 +105,28 @@ const ChatBox = ({
         setVisible(true);
       }
     } else if (lastMessage === "Deny") {
-      setVisible(false);
       setMessages((prevMessages) =>
-        prevMessages.filter((msg) => msg.message !== "Sold")
+        prevMessages.filter((msg) => msg.message !== "Sold" && msg.message !== "Deny")
       );
+      setVisible(false);
     } else if (lastMessage === "Done") {
       setVisible(false);
       getPlayerDetailsByMatchId();
       setSelectedPlayer();
       setMessages([]);
+    } else if (lastMessage === "UnSold") {
+      setMessages((prevMessages) =>
+        prevMessages.filter((msg) => msg.message !== "UnSold")
+      );
+      setUnSoldModal(true);
+    } else if (lastMessage === "Un Sold Deny") {
+      setMessages((prevMessages) =>
+        prevMessages.filter((msg) => msg.message !== "Un Sold Deny" && msg.message !== "UnSold")
+      );
+      setUnSoldModal(false);
     }
   };
+  
 
   const findLastValidBid = (messages) => {
     for (let i = messages.length - 2; i >= 0; i--) {
@@ -178,10 +190,18 @@ const ChatBox = ({
 
   console.log("messages", messages);
 
+  const filteredMessages = messages?.filter(
+    (message) =>
+      message?.message !== "UnSold" &&
+      message?.message !== "Un Sold Deny" &&
+      message?.message !== "Sold" &&
+      message?.message !== "Deny"
+  );
+
   return (
     <body className="chat-container">
       <div className="bids-section">
-        {messages.map((bid, index) => {
+        {filteredMessages.map((bid, index) => {
           const isAdminMessage =
             isNaN(bid.message) || ["1", "2", "3"].includes(bid.message);
 
@@ -235,7 +255,8 @@ const ChatBox = ({
 
       <Modal
         open={visible}
-        onCancel={onClose}
+        // onCancel={onClose}
+        closable={false}
         footer={null}
         className="customModal"
       >
@@ -262,8 +283,33 @@ const ChatBox = ({
       </Modal>
 
       <Modal
+        open={unSoldModal}
+        // onCancel={onClose}
+        closable={false}
+        footer={null}
+        className="customModal"
+      >
+        <Card className="playerCard">
+          <div className="cardContent">
+            <img
+              src={`data:image/jpeg;base64,${selectedPlayer?.playerImage}`}
+              alt={selectedPlayer?.playerName}
+              className="playeImage"
+            />
+            <div className="playerInfo">
+              <p className="playerName">{selectedPlayer?.playerName}</p>
+              <p className="playerSoldBy">
+                <span style={{ color: "whitesmoke" }}> Un Sold </span>
+                {lastBid?.name}
+              </p>
+            </div>
+          </div>
+        </Card>
+      </Modal>
+
+      <Modal
         open={biddingOverModal}
-        onCancel={onClose}
+        // onCancel={onClose}
         footer={null}
         className="biddingOverModal"
       >

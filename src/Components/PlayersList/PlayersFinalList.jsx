@@ -51,6 +51,12 @@ const PlayersFinalList = () => {
       });
   };
 
+  const totalSoldAmount = [
+    ...Object.values(playersTeam1 || {}), 
+    ...Object.values(playersTeam2 || {})
+  ].reduce((total, player) => total + (player?.soldPrice || 0), 0);
+  
+
   return (
     <div>
       <Header />
@@ -118,7 +124,7 @@ const PlayersFinalList = () => {
         </div>
 
         <div className="total-amount-container">
-          <span>Total Amount =</span> ₹32000
+          <span>Total Amount =</span> ₹{totalSoldAmount?.toLocaleString()}
         </div>
         <Footer />
       </div>

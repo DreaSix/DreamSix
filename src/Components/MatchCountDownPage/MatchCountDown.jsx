@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import './MatchCountDown.scss';
-import { matchDetailsService } from '../../Service/MatchDetailsService';
-import { Button } from 'antd';
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import "./MatchCountDown.scss";
+import { matchDetailsService } from "../../Service/MatchDetailsService";
+import { Button } from "antd";
 
 const CountdownPage = () => {
   const { matchId } = useParams();
@@ -11,7 +11,11 @@ const CountdownPage = () => {
   const [matchData, setMatchDetails] = useState(null);
   const [playersTeam1, setPlayersTeam1] = useState({});
   const [playersTeam2, setPlayersTeam2] = useState({});
-  const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 });
+  const [timeLeft, setTimeLeft] = useState({
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
   useEffect(() => {
     if (matchId) {
@@ -20,12 +24,13 @@ const CountdownPage = () => {
   }, [matchId]);
 
   const getMatchDetailsById = () => {
-    matchDetailsService.getMtachDetailsById(matchId)
-      .then(response => {
+    matchDetailsService
+      .getMtachDetailsById(matchId)
+      .then((response) => {
         setMatchDetails(response?.data);
       })
-      .catch(error => {
-        console.log('Error fetching match details:', error);
+      .catch((error) => {
+        console.log("Error fetching match details:", error);
       });
   };
 
@@ -40,7 +45,7 @@ const CountdownPage = () => {
           return {
             hours: Math.floor(difference / (1000 * 60 * 60)),
             minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
-            seconds: Math.floor((difference % (1000 * 60)) / 1000)
+            seconds: Math.floor((difference % (1000 * 60)) / 1000),
           };
         }
         return { hours: 0, minutes: 0, seconds: 0 };
@@ -63,8 +68,9 @@ const CountdownPage = () => {
   }, [matchData]);
 
   const getPlayerDetailsByMatchId = () => {
-    matchDetailsService.getMatchPlayerDetails(matchId)
-      .then(response => {
+    matchDetailsService
+      .getMatchPlayerDetails(matchId)
+      .then((response) => {
         const teamOneData = response?.data?.find(
           (player) => player?.teamName === matchData?.teamOneName
         );
@@ -74,12 +80,11 @@ const CountdownPage = () => {
         );
         const flattenedPlayers2 = teamTwoData?.playersDtoMap;
 
-
-        setPlayersTeam1(flattenedPlayers1)
-        setPlayersTeam2(flattenedPlayers2)
+        setPlayersTeam1(flattenedPlayers1);
+        setPlayersTeam2(flattenedPlayers2);
       })
-      .catch(error => {
-        console.log('Error fetching player details:', error);
+      .catch((error) => {
+        console.log("Error fetching player details:", error);
       });
   };
 
@@ -96,36 +101,48 @@ const CountdownPage = () => {
               src={`data:image/jpeg;base64,${matchData.matchImage}`}
               alt={`${matchData.teamOneName} vs ${matchData.teamTwoName}`}
               className="match-banner"
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: "pointer" }}
             />
           )}
           <div className="bid-info">
             <div className="top-sixer">Top Sixer</div>
-            <h4>Get Ready, Bid Will Start Soon</h4>
 
+            {timeLeft.hours === 0 &&
+            timeLeft.minutes === 0 &&
+            timeLeft.seconds === 0 ? (
+              <>
+                <div className="top-sixer">In Progress</div>
 
-            {(timeLeft.hours === 0 && timeLeft.minutes === 0 && timeLeft.seconds === 0) ? (
-              <Button onClick={handleImageClick} className="start-button">Start</Button>
+                <Button onClick={handleImageClick} className="start-button">
+                  Start
+                </Button>
+              </>
             ) : (
-              <div className="countdown">
-                {String(timeLeft.hours).padStart(2, "0")} :
-                {String(timeLeft.minutes).padStart(2, "0")} :
-                {String(timeLeft.seconds).padStart(2, "0")}
-              </div>
+              <>
+                <h4>Get Ready, Bid Will Start Soon</h4>
+
+                <div className="countdown">
+                  {String(timeLeft.hours).padStart(2, "0")} :
+                  {String(timeLeft.minutes).padStart(2, "0")} :
+                  {String(timeLeft.seconds).padStart(2, "0")}
+                </div>
+              </>
             )}
           </div>
         </div>
 
         <div className="player-list-container">
-          <div className='heading-container'>
-            <h4>{matchData?.teamOneName} vs {matchData?.teamTwoName}</h4>
+          <div className="heading-container">
+            <h4>
+              {matchData?.teamOneName} vs {matchData?.teamTwoName}
+            </h4>
             <p>Expected Players</p>
           </div>
           <table className="player-list-table">
             <thead>
               <tr>
-                <th className='header-name'>{matchData?.teamOneName}</th>
-                <th className='header-name'>{matchData?.teamTwoName}</th>
+                <th className="header-name">{matchData?.teamOneName}</th>
+                <th className="header-name">{matchData?.teamTwoName}</th>
               </tr>
             </thead>
             <tbody>
@@ -133,27 +150,37 @@ const CountdownPage = () => {
                 <td>
                   {playersTeam1 && (
                     <div className="player-list">
-                    {Object.entries(playersTeam1).map(
+                      {Object.entries(playersTeam1).map(
                         ([playerId, player]) => (
-                      <div key={playerId} className="player-item">
-                        <img src={`data:image/jpeg;base64,${player?.playerImage}`} alt={player.playerName} className="player-icon" />
-                        <span>{player.playerName}</span>
-                      </div>
-                    ))}
-                  </div>
+                          <div key={playerId} className="player-item">
+                            <img
+                              src={`data:image/jpeg;base64,${player?.playerImage}`}
+                              alt={player.playerName}
+                              className="player-icon"
+                            />
+                            <span>{player.playerName}</span>
+                          </div>
+                        )
+                      )}
+                    </div>
                   )}
                 </td>
                 <td>
                   {playersTeam2 && (
                     <div className="player-list">
-                    {Object.entries(playersTeam2).map(
+                      {Object.entries(playersTeam2).map(
                         ([playerId, player]) => (
-                      <div key={playerId} className="player-item">
-                        <img src={`data:image/jpeg;base64,${player?.playerImage}`} alt={player.playerName} className="player-icon" />
-                        <span>{player.playerName}</span>
-                      </div>
-                    ))}
-                  </div>
+                          <div key={playerId} className="player-item">
+                            <img
+                              src={`data:image/jpeg;base64,${player?.playerImage}`}
+                              alt={player.playerName}
+                              className="player-icon"
+                            />
+                            <span>{player.playerName}</span>
+                          </div>
+                        )
+                      )}
+                    </div>
                   )}
                 </td>
               </tr>

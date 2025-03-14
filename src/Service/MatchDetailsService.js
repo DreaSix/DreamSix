@@ -1,4 +1,4 @@
-import { ADD_DEPOSITE, ADD_WITHDRAW, ADD_WITHDRAW_TRANSACTION, GET_MATCH_DETAILS, GET_MATCH_DETAILS_BY_ID, GET_MATCH_PLAYER_DETAILS, GET_MATCH_PLAYER_DETAILS_ENDPOINT, GET_USER_WITHDRAW_ACCOUNTS, MATCH_WINNER, SAVE_TEAM_PLAYERS, USER_BIDS } from "../Constants/Constant"
+import { ADD_DEPOSITE, ADD_WITHDRAW, ADD_WITHDRAW_TRANSACTION, GET_MATCH_DETAILS, GET_MATCH_DETAILS_AUCTION_COMPLETED, GET_MATCH_DETAILS_BY_ID, GET_MATCH_PLAYER_DETAILS, GET_MATCH_PLAYER_DETAILS_ENDPOINT, GET_USER_WITHDRAW_ACCOUNTS, MATCH_WINNER, SAVE_TEAM_PLAYERS, USER_BIDS } from "../Constants/Constant"
 import { DeleteAPIRequest, GetAPIRequest, PostAPIRequest } from "./Api"
 
 const getAllMatches = () => {
@@ -70,6 +70,12 @@ const createWithdrawRequest = (payload) => {
     })
 }
 
+const getMatches = () => {
+    return GetAPIRequest({
+        url: GET_MATCH_DETAILS_AUCTION_COMPLETED
+    })
+}
+
 export const matchDetailsService = {
     getAllMatches,
     saveTeamPlayers,
@@ -81,5 +87,6 @@ export const matchDetailsService = {
     getAllWIthdrawAccounts,
     deleteWithdrawAccount,
     createWithdrawRequest,
-    getUserBets
+    getUserBets,
+    getMatches
 }

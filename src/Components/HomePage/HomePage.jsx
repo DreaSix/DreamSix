@@ -45,7 +45,7 @@ const HomePage = () => {
   }, [])
 
   const getAllMatches = () => {
-    matchDetailsService.getAllMatches()
+    matchDetailsService.getMatches()
       .then(response => {
         setMatches(response?.data)
       })
