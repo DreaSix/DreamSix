@@ -3,22 +3,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
   padding: 2rem;
-  background: linear-gradient(to right, #1c3a56, #005f73); // Updated gradient background
-  justify-content: center;
+  background: linear-gradient(to right, #1c3a56, #005f73);
 
   .register-logo {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
     margin-bottom: 1rem;
-    margin-left:70px;
 
     img {
       width: 150px;
-      height: 60px;
-      margin-right: 10px;
+      height: auto;
     }
   }
 
@@ -27,10 +26,12 @@
     font-size: 2rem;
     margin-bottom: 1.5rem;
     font-weight: 600;
-    
   }
 
   .register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 2rem;
     border-radius: 10px;
     width: 100%;
@@ -39,17 +40,20 @@
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 
     .ant-form-item {
+      width: 100%;
       label {
         font-weight: bold;
+        color: white;
       }
     }
 
-    .ant-input {
+    .ant-input,
+    .ant-input-password {
       height: 45px;
       border-radius: 8px;
     }
 
-    .ant-btn {
+    .otp-button {
       width: 100%;
       background-color: #ffd700;
       border: none;
@@ -59,12 +63,10 @@
       border-radius: 8px;
       font-size: 1.2rem;
       margin-bottom: 10px;
-      width: auto;
-      float: right;
+      transition: background 0.3s ease-in-out;
       &:hover {
         background-color: #f4c400;
       }
-
       &:disabled {
         background-color: #ccc;
         color: #666;
@@ -80,6 +82,7 @@
       height: 45px;
       border-radius: 8px;
       font-size: 1.2rem;
+      transition: background 0.3s ease-in-out;
       &:hover {
         background-color: #f4c400;
       }
@@ -90,6 +93,7 @@
     margin-top: 1rem;
     color: white;
     font-size: 1rem;
+    text-align: center;
 
     a {
       color: #ffd700;
@@ -103,18 +107,14 @@
   }
 }
 
-/* Responsive Styles */
+/* 📌 Mobile Responsive Styles */
 @media (max-width: 768px) {
   .register-container {
     padding: 1rem;
+  }
 
-    h2 {
-      font-size: 1.5rem;
-    }
-
-    .register-form {
-      max-width: 100%;
-      padding: 1.5rem;
-    }
+  .register-form {
+    max-width: 100%;
+    padding: 1.5rem;
   }
 }
