@@ -124,6 +124,13 @@ const ChatBox = ({
         prevMessages.filter((msg) => msg.message !== "Un Sold Deny" && msg.message !== "UnSold")
       );
       setUnSoldModal(false);
+    } else if (lastMessage === "Un Sold Done"){
+      setUnSoldModal(false)
+      setMessages([])
+      getPlayerDetailsByMatchId()
+      setSelectedPlayer()
+    } else if (lastMessage === "Done Match"){
+      setBiddingOverModal(true)
     }
   };
   
