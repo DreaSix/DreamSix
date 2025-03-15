@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import Cookies from "js-cookie";
 
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import LoginPage from "./Components/Login/LoginPage";
 import HomePage from "./Components/HomePage/HomePage";
 import Rules from "./Components/Rules/Rules";
@@ -32,7 +32,9 @@ import PlayerModal from "./Components/ReusableCode/SoldModal";
 import Updates from "./Components/Updates/Updates";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(Cookies.get("jwtToken"))  
+  const [isAuthenticated, setIsAuthenticated] = useState(Cookies.get("jwtToken"))
+
+
 
   return (
     <div
@@ -43,7 +45,7 @@ function App() {
         justifyContent: "space-between",
       }}
     >
-      <Router> 
+      <Router>
         {!isAuthenticated ? (
           <Routes>
             <Route path="/registration" element={<Registration />} />
@@ -52,7 +54,7 @@ function App() {
           </Routes>
         ) : (
           <>
-            <Header setIsAuthenticated={setIsAuthenticated} />
+              <Header setIsAuthenticated={setIsAuthenticated} />
             <Routes>
               <Route path="/register-process" element={<RegisterProcess />} />
               <Route path="/homepage" element={<HomePage />} />
@@ -74,14 +76,14 @@ function App() {
               <Route path="/players-final-list/:matchId" element={<PlayersFinalList />} />
               <Route path="/withdrawl" element={<Withdrawl />} />
               <Route path="*" element={<Navigate to="/homepage" />} />
-              <Route path="/otpverification" element={<OtpVerification/> } />
-              <Route path="/terms&conditions" element={<TermsAndConditions /> } />
-              <Route path="/soldmodal" element={<PlayerModal /> } />
-              <Route path="/updates" element={<Updates /> } />
+              <Route path="/otpverification" element={<OtpVerification />} />
+              <Route path="/terms&conditions" element={<TermsAndConditions />} />
+              <Route path="/soldmodal" element={<PlayerModal />} />
+              <Route path="/updates" element={<Updates />} />
             </Routes>
             <Footer />
           </>
-         )} 
+        )}
       </Router>
     </div>
   );

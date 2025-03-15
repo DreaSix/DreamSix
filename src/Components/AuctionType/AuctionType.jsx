@@ -24,10 +24,10 @@ const AuctionTypePage = () => {
   const options = [
     { label: 'Top Sixer', image: TopSix },
     { label: 'Top Scorer', image: TopScorer },
-    { label: 'Most Wickets', image: MostWickets },
-    { label: 'Top Contest', image: TopContest },
-    { label: 'Top Sixer', image: TopSix },
-    { label: 'Top Scorer', image: TopScorer },
+    // { label: 'Most Wickets', image: MostWickets },
+    // { label: 'Top Contest', image: TopContest },
+    // { label: 'Top Sixer', image: TopSix },
+    // { label: 'Top Scorer', image: TopScorer },
   
   ];
 
