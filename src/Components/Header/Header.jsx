@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { UserOutlined } from "@ant-design/icons";
 import { Button } from "antd";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
 import Logo from "../../assets/logo.jpeg";
@@ -10,6 +10,7 @@ import SideMenu from "./SideMenu";
 import { userService } from "../../Service/UserService";
 
 const Header = ({setIsAuthenticated}) => {
+  const location = useLocation()
   const [userWallet, setUserWallet] = useState(0)
 
   useEffect(() => {
@@ -26,7 +27,12 @@ const Header = ({setIsAuthenticated}) => {
       })
   }
 
+  const isHeaderShow = location?.pathname?.includes("user-auctionpage")
+
+
   return (
+
+    !isHeaderShow && 
     <div className="header">
       <div className="menu-container">
         <SideMenu setIsAuthenticated={setIsAuthenticated} />

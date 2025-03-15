@@ -49,6 +49,28 @@
       border-radius: 8px;
     }
 
+    .ant-btn {
+      width: 100%;
+      background-color: #ffd700;
+      border: none;
+      color: #000;
+      font-weight: bold;
+      height: 45px;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      width: auto;
+      float: right;
+      &:hover {
+        background-color: #f4c400;
+      }
+
+      &:disabled {
+        background-color: #ccc;
+        color: #666;
+      }
+    }
+
     .register-button {
       width: 100%;
       background-color: #ffd700;

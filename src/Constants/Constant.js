@@ -45,3 +45,6 @@ export const PAYMENTS = BASE_URL + "/api/payments";
 export const GET_USER_TRANSACTIONS = BASE_URL + "/api/transactions/get-all-transactions-by-user"
 export const GET_TRANSACTION_BY_ID = BASE_URL + "/api/transactions";
 
+export const SEND_OTP_URL = BASE_URL + "/api/otp/send"
+
+export const VERIFY_OTP_URL = BASE_URL + "/api/otp/verify"
