@@ -107,6 +107,9 @@ const Registration = () => {
           onFinish(form.getFieldsValue());
         } else if (response?.message === "invalid otp") {
           message.error("OTP verification failed, please try again");
+        }else if(response?.message === "otp already verifed"){
+          onFinish(form.getFieldsValue());
+
         }
       })
       .catch((error) => {
