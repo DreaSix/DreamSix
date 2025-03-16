@@ -208,6 +208,7 @@ const ChatBox = ({
   return (
     <body className="chat-container">
       <div className="bids-section">
+        <div className="messages-container">
         {filteredMessages.map((bid, index) => {
           const isAdminMessage =
             isNaN(bid.message) || ["1", "2", "3"].includes(bid.message);
@@ -244,6 +245,7 @@ const ChatBox = ({
             </div>
           );
         })}
+        </div>
 
         {selectedPlayer && (
           <div className="chat-buttons bidding-footer">

@@ -62,6 +62,12 @@
     border-radius: 8px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 
+    .messages-container{
+      max-height: 300px;
+      overflow: auto;
+      scrollbar-width: 0px;
+    }
+
     .bid-card {
       display: flex;
       align-items: center;
