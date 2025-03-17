@@ -19,7 +19,7 @@ const MyBets = () => {
     matchDetailsService
       .getUserBets(Cookies.get("userId"))
       .then((response) => {
-        setBetData(response?.data);
+        setBetData(response?.data || []);
       })
       .catch((error) => {
         console.log("error", error);
@@ -32,54 +32,60 @@ const MyBets = () => {
 
   console.log("betData", betData);
 
+  // Flatten data: each player should have its own card
+  const flattenedBets = betData.flatMap((details) =>
+    Object.values(details.playersDtoMap || {}).map((player) => ({
+      matchId: details.matchDetailsResponse?.matchId,
+      matchName: details.matchDetailsResponse?.matchName,
+      matchAction: details.matchDetailsResponse?.matchAction,
+      status: details?.status,
+      player,
+    }))
+  );
+
   return (
     <div>
       <Header />
       <div className="player-page">
-        {/* Player List */}
         <List
-  dataSource={betData}
-  renderItem={(details) => (
-    <Card
-      key={details.matchDetailsResponse?.matchId} // Unique key for the card
-      className="player-card"
-      onClick={() => handlePlayerClick(details)}
-    >
-      <Row gutter={[16, 16]}>
-        {/* Match Details */}
-        <div style={{display:"flex", justifyContent: "space-between", width:"100%"}}>
-          <h2 className="match-name">{details.matchDetailsResponse?.matchName}</h2>
-          <p className="auction-type">{details.matchDetailsResponse?.matchAction}</p>
-        </div>
-
-        {/* Player Details */}
-        {Object.values(details.playersDtoMap || {}).map((player) => (
-          <Col span={24} key={player.playerId}>
-            <Row gutter={[16, 16]} align="middle">
-              <Col span={6}>
-                <Avatar src={`data:image/jpeg;base64,${player.playerImage}`} size={64} />
-              </Col>
-              <Col span={12}>
-                <h3 className="player-name">{player.playerName}</h3>
-                <p className="date">{player.soldDate.split("T")[0]}</p>
-              </Col>
-              <Col span={6} style={{ textAlign: "right" }}>
-                <div className="amount">₹ {player.soldPrice}</div>
-                <div className={`status ${details?.status === "Loss" ? "loss" : "win"}`}>
-                  {details?.status}
+          dataSource={flattenedBets}
+          renderItem={(bet) => (
+            <Card
+              key={`${bet.matchId}-${bet.player.playerId}`} // Unique key
+              className="player-card"
+              onClick={() => handlePlayerClick(bet.player)}
+            >
+              <Row gutter={[16, 16]}>
+                {/* Match Details */}
+                <div style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+                  <h2 className="match-name">{bet.matchName}</h2>
+                  <p className="auction-type">{bet.matchAction}</p>
                 </div>
-              </Col>
-            </Row>
-          </Col>
-        ))}
-      </Row>
-    </Card>
-  )}
-  split={false}
-  className="player-list"
-/>
 
-
+                {/* Player Details */}
+                <Col span={24}>
+                  <Row gutter={[16, 16]} align="middle">
+                    <Col span={6}>
+                      <Avatar src={`data:image/jpeg;base64,${bet.player.playerImage}`} size={64} />
+                    </Col>
+                    <Col span={12}>
+                      <h3 className="player-name">{bet.player.playerName}</h3>
+                      <p className="date">{bet.player.soldDate.split("T")[0]}</p>
+                    </Col>
+                    <Col span={6} style={{ textAlign: "right" }}>
+                      <div className="amount">₹ {bet.player.soldPrice}</div>
+                      <div className={`status ${bet.status === "Loss" ? "loss" : "win"}`}>
+                        {bet.status}
+                      </div>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+            </Card>
+          )}
+          split={false}
+          className="player-list"
+        />
       </div>
       <Footer />
     </div>
