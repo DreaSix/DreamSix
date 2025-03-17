@@ -4,7 +4,7 @@ import { Button } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
-import Logo from "../../assets/logo.jpeg";
+import Logo from "../../assets/DreamSix_logo.png";
 import "./Header.scss";
 import SideMenu from "./SideMenu";
 import { userService } from "../../Service/UserService";

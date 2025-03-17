@@ -2,6 +2,7 @@ import React, { useState, lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import "./App.css";
+import ForgotPassword from "./Components/ForgotPassword/ForgotPassword";
 
 const LoginPage = lazy(() => import("./Components/Login/LoginPage"));
 const HomePage = lazy(() => import("./Components/HomePage/HomePage"));
@@ -41,6 +42,7 @@ function App() {
           {!isAuthenticated ? (
             <Routes>
               <Route path="/registration" element={<Registration />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/" element={<LoginPage setIsAuthenticated={setIsAuthenticated} />} />
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
@@ -72,6 +74,7 @@ function App() {
                 <Route path="/soldmodal" element={<PlayerModal />} />
                 <Route path="/updates" element={<Updates />} />
                 <Route path="*" element={<Navigate to="/homepage" />} />
+                
               </Routes>
               <Footer />
             </>
