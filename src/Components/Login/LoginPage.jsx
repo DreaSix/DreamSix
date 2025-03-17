@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Input, Button } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import "./LoginPage.scss";
-import Logo from "../../assets/logo.jpeg";
+import Logo from "../../assets/DreamSix_logo.png";
 import Cookies from "js-cookie";
 import { userService } from "../../Service/UserService";
 
