@@ -7,6 +7,8 @@ import { useParams } from "react-router-dom";
 import { matchDetailsService } from "../../Service/MatchDetailsService";
 import { userService } from "../../Service/UserService";
 import Cookies from "js-cookie";
+import SockJS from "sockjs-client";
+import { Client } from "@stomp/stompjs";
 
 const USerAuctionPage = () => {
   const { matchId } = useParams();
@@ -17,6 +19,9 @@ const USerAuctionPage = () => {
   const [unSoldPlayers, setUnSoldPlayers] = useState({})
   const [selectedPlayer, setSelectedPlayer] = useState();
   const [currentBidId, setCurrentBidId] = useState();
+  const [client, setClient] = useState(null);
+  const [players, setPlayers] = useState([])
+
 
   const [userData, setUserData] = useState(0);
 
@@ -34,6 +39,37 @@ const USerAuctionPage = () => {
         console.log("error", error);
       });
   };
+
+  useEffect(() => {
+    const socket = new SockJS("http://localhost:8080/ws");
+    const stompClient = new Client({
+      webSocketFactory: () => socket,
+      reconnectDelay: 5000,
+      onConnect: () => {
+        console.log("Connected to WebSocket");
+  
+        if (matchId) {
+          stompClient.subscribe(`/topic/teamPlayers/${matchId}`, (message) => {
+            const teamPlayers = JSON.parse(message.body);
+            console.log("Received Team Players:", teamPlayers);
+            setPlayers(teamPlayers); // Assuming `setPlayers` updates state
+          });
+        }
+  
+        setClient(stompClient);
+      },
+      onStompError: (error) => {
+        console.error("STOMP Error:", error);
+      },
+    });
+  
+    stompClient.activate();
+  
+    return () => {
+      stompClient.deactivate();
+    };
+  }, []);
+  
 
   useEffect(() => {
     if (matchId) {
@@ -57,6 +93,8 @@ const USerAuctionPage = () => {
       getPlayerDetailsByMatchId();
     }
   }, [matchData]);
+
+  console.log('players', players)
 
   const getPlayerDetailsByMatchId = () => {
     matchDetailsService

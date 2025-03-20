@@ -31,6 +31,7 @@ export const USER_BIDS = GET_MATCH_PLAYER_DETAILS + "userBets/"
 //change password
 
 export const CHANGE_PASSWORD = BASE_URL + "/api/user/change-password";
+export const FORGOT_PASSWORD = BASE_URL + "/api/user/forget-password"
 
 //role
 
