@@ -1,4 +1,4 @@
-import { CHANGE_PASSWORD, CREATE_USER, LOGIN_URL, REGISTER_USER, USER_DETAILS } from "../Constants/Constant"
+import { CHANGE_PASSWORD, CREATE_USER, FORGOT_PASSWORD, LOGIN_URL, REGISTER_USER, USER_DETAILS } from "../Constants/Constant"
 import { GetAPIRequest, PostAPIRequest, PutAPIRequest } from "./Api"
 
 const createUser = (payload) => {
@@ -28,9 +28,17 @@ const changePassword = (payload) => {
     })
 }
 
+const forgotPassword = (params) => {
+    return PutAPIRequest({
+        url: FORGOT_PASSWORD,
+        params
+    })
+}
+
 export const userService = {
     createUser,
     loginUser, 
     getUser, 
-    changePassword
+    changePassword,
+    forgotPassword
 }

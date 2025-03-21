@@ -34,21 +34,6 @@ const ForgotPassword = () => {
       });
   };
 
-//    const changePassword = () => {
-//       const payload = {
-//         password: values?.password,
-//         newPassword: values?.newPassword
-//       }
-  
-//       userService.changePassword(payload)
-//         .then(response => {
-//           console.log('response', response)
-//         })
-//         .catch(error => {
-//           console.log('error', error)
-//         })
-//     };
-
 
   const handleVerifyOtp = () => {
     const phoneNumber = form.getFieldValue("phoneNumber");
@@ -82,17 +67,17 @@ const ForgotPassword = () => {
       return message.error("Passwords do not match!");
     }
 
-    const payload = {
-      mobileNumber: form.getFieldValue("phoneNumber"),
+    const params = {
+      userName: form.getFieldValue("phoneNumber"),
       newPassword: values.password,
     };
 
     userService
-      .resetPassword(payload)
+      .forgotPassword(params)
       .then(() => {
 
         message.success("Password reset successful! Please login.");
-        navigate("/login");
+        navigate("/");
       })
       .catch((error) => {
         console.log("Error resetting password", error);

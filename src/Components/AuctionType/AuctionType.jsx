@@ -1,51 +1,55 @@
-import React from 'react';
-import './AuctionType.scss'; // SCSS file for styling
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
-import { useNavigate, useParams } from 'react-router-dom';
+import React from "react";
+import { FaLock } from "react-icons/fa"; // Import lock icon
+import "./AuctionType.scss"; // SCSS file for styling
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
+import { useNavigate, useParams } from "react-router-dom";
 
-// Import all 6 images
-import TopSix from '../../assets/topsixer.png';
-import TopScorer from '../../assets/topscorer.png';
-import MostWickets from '../../assets/Top Wickets.jpg';
-import TopContest from '../../assets/TopContestt.png';
-// import PowerplayScorer from '../../assets/powerplayscorer.png';
-// import DeathOverScorer from '../../assets/deathoverscorer.png';
+// Import images
+import TopSix from "../../assets/topsixer.png";
+import TopScorer from "../../assets/topscorer.png";
 
 const AuctionTypePage = () => {
   const { matchId } = useParams();
   const navigate = useNavigate();
 
-  const handleCardClick = (type) => {
-    // Pass auction type if needed (optional)
-    navigate(`/match-countdown/${matchId}`);
+  const handleCardClick = (type, isLocked) => {
+    if (!isLocked) {
+      navigate(`/match-countdown/${matchId}`);
+    }
   };
 
   const options = [
-    { label: 'Top Sixer', image: TopSix },
-    { label: 'Top Scorer', image: TopScorer },
-    // { label: 'Most Wickets', image: MostWickets },
-    // { label: 'Top Contest', image: TopContest },
-    // { label: 'Top Sixer', image: TopSix },
-    // { label: 'Top Scorer', image: TopScorer },
-  
+    { label: "Top Sixer", image: TopSix, isLocked: false },
+    { label: "Top Scorer", image: TopScorer, isLocked: true }, // Locked
   ];
 
   return (
-    <div>
-      <Header />
-      <div className="top-sixer-scorer-page">
-        {options.map((option, index) => (
-          <div className="option-section" key={index}>
-            <h2>▼ {option.label}</h2>
-            <div className="card" onClick={() => handleCardClick(option.label)}>
-              <img src={option.image} alt={option.label} className="team-image" />
+    <main>
+      <div>
+        <Header />
+        <div className="top-sixer-scorer-page">
+          {options.map((option, index) => (
+            <div className="option-section" key={index}>
+              <h2>▼ {option.label}</h2>
+              <div
+                className={`card ${option.isLocked ? "locked" : ""}`}
+                onClick={() => handleCardClick(option.label, option.isLocked)}
+              >
+                {option.isLocked && <FaLock className="lock-icon" />}{" "}
+                {/* Lock Icon */}
+                <img
+                  src={option.image}
+                  alt={option.label}
+                  className="team-image"
+                />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </main>
   );
 };
 

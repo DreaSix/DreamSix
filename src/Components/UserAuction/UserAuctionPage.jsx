@@ -21,6 +21,13 @@ const USerAuctionPage = () => {
   const [currentBidId, setCurrentBidId] = useState();
   const [client, setClient] = useState(null);
   const [players, setPlayers] = useState([])
+  const [stompClient, setStompClient] = useState(null);
+
+  const requestTeamPlayers = () => {
+    if (stompClient) {
+      stompClient.publish({ destination: `/app/teamPlayers/${matchId}` });
+    }
+  };
 
 
   const [userData, setUserData] = useState(0);
@@ -42,34 +49,33 @@ const USerAuctionPage = () => {
 
   useEffect(() => {
     const socket = new SockJS("http://localhost:8080/ws");
-    const stompClient = new Client({
+    const client = new Client({
       webSocketFactory: () => socket,
       reconnectDelay: 5000,
       onConnect: () => {
         console.log("Connected to WebSocket");
-  
-        if (matchId) {
-          stompClient.subscribe(`/topic/teamPlayers/${matchId}`, (message) => {
-            const teamPlayers = JSON.parse(message.body);
-            console.log("Received Team Players:", teamPlayers);
-            setPlayers(teamPlayers); // Assuming `setPlayers` updates state
-          });
-        }
-  
-        setClient(stompClient);
+
+        // Subscribe to match team players
+        client.subscribe(`/topic/teamPlayers/${matchId}`, (message) => {
+          const playerData = JSON.parse(message.body);
+          console.log("Received Team Players:", playerData);
+          setPlayers(playerData);
+        });
+
+        setStompClient(client);
       },
       onStompError: (error) => {
         console.error("STOMP Error:", error);
       },
     });
-  
-    stompClient.activate();
-  
+
+    client.activate();
+
     return () => {
-      stompClient.deactivate();
+      client.deactivate();
     };
-  }, []);
-  
+  }, [matchId]);
+
 
   useEffect(() => {
     if (matchId) {

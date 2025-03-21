@@ -88,6 +88,9 @@ const CountdownPage = () => {
       });
   };
 
+  const isBiddingInProgress =
+    timeLeft.hours === 0 && timeLeft.minutes === 0 && timeLeft.seconds === 0;
+
   const handleImageClick = () => {
     navigate(`/user-auctionpage/${matchId}`);
   };
@@ -96,37 +99,37 @@ const CountdownPage = () => {
     <main>
       <div className="cricket-page-container">
         <div className="match-info">
+          {/* Match Banner */}
           {matchData?.matchImage && (
             <img
               src={`data:image/jpeg;base64,${matchData.matchImage}`}
               alt={`${matchData.teamOneName} vs ${matchData.teamTwoName}`}
               className="match-banner"
-              style={{ cursor: "pointer" }}
             />
           )}
-          <div className="bid-info">
-            <div className="top-sixer">Top Sixer</div>
 
-            {timeLeft.hours === 0 &&
-            timeLeft.minutes === 0 &&
-            timeLeft.seconds === 0 ? (
-              <>
-                <div className="top-sixer">In Progress</div>
+          {/* Bid Info Section */}
+          <div className="bid-info">
+            <div className="top-sixer">🔥 Top Sixer Bidding 🔥</div>
+
+            {isBiddingInProgress ? (
+              <div className="bidding-in-progress">
+                <h2>🎯Bidding is LIVE!🎯</h2>
+                <p>Place your bids now and stay ahead in the game! 🚀</p>
 
                 <Button onClick={handleImageClick} className="start-button">
-                  Start
+                  Enter Bidding Zone 🚀
                 </Button>
-              </>
+              </div>
             ) : (
-              <>
-                <h4>Get Ready, Bid Will Start Soon</h4>
-
+              <div className="countdown-container">
+                <h4>⏳ Get Ready! Bidding Starts Soon</h4>
                 <div className="countdown">
                   {String(timeLeft.hours).padStart(2, "0")} :
                   {String(timeLeft.minutes).padStart(2, "0")} :
                   {String(timeLeft.seconds).padStart(2, "0")}
                 </div>
-              </>
+              </div>
             )}
           </div>
         </div>
@@ -158,7 +161,17 @@ const CountdownPage = () => {
                               alt={player.playerName}
                               className="player-icon"
                             />
-                            <span>{player.playerName}</span>
+                            <span
+                              style={{
+                                color:
+                                  player?.status === "UNSOLD"
+                                    ? "lightGreen"
+                                    : "red",
+                              }}
+                            >
+                              {player.playerName}{" "}
+                              {player?.soldPrice ? `(${player.soldPrice})` : ""}
+                            </span>
                           </div>
                         )
                       )}
@@ -176,7 +189,17 @@ const CountdownPage = () => {
                               alt={player.playerName}
                               className="player-icon"
                             />
-                            <span>{player.playerName}</span>
+                            <span
+                              style={{
+                                color:
+                                  player?.status === "UNSOLD"
+                                    ? "lightGreen"
+                                    : "red",
+                              }}
+                            >
+                              {player.playerName}{" "}
+                              {player?.soldPrice ? `(${player.soldPrice})` : ""}
+                            </span>
                           </div>
                         )
                       )}
