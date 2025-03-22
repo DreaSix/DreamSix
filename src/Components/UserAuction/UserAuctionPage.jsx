@@ -48,7 +48,7 @@ const USerAuctionPage = () => {
   };
 
   useEffect(() => {
-    const socket = new SockJS("http://localhost:8080/ws");
+    const socket = new SockJS("https://api.dreamsix.in/v1.0/dreamsix/ws");
     const client = new Client({
       webSocketFactory: () => socket,
       reconnectDelay: 5000,
