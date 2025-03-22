@@ -34,7 +34,7 @@ const Registration = () => {
 
   const getRoleList = () => {
     axios
-      .get("http://localhost:8080/api/role/all")
+      .get("http://34.224.218.201:8080/v1.0/dreamsix/api/role/all")
       .then((response) => {
         setRoleList(response?.data?.totalContent);
       })
