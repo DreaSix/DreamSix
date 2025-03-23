@@ -61,11 +61,11 @@ const HomePage = () => {
         <div className="content-area">
           <div className="section matches-section">
             <Carousel autoplay dots infinite>
-              {matches.map((match) => (
+              {matches?.map((match) => (
                 <div key={match.matchId}>
                   <Card className="match-cards" hoverable>
                     <img
-                      src={`data:image/jpeg;base64,${match?.matchImage}`}
+                      src={`${match?.matchImage}`}
                       alt={`Match ${match.matchId}`}
                       onClick={() => onClickMatchImage(match?.matchId)}
                       className="match-image"
