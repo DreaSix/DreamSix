@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import "./LoginPage.scss";
 import Logo from "../../assets/DreamSix_logo.png";
@@ -21,8 +21,10 @@ const LoginPage = ({setIsAuthenticated}) => {
         Cookies.set("username", response?.data?.username)
         setIsAuthenticated(response?.data?.accessToken)
         navigate("/homepage")
+        message.success("Login successfully")
       })
       .catch(error => {
+        message.error("Error occured while login")
         console.log('error', error)
       })
   };

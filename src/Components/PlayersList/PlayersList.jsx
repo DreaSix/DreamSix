@@ -79,7 +79,7 @@ const PlayersList = () => {
               onClick={() => navigate(`/players-final-list/${match?.matchId}`)}
             >
               <img
-                src={`data:image/jpeg;base64,${match?.matchImage}`}
+                src={match?.matchImage}
                 alt={`${match.teamOneName} vs ${match.teamTwoName}`}
                 className="match-image"
               />

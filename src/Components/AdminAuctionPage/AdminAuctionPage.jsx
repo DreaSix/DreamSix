@@ -31,7 +31,7 @@ const AdminAuctionPage = () => {
         <div className="players-list">
           {nextPlayers.map((player, index) => (
             <div key={index} className="player">
-              <img src={player.image} alt={player.name} className="player-image" />
+              <img src={player?.image} alt={player.name} className="player-image" />
               <p>{player.name}</p>
               <span className="bid-tag">BID</span>
             </div>

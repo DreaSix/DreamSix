@@ -102,7 +102,7 @@ const CountdownPage = () => {
           {/* Match Banner */}
           {matchData?.matchImage && (
             <img
-              src={`data:image/jpeg;base64,${matchData.matchImage}`}
+              src={matchData.matchImage}
               alt={`${matchData.teamOneName} vs ${matchData.teamTwoName}`}
               className="match-banner"
             />
@@ -157,7 +157,7 @@ const CountdownPage = () => {
                         ([playerId, player]) => (
                           <div key={playerId} className="player-item">
                             <img
-                              src={`data:image/jpeg;base64,${player?.playerImage}`}
+                              src={player?.playerImage}
                               alt={player.playerName}
                               className="player-icon"
                             />
@@ -185,7 +185,7 @@ const CountdownPage = () => {
                         ([playerId, player]) => (
                           <div key={playerId} className="player-item">
                             <img
-                              src={`data:image/jpeg;base64,${player?.playerImage}`}
+                              src={player?.playerImage}
                               alt={player.playerName}
                               className="player-icon"
                             />

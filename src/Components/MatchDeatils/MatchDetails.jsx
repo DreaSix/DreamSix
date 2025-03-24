@@ -58,7 +58,7 @@ const MatchPage = () => {
       matchList.map((match, index) => (
         <Card key={index} hoverable className="match-card">
           <img
-            src={`data:image/jpeg;base64,${match?.matchImage}`}
+            src={match?.matchImage}
             alt={`${match.teamOneName} vs ${match.teamTwoName}`}
           />
           <div className="match-details">

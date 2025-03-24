@@ -65,7 +65,7 @@ const HomePage = () => {
                 <div key={match.matchId}>
                   <Card className="match-cards" hoverable>
                     <img
-                      src={`data:image/jpeg;base64,${match?.matchImage}`}
+                      src={match?.matchImage}
                       alt={`Match ${match.matchId}`}
                       onClick={() => onClickMatchImage(match?.matchId)}
                       className="match-image"
@@ -117,7 +117,7 @@ const HomePage = () => {
                 <Row align="middle">
                   <Col>
                     <div className="winner-badge">
-                      <img src={`data:image/jpeg;base64,${winner?.playerDetailsResponse?.playerImage}`} alt="Winner" />
+                      <img src={winner?.playerDetailsResponse?.playerImage} alt="Winner" />
                     </div>
                   </Col>
                   <Col>

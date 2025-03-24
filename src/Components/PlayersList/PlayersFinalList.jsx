@@ -76,7 +76,7 @@ const PlayersFinalList = () => {
                   <div className="player-info">
                     <div className="player-image-name-container">
                       <img
-                        src={`data:image/jpeg;base64,${player?.playerImage}`}
+                        src={player?.playerImage}
                         className="match-banner"
                         alt={player?.playerName}
                       />
@@ -103,7 +103,7 @@ const PlayersFinalList = () => {
                   <div className="player-info">
                   <div className="player-image-name-container">
                       <img
-                        src={`data:image/jpeg;base64,${player?.playerImage}`}
+                        src={player?.playerImage}
                         className="match-banner"
                         alt={player?.playerName}
                       />

@@ -154,7 +154,7 @@ const USerAuctionPage = () => {
       <div className="header">
         <div className="header-left">
           <img
-            src={`data:image/jpeg;base64,${matchData?.matchImage}`}
+            src={matchData?.matchImage}
             alt="team logo"
             className="team-logo"
           />
@@ -184,7 +184,7 @@ const USerAuctionPage = () => {
               {nextPlayers?.map((player) => (
                 <div className="player-card" key={player.playerName}>
                   <img
-                    src={`data:image/jpeg;base64,${player?.playerImage}`}
+                    src={player?.playerImage}
                     alt={player.playerName}
                     className="player-img"
                   />
@@ -204,7 +204,7 @@ const USerAuctionPage = () => {
               {soldPlayers?.map((player) => (
                 <div className="player-card" key={player.playerName}>
                   <img
-                    src={`data:image/jpeg;base64,${player?.playerImage}`}
+                    src={player?.playerImage}
                     alt={player.playerName}
                     className="player-img"
                   />
@@ -225,7 +225,7 @@ const USerAuctionPage = () => {
               {unSoldPlayers?.map((player) => (
                 <div className="player-card" key={player.playerName}>
                   <img
-                    src={`data:image/jpeg;base64,${player?.playerImage}`}
+                    src={player?.playerImage}
                     alt={player.playerName}
                     className="player-img"
                   />
@@ -241,7 +241,7 @@ const USerAuctionPage = () => {
       {selectedPlayer && (
         <div className="player-info">
           <img
-            src={`data:image/jpeg;base64,${selectedPlayer?.playerImage}`}
+            src={selectedPlayer?.playerImage}
             alt={selectedPlayer?.playerName}
             className="selected-player-img"
           />
