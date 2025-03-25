@@ -66,7 +66,7 @@ const MyBets = () => {
                 <Col span={24}>
                   <Row gutter={[16, 16]} align="middle">
                     <Col span={6}>
-                      <Avatar src={`data:image/jpeg;base64,${bet.player.playerImage}`} size={64} />
+                      <Avatar src={bet.player.playerImage} size={64} />
                     </Col>
                     <Col span={12}>
                       <h3 className="player-name">{bet.player.playerName}</h3>
