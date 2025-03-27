@@ -76,6 +76,21 @@ const USerAuctionPage = () => {
     };
   }, [matchId]);
 
+  useEffect(() => {
+    let interval;
+  
+    if (!selectedPlayer) {
+      interval = setInterval(() => {
+        console.log("Fetching player details...");
+        getPlayerDetailsByMatchId();
+      }, 5000);
+    } else {
+      clearInterval(interval);
+    }
+  
+    return () => clearInterval(interval);
+  }, [selectedPlayer]);
+
 
   useEffect(() => {
     if (matchId) {
