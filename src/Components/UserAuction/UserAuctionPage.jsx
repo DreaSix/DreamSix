@@ -7,8 +7,6 @@ import { useParams } from "react-router-dom";
 import { matchDetailsService } from "../../Service/MatchDetailsService";
 import { userService } from "../../Service/UserService";
 import Cookies from "js-cookie";
-import SockJS from "sockjs-client";
-import { Client } from "@stomp/stompjs";
 
 const USerAuctionPage = () => {
   const { matchId } = useParams();
@@ -19,16 +17,7 @@ const USerAuctionPage = () => {
   const [unSoldPlayers, setUnSoldPlayers] = useState({})
   const [selectedPlayer, setSelectedPlayer] = useState();
   const [currentBidId, setCurrentBidId] = useState();
-  const [client, setClient] = useState(null);
   const [players, setPlayers] = useState([])
-  const [stompClient, setStompClient] = useState(null);
-
-  const requestTeamPlayers = () => {
-    if (stompClient) {
-      stompClient.publish({ destination: `/app/teamPlayers/${matchId}` });
-    }
-  };
-
 
   const [userData, setUserData] = useState(0);
 
@@ -46,35 +35,6 @@ const USerAuctionPage = () => {
         console.log("error", error);
       });
   };
-
-  useEffect(() => {
-    const socket = new SockJS("https://api.dreamsix.in/v1.0/dreamsix/ws");
-    const client = new Client({
-      webSocketFactory: () => socket,
-      reconnectDelay: 5000,
-      onConnect: () => {
-        console.log("Connected to WebSocket");
-
-        // Subscribe to match team players
-        client.subscribe(`/topic/teamPlayers/${matchId}`, (message) => {
-          const playerData = JSON.parse(message.body);
-          console.log("Received Team Players:", playerData);
-          setPlayers(playerData);
-        });
-
-        setStompClient(client);
-      },
-      onStompError: (error) => {
-        console.error("STOMP Error:", error);
-      },
-    });
-
-    client.activate();
-
-    return () => {
-      client.deactivate();
-    };
-  }, [matchId]);
 
   useEffect(() => {
     let interval;
@@ -178,7 +138,7 @@ const USerAuctionPage = () => {
             <p className="status">Online</p>
           </div> */}
         </div>
-        <button className="top-sixer-btn">{matchData?.matchAction}</button>
+        <button className="top-sixer-btn">Top Sixer</button>
         <button className="top-sixer-btn">
           {userData?.balance ? userData?.balance : 0}
         </button>
@@ -281,13 +241,6 @@ const USerAuctionPage = () => {
         setSelectedPlayer={setSelectedPlayer}
         getUserDetails={getUserDetails}
       />
-
-      {/* <footer className="bidding-footer">
-        <Button>+50</Button>
-        <Button>+100</Button>
-        <Button>+200</Button>
-        <Button>+500</Button>
-      </footer> */}
 
       <Footer />
     </div>

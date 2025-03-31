@@ -7,23 +7,40 @@ import { matchDetailsService } from "../../Service/MatchDetailsService";
 const HomePage = () => {
   const { Text } = Typography;
 
-  const [matches, setMatches] = useState([])
+  const [matches, setMatches] = useState([]);
 
-  const [winnersList, setWinnersList] = useState([])
+  const [winnersList, setWinnersList] = useState([]);
 
   useEffect(() => {
-    getWinnersList()
-  }, [])
+    getWinnersList();
+  }, []);
 
   const getWinnersList = () => {
-    matchDetailsService.getWinners()
-      .then(response => {
-        setWinnersList(response?.data)
+    matchDetailsService
+      .getWinners()
+      .then((response) => {
+        const winners = response?.data || [];
+        const groupedWinners = groupWinnersByMatch(winners);
+        setWinnersList(groupedWinners);
       })
-      .catch(error => {
-        console.log('error', error)
-      })
-  }
+      .catch((error) => {
+        console.log("Error fetching winners:", error);
+      });
+  };
+
+  const groupWinnersByMatch = (winners) => {
+    return winners.reduce((acc, winner) => {
+      const matchId = winner?.matchDetailsResponse?.matchId;
+      if (!acc[matchId]) {
+        acc[matchId] = {
+          matchDetails: winner.matchDetailsResponse,
+          winners: [],
+        };
+      }
+      acc[matchId].winners.push(winner);
+      return acc;
+    }, {});
+  };
   const navigate = useNavigate();
 
   const onClickMatchImage = (matchId) => {
@@ -41,23 +58,23 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    getAllMatches()
-  }, [])
+    getAllMatches();
+  }, []);
 
   const getAllMatches = () => {
-    matchDetailsService.getMatches()
-      .then(response => {
-        setMatches(response?.data)
+    matchDetailsService
+      .getMatches()
+      .then((response) => {
+        setMatches(response?.data);
       })
-      .catch(error => {
-        console.log('error', error)
-      })
-  }
+      .catch((error) => {
+        console.log("error", error);
+      });
+  };
 
   return (
     <main>
       <div className="landing-page">
-
         <div className="content-area">
           <div className="section matches-section">
             <Carousel autoplay dots infinite>
@@ -102,7 +119,7 @@ const HomePage = () => {
               </Button>
               <Button
                 className="updates-button blue-button"
-                onClick={() =>  handleNavigation("/updates")}
+                onClick={() => handleNavigation("/updates")}
               >
                 Updates
               </Button>
@@ -112,31 +129,44 @@ const HomePage = () => {
           {/* Recent Winners */}
           <section className="recent-winners">
             <h2>DreamSix Recent Winners</h2>
-            {winnersList?.map(winner => (
-              <Card className="winner-card">
+            {Object.values(winnersList).map((match) => (
+              <Card key={match.matchDetails.matchId} className="winner-card">
                 <Row align="middle">
-                  <Col>
-                    <div className="winner-badge">
-                      <img src={winner?.playerDetailsResponse?.playerImage} alt="Winner" />
-                    </div>
-                  </Col>
-                  <Col>
-                    <Text className="winner-name">{winner?.winnerName?.name}</Text>
-                    <br />
-                    <Text className="winner-match">{winner?.matchDetailsResponse?.matchName}</Text>
-                  </Col>
-                  <Col flex="auto" />
-                  <Col>
-                    <Text className="winner-prize">₹ {winner?.winnerAmount}</Text>
-                    <br />
-                    <Button className="top-sixer-button">{winner?.matchDetailsResponse?.matchAction}</Button>
+                  <Col span={24}>
+                  <Typography.Title level={4} className="winner-match">
+      {match?.matchDetails?.matchName}
+    </Typography.Title>
                   </Col>
                 </Row>
+                {match?.winners.map((winner, index) => (
+                  <Row align="middle" key={index} className="winner-details">
+                    <Col>
+                      <div className="winner-badge">
+                        <img
+                          src={winner?.playerDetailsResponse?.playerImage}
+                          alt="Winner"
+                        />
+                      </div>
+                    </Col>
+                    <Col>
+                      <Text className="winner-name">
+                        {winner?.winnerName?.name}
+                      </Text>
+                    </Col>
+                    <Col flex="auto" />
+                    <Col>
+                      <Text className="winner-prize">
+                        ₹ {winner?.winnerAmount}
+                      </Text>
+                      <br />
+                      <Button className="top-sixer-button">Top Sixer</Button>
+                    </Col>
+                  </Row>
+                ))}
               </Card>
             ))}
           </section>
         </div>
-
       </div>
     </main>
   );

@@ -145,6 +145,16 @@
      
         margin-bottom:3px;
 
+        .winner-match {
+          font-weight: bold;
+          font-size: 18px;
+          color: #1890ff; /* Highlight with a blue color */
+          text-transform: uppercase;
+          text-align: center;
+          margin-bottom: 8px;
+        }
+        
+
         .winner-info {
           display: flex;
           align-items: center;

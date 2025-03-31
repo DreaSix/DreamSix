@@ -1,5 +1,5 @@
 
-// export const BASE_URL = "https://ec2-13-60-233-23.eu-north-1.compute.amazonaws.com:8082";
+// export const BASE_URL = "http://localhost:8080/v1.0/dreamsix";
 export const BASE_URL = "https://api.dreamsix.in/v1.0/dreamsix";
 
 export const REGISTER_USER = BASE_URL + "/api/user/create";

@@ -15,7 +15,7 @@ const ChatBox = ({
   matchId,
   getPlayerDetailsByMatchId,
   setSelectedPlayer,
-  getUserDetails
+  getUserDetails,
 }) => {
   const navigate = useNavigate();
   const [messages, setMessages] = useState([]);
@@ -24,15 +24,17 @@ const ChatBox = ({
   const [visible, setVisible] = useState(false);
   const [lastBid, setLastBid] = useState();
   const [biddingOverModal, setBiddingOverModal] = useState(false);
-  const [unSoldModal, setUnSoldModal] = useState(false)
+  const [unSoldModal, setUnSoldModal] = useState(false);
+  const [countdown, setCountdown] = useState(30);
 
   const handleGoToPlayersList = () => {
     navigate(`/players-final-list/${matchId}`); // Change the path as per your route
   };
 
   const messagesEndRef = useRef(null);
-
-  
+  const inactivityTimer = useRef(null);
+  const countdownRef = useRef(30);
+  const countdownInterval = useRef(null);
 
   useEffect(() => {
     if (!currentBidId) return;
@@ -82,6 +84,7 @@ const ChatBox = ({
 
           setMessages(sortedMessages);
           checkForSoldMessage(sortedMessages);
+          resetInactivityTimer();
         });
 
         setClient(stompClient);
@@ -100,19 +103,21 @@ const ChatBox = ({
 
   const checkForSoldMessage = (sortedMessages) => {
     if (sortedMessages.length === 0) return;
-  
+
     const lastMessage = sortedMessages[sortedMessages.length - 1]?.message;
-  
+
     if (lastMessage === "Sold") {
       const lastValidBid = findLastValidBid(sortedMessages);
       if (lastValidBid) {
         setLastBid(lastValidBid);
         setVisible(true);
       }
-      getUserDetails()
+      getUserDetails();
     } else if (lastMessage === "Deny") {
       setMessages((prevMessages) =>
-        prevMessages.filter((msg) => msg.message !== "Sold" && msg.message !== "Deny")
+        prevMessages.filter(
+          (msg) => msg.message !== "Sold" && msg.message !== "Deny"
+        )
       );
       setVisible(false);
     } else if (lastMessage === "Done") {
@@ -127,19 +132,20 @@ const ChatBox = ({
       setUnSoldModal(true);
     } else if (lastMessage === "Un Sold Deny") {
       setMessages((prevMessages) =>
-        prevMessages.filter((msg) => msg.message !== "Un Sold Deny" && msg.message !== "UnSold")
+        prevMessages.filter(
+          (msg) => msg.message !== "Un Sold Deny" && msg.message !== "UnSold"
+        )
       );
       setUnSoldModal(false);
-    } else if (lastMessage === "Un Sold Done"){
-      setUnSoldModal(false)
-      setMessages([])
-      getPlayerDetailsByMatchId()
-      setSelectedPlayer()
-    } else if (lastMessage === "Done Match"){
-      setBiddingOverModal(true)
+    } else if (lastMessage === "Un Sold Done") {
+      setUnSoldModal(false);
+      setMessages([]);
+      getPlayerDetailsByMatchId();
+      setSelectedPlayer();
+    } else if (lastMessage === "Done Match") {
+      setBiddingOverModal(true);
     }
   };
-  
 
   const findLastValidBid = (messages) => {
     for (let i = messages.length - 2; i >= 0; i--) {
@@ -149,6 +155,55 @@ const ChatBox = ({
       }
     }
     return null;
+  };
+
+  const resetInactivityTimer = () => {
+    clearTimeout(inactivityTimer.current);
+    clearInterval(countdownInterval.current);
+    setCountdown(30);
+    inactivityTimer.current = setTimeout(startCountdown, 1000);
+  };
+
+  const startCountdown = () => {
+    countdownInterval.current = setInterval(() => {
+      setCountdown((prev) => {
+        console.log('prev', prev)
+        if (prev <= 1) {
+          clearInterval(countdownInterval.current);
+          handleAutoMessages();
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+  };
+
+  const handleAutoMessages = async () => {
+    const autoMessages = ["1", "2", "3"];
+    for (let msg of autoMessages) {
+      sendMessage(msg);
+      resetInactivityTimer();
+      await new Promise((res) => setTimeout(res, 10000));
+    }
+    finalizeAuction();
+  };
+
+  const finalizeAuction = async () => {
+    const lastValidBid = findLastValidBid(messages);
+    if (lastValidBid) {
+      await axios.post("https://api.dreamsix.in/v1.0/dreamsix/api/chat/sold", {
+        bidId: currentBidId,
+        amount: lastValidBid.message,
+        userId: lastValidBid.userId,
+      });
+    } else {
+      await axios.post(
+        "https://api.dreamsix.in/v1.0/dreamsix/api/chat/unsold",
+        {
+          bidId: currentBidId,
+        }
+      );
+    }
   };
 
   const sendMessage = (amount) => {
@@ -197,11 +252,7 @@ const ChatBox = ({
     }
   };
 
-  const onClose = () => {
-    setVisible(false);
-  };
-
-  console.log("messages", messages);
+  console.log('countdown', countdown)
 
   const filteredMessages = messages?.filter(
     (message) =>
@@ -212,52 +263,55 @@ const ChatBox = ({
   );
 
   useEffect(() => {
-    // Scroll to bottom when new message arrives
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [filteredMessages])
+  }, [filteredMessages]);
 
   return (
     <body className="chat-container">
       <div className="bids-section">
-      <div className="messages-container">
-      {filteredMessages.map((bid, index) => {
-        const isAdminMessage =
-          isNaN(bid.message) || ["1", "2", "3"].includes(bid.message);
+        <div className="messages-container">
+          {filteredMessages.map((bid, index) => {
+            const isAdminMessage =
+              isNaN(bid.message) || ["1", "2", "3"].includes(bid.message);
 
-        return (
-          <div
-            key={index}
-            className={bid?.username === username ? "own-bid-card" : "bid-card"}
-          >
-            {bid?.username !== username && (
-              <div className="bid-user">{bid?.name?.charAt(0)}</div>
-            )}
+            return (
+              <div
+                key={index}
+                className={
+                  bid?.username === username ? "own-bid-card" : "bid-card"
+                }
+              >
+                {bid?.username !== username && (
+                  <div className="bid-user">{bid?.name?.charAt(0)}</div>
+                )}
 
-            <div className="bid-info">
-              <span className="bid-name">{bid?.name}</span>
+                <div className="bid-info">
+                  <span className="bid-name">{bid?.name}</span>
 
-              {isAdminMessage ? (
-                <div className="admin-message">
-                  <span className="bid-amount" style={{ color: "black" }}>
-                    {bid?.message}
-                  </span>
+                  {isAdminMessage ? (
+                    <div className="admin-message">
+                      <span className="bid-amount" style={{ color: "black" }}>
+                        {bid?.message}
+                      </span>
+                    </div>
+                  ) : (
+                    <span className="bid-amount">{bid?.message}</span>
+                  )}
                 </div>
-              ) : (
-                <span className="bid-amount">{bid?.message}</span>
-              )}
-            </div>
 
-            {bid?.username === username && (
-              <div className="bid-user">{bid?.name?.charAt(0)}</div>
-            )}
-          </div>
-        );
-      })}
-      <div ref={messagesEndRef} />
-    </div>
+                {bid?.username === username && (
+                  <div className="bid-user">{bid?.name?.charAt(0)}</div>
+                )}
+              </div>
+            );
+          })}
+          <div ref={messagesEndRef} />
+        </div>
 
         {selectedPlayer && (
-          <div className="chat-buttons bidding-footer">
+          <div className="chat-buttons ">
+            <p className="countdown-timer">Time Left: {countdown}s</p>
+            <div className="bidding-footer">
             {[50, 100, 200, 500].map((amount) => (
               <Button
                 key={amount}
@@ -267,6 +321,7 @@ const ChatBox = ({
                 +{amount}
               </Button>
             ))}
+              </div>
           </div>
         )}
       </div>
