@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
@@ -15,6 +15,7 @@ const ChatBox = ({
   matchId,
   getPlayerDetailsByMatchId,
   setSelectedPlayer,
+  getUserDetails
 }) => {
   const navigate = useNavigate();
   const [messages, setMessages] = useState([]);
@@ -28,6 +29,10 @@ const ChatBox = ({
   const handleGoToPlayersList = () => {
     navigate(`/players-final-list/${matchId}`); // Change the path as per your route
   };
+
+  const messagesEndRef = useRef(null);
+
+  
 
   useEffect(() => {
     if (!currentBidId) return;
@@ -104,6 +109,7 @@ const ChatBox = ({
         setLastBid(lastValidBid);
         setVisible(true);
       }
+      getUserDetails()
     } else if (lastMessage === "Deny") {
       setMessages((prevMessages) =>
         prevMessages.filter((msg) => msg.message !== "Sold" && msg.message !== "Deny")
@@ -205,47 +211,50 @@ const ChatBox = ({
       message?.message !== "Deny"
   );
 
+  useEffect(() => {
+    // Scroll to bottom when new message arrives
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [filteredMessages])
+
   return (
     <body className="chat-container">
       <div className="bids-section">
-        <div className="messages-container">
-        {filteredMessages.map((bid, index) => {
-          const isAdminMessage =
-            isNaN(bid.message) || ["1", "2", "3"].includes(bid.message);
+      <div className="messages-container">
+      {filteredMessages.map((bid, index) => {
+        const isAdminMessage =
+          isNaN(bid.message) || ["1", "2", "3"].includes(bid.message);
 
-          return (
-            <div
-              key={index}
-              className={
-                bid?.username === username ? "own-bid-card" : "bid-card"
-              }
-            >
-              {bid?.username !== username && (
-                <div className="bid-user">{bid?.name?.charAt(0)}</div>
-              )}
+        return (
+          <div
+            key={index}
+            className={bid?.username === username ? "own-bid-card" : "bid-card"}
+          >
+            {bid?.username !== username && (
+              <div className="bid-user">{bid?.name?.charAt(0)}</div>
+            )}
 
-              <div className="bid-info">
-                <span className="bid-name">{bid?.name}</span>
+            <div className="bid-info">
+              <span className="bid-name">{bid?.name}</span>
 
-                {isAdminMessage ? (
-                  // Admin messages (string or "1", "2", "3") displayed in a tag
-                  <div className="admin-message">
-                    {/* <span className="admin-tag">Admin</span> */}
-                    <span className="bid-amount" style={{color: "black"}}>{bid?.message}</span>
-                  </div>
-                ) : (
-                  // Normal bid messages
-                  <span className="bid-amount" >{bid?.message}</span>
-                )}
-              </div>
-
-              {bid?.username === username && (
-                <div className="bid-user">{bid?.name?.charAt(0)}</div>
+              {isAdminMessage ? (
+                <div className="admin-message">
+                  <span className="bid-amount" style={{ color: "black" }}>
+                    {bid?.message}
+                  </span>
+                </div>
+              ) : (
+                <span className="bid-amount">{bid?.message}</span>
               )}
             </div>
-          );
-        })}
-        </div>
+
+            {bid?.username === username && (
+              <div className="bid-user">{bid?.name?.charAt(0)}</div>
+            )}
+          </div>
+        );
+      })}
+      <div ref={messagesEndRef} />
+    </div>
 
         {selectedPlayer && (
           <div className="chat-buttons bidding-footer">
@@ -309,7 +318,6 @@ const ChatBox = ({
               <p className="playerName">{selectedPlayer?.playerName}</p>
               <p className="playerSoldBy">
                 <span style={{ color: "whitesmoke" }}> Un Sold </span>
-                {lastBid?.name}
               </p>
             </div>
           </div>

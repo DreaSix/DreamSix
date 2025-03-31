@@ -225,6 +225,7 @@ const USerAuctionPage = () => {
                   />
                   <div className="player-name">{player.playerName}</div>
                   <div>{player?.soldPrice}</div>
+                  <div>Buyer: {player?.userResponseVO?.name}</div>
                 </div>
               ))}
             </div>
@@ -278,6 +279,7 @@ const USerAuctionPage = () => {
         matchId={matchId}
         getPlayerDetailsByMatchId={getPlayerDetailsByMatchId}
         setSelectedPlayer={setSelectedPlayer}
+        getUserDetails={getUserDetails}
       />
 
       {/* <footer className="bidding-footer">

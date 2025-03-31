@@ -143,8 +143,11 @@ const ForgotPassword = () => {
               <Input.Password placeholder="Confirm Password" />
             </Form.Item>
 
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submzit">
               Reset Password
+            </Button>
+            <Button type="link" onClick={() => navigate("/")}>
+              Back to Login
             </Button>
           </>
         )}

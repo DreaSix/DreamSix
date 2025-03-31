@@ -222,13 +222,10 @@ const Withdrawl = () => {
                 name="amount"
                 label="Amount"
                 rules={[
-                  { required: true, message: "Please enter an amount!" },
                   ({ getFieldValue }) => ({
                     validator(_, value) {
-                      if (!value)
-                        return Promise.reject("Please enter an amount!");
-                      if (value <= 0)
-                        return Promise.reject("Amount must be greater than ₹0");
+                      if (!value) return Promise.reject("Please enter an amount!");
+                      if (value < 100) return Promise.reject("Minimum amount should be ₹100");
                       if (value > userWallet)
                         return Promise.reject(
                           `Amount cannot exceed your balance of ₹${userWallet}`

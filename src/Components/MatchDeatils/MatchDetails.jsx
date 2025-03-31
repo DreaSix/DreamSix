@@ -5,6 +5,7 @@ import "./MatchDetails.scss";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import { matchDetailsService } from "../../Service/MatchDetailsService";
+import { useNavigate } from "react-router-dom";
 
 const { TabPane } = Tabs;
 
@@ -53,10 +54,16 @@ const MatchPage = () => {
       });
   };
 
+  const navigate = useNavigate();
+
+  const onClickMatchImage = (matchId) => {
+    navigate(`/auction-type/${matchId}`);
+  };
+
   const renderMatches = (matchList) => {
     return matchList.length > 0 ? (
       matchList.map((match, index) => (
-        <Card key={index} hoverable className="match-card">
+        <Card  onClick={() => onClickMatchImage(match?.matchId)} key={index} hoverable className="match-card">
           <img
             src={match?.matchImage}
             alt={`${match.teamOneName} vs ${match.teamTwoName}`}
