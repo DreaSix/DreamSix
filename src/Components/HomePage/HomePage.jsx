@@ -65,7 +65,17 @@ const HomePage = () => {
     matchDetailsService
       .getMatches()
       .then((response) => {
-        setMatches(response?.data);
+        const currentDate = new Date();
+        
+        // Filter matches where countdownEndTime is still valid
+        const validMatches = response?.data?.filter((match) => {
+          const matchEndTime = new Date(match.countdownEndTime);
+          matchEndTime.setDate(matchEndTime.getDate() + 1); // Shift by one day
+  
+          return matchEndTime > currentDate; // Display if still valid
+        });
+  
+        setMatches(validMatches);
       })
       .catch((error) => {
         console.log("error", error);
@@ -133,9 +143,9 @@ const HomePage = () => {
               <Card key={match.matchDetails.matchId} className="winner-card">
                 <Row align="middle">
                   <Col span={24}>
-                  <Typography.Title level={4} className="winner-match">
-      {match?.matchDetails?.matchName}
-    </Typography.Title>
+                    <Typography.Title level={4} className="winner-match">
+                      {match?.matchDetails?.matchName}
+                    </Typography.Title>
                   </Col>
                 </Row>
                 {match?.winners.map((winner, index) => (

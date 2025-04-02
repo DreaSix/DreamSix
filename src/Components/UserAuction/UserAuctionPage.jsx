@@ -17,7 +17,6 @@ const USerAuctionPage = () => {
   const [unSoldPlayers, setUnSoldPlayers] = useState({})
   const [selectedPlayer, setSelectedPlayer] = useState();
   const [currentBidId, setCurrentBidId] = useState();
-  const [players, setPlayers] = useState([])
 
   const [userData, setUserData] = useState(0);
 
@@ -74,8 +73,6 @@ const USerAuctionPage = () => {
       getPlayerDetailsByMatchId();
     }
   }, [matchData]);
-
-  console.log('players', players)
 
   const getPlayerDetailsByMatchId = () => {
     matchDetailsService
