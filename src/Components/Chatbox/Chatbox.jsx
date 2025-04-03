@@ -23,7 +23,32 @@ const ChatBox = ({
   const [visible, setVisible] = useState(false);
   const [lastBid, setLastBid] = useState();
   const [biddingOverModal, setBiddingOverModal] = useState(false);
-  const [unSoldModal, setUnSoldModal] = useState(false)
+  const [unSoldModal, setUnSoldModal] = useState(false);
+  const [canBid, setCanBid] = useState(true);
+
+  useEffect(() => {
+    if (messages.length === 0) {
+      setCanBid(true); // Allow first bid
+      return;
+    }
+
+    const lastMessage = messages[messages.length - 1];
+
+    // Check if last message is a numeric bid
+    const isBidMessage =
+      !isNaN(lastMessage.message) &&
+      !["1", "2", "3"].includes(lastMessage.message);
+
+    if (isBidMessage) {
+      if (lastMessage.username === username) {
+        setCanBid(false); // Last bid is by same user - block
+      } else {
+        setCanBid(true); // Last bid is from other user - allow
+      }
+    } else {
+      setCanBid(true); // If last message is admin message, allow
+    }
+  }, [messages, username]);
 
   const handleGoToPlayersList = () => {
     navigate(`/players-final-list/${matchId}`); // Change the path as per your route
@@ -95,9 +120,9 @@ const ChatBox = ({
 
   const checkForSoldMessage = (sortedMessages) => {
     if (sortedMessages.length === 0) return;
-  
+
     const lastMessage = sortedMessages[sortedMessages.length - 1]?.message;
-  
+
     if (lastMessage === "Sold") {
       const lastValidBid = findLastValidBid(sortedMessages);
       if (lastValidBid) {
@@ -106,7 +131,9 @@ const ChatBox = ({
       }
     } else if (lastMessage === "Deny") {
       setMessages((prevMessages) =>
-        prevMessages.filter((msg) => msg.message !== "Sold" && msg.message !== "Deny")
+        prevMessages.filter(
+          (msg) => msg.message !== "Sold" && msg.message !== "Deny"
+        )
       );
       setVisible(false);
     } else if (lastMessage === "Done") {
@@ -121,19 +148,20 @@ const ChatBox = ({
       setUnSoldModal(true);
     } else if (lastMessage === "Un Sold Deny") {
       setMessages((prevMessages) =>
-        prevMessages.filter((msg) => msg.message !== "Un Sold Deny" && msg.message !== "UnSold")
+        prevMessages.filter(
+          (msg) => msg.message !== "Un Sold Deny" && msg.message !== "UnSold"
+        )
       );
       setUnSoldModal(false);
-    } else if (lastMessage === "Un Sold Done"){
-      setUnSoldModal(false)
-      setMessages([])
-      getPlayerDetailsByMatchId()
-      setSelectedPlayer()
-    } else if (lastMessage === "Done Match"){
-      setBiddingOverModal(true)
+    } else if (lastMessage === "Un Sold Done") {
+      setUnSoldModal(false);
+      setMessages([]);
+      getPlayerDetailsByMatchId();
+      setSelectedPlayer();
+    } else if (lastMessage === "Done Match") {
+      setBiddingOverModal(true);
     }
   };
-  
 
   const findLastValidBid = (messages) => {
     for (let i = messages.length - 2; i >= 0; i--) {
@@ -209,42 +237,44 @@ const ChatBox = ({
     <body className="chat-container">
       <div className="bids-section">
         <div className="messages-container">
-        {filteredMessages.map((bid, index) => {
-          const isAdminMessage =
-            isNaN(bid.message) || ["1", "2", "3"].includes(bid.message);
+          {filteredMessages.map((bid, index) => {
+            const isAdminMessage =
+              isNaN(bid.message) || ["1", "2", "3"].includes(bid.message);
 
-          return (
-            <div
-              key={index}
-              className={
-                bid?.username === username ? "own-bid-card" : "bid-card"
-              }
-            >
-              {bid?.username !== username && (
-                <div className="bid-user">{bid?.name?.charAt(0)}</div>
-              )}
+            return (
+              <div
+                key={index}
+                className={
+                  bid?.username === username ? "own-bid-card" : "bid-card"
+                }
+              >
+                {bid?.username !== username && (
+                  <div className="bid-user">{bid?.name?.charAt(0)}</div>
+                )}
 
-              <div className="bid-info">
-                <span className="bid-name">{bid?.name}</span>
+                <div className="bid-info">
+                  <span className="bid-name">{bid?.name}</span>
 
-                {isAdminMessage ? (
-                  // Admin messages (string or "1", "2", "3") displayed in a tag
-                  <div className="admin-message">
-                    {/* {/ <span className="admin-tag">Admin</span> /} */}
-                    <span className="bid-amount" style={{color: "black"}}>{bid?.message}</span>
-                  </div>
-                ) : (
-                  // Normal bid messages
-                  <span className="bid-amount" >{bid?.message}</span>
+                  {isAdminMessage ? (
+                    // Admin messages (string or "1", "2", "3") displayed in a tag
+                    <div className="admin-message">
+                      {/* {/ <span className="admin-tag">Admin</span> /} */}
+                      <span className="bid-amount" style={{ color: "black" }}>
+                        {bid?.message}
+                      </span>
+                    </div>
+                  ) : (
+                    // Normal bid messages
+                    <span className="bid-amount">{bid?.message}</span>
+                  )}
+                </div>
+
+                {bid?.username === username && (
+                  <div className="bid-user">{bid?.name?.charAt(0)}</div>
                 )}
               </div>
-
-              {bid?.username === username && (
-                <div className="bid-user">{bid?.name?.charAt(0)}</div>
-              )}
-            </div>
-          );
-        })}
+            );
+          })}
         </div>
 
         {selectedPlayer && (
@@ -254,11 +284,17 @@ const ChatBox = ({
                 key={amount}
                 className="send-btn"
                 onClick={() => sendMessage(amount)}
+                disabled={!canBid}
               >
                 +{amount}
               </Button>
             ))}
           </div>
+        )}
+        {!canBid && (
+          <p style={{ color: "red", textAlign: "center", marginTop: "8px" }}>
+            You can't place consecutive bids. Wait for others.
+          </p>
         )}
       </div>
 
