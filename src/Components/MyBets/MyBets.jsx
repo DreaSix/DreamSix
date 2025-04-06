@@ -10,6 +10,8 @@ import Cookies from "js-cookie";
 const MyBets = () => {
   const navigate = useNavigate();
   const [betData, setBetData] = useState([]);
+  const [groupedBets, setGroupedBets] = useState([]);
+
 
   useEffect(() => {
     getUserBids();
@@ -19,70 +21,90 @@ const MyBets = () => {
     matchDetailsService
       .getUserBets(Cookies.get("userId"))
       .then((response) => {
-        setBetData(response?.data || []);
+        const originalData = response?.data || [];
+        const grouped = groupByMatchId(originalData);
+        setGroupedBets(grouped);
       })
       .catch((error) => {
         console.log("error", error);
       });
   };
 
+  const groupByMatchId = (data) => {
+    const groupedMap = {};
+
+    data.forEach((item) => {
+      const matchId = item.matchDetailsResponse?.matchId;
+      if (!matchId) return;
+
+      if (!groupedMap[matchId]) {
+        groupedMap[matchId] = {
+          matchDetailsResponse: item.matchDetailsResponse,
+          status: item.status,
+          players: [],
+        };
+      }
+
+      const players = Object.values(item.playersDtoMap || {});
+      groupedMap[matchId].players.push(...players);
+    });
+
+    return Object.values(groupedMap);
+  };
+
   const handlePlayerClick = (selectedPlayer) => {
     navigate("/player-details", { state: { player: selectedPlayer } });
   };
 
-  console.log("betData", betData);
-
-  // Flatten data: each player should have its own card
-  const flattenedBets = betData.flatMap((details) =>
-    Object.values(details.playersDtoMap || {}).map((player) => ({
-      matchId: details.matchDetailsResponse?.matchId,
-      matchName: details.matchDetailsResponse?.matchName,
-      matchAction: details.matchDetailsResponse?.matchAction,
-      status: details?.status,
-      player,
-    }))
-  );
 
   return (
     <div>
       <Header />
       <div className="player-page">
-        <List
-          dataSource={flattenedBets}
-          renderItem={(bet) => (
-            <Card
-              key={`${bet.matchId}-${bet.player.playerId}`} // Unique key
-              className="player-card"
-              onClick={() => handlePlayerClick(bet.player)}
-            >
-              <Row gutter={[16, 16]}>
+      <List
+          dataSource={groupedBets}
+          renderItem={(matchData) => {
+            const { matchDetailsResponse, players, status } = matchData;
+
+            return (
+              <Card
+                key={matchDetailsResponse?.matchId}
+                className="player-card"
+              >
                 {/* Match Details */}
                 <div style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
-                  <h2 className="match-name">{bet.matchName}</h2>
-                  <p className="auction-type">{bet.matchAction}</p>
+                  <h2 className="match-name">{matchDetailsResponse?.matchName}</h2>
+                  <p className="auction-type">{matchDetailsResponse?.matchAction}</p>
                 </div>
 
-                {/* Player Details */}
-                <Col span={24}>
-                  <Row gutter={[16, 16]} align="middle">
-                    <Col span={6}>
-                      <Avatar src={bet.player.playerImage} size={64} />
+                {/* Players for this match */}
+                {players.map((player) => (
+                  <Row
+                    key={player.playerId}
+                    gutter={[16, 16]}
+                    align="middle"
+                    className="player-row"
+                    onClick={() => handlePlayerClick(player)}
+                    style={{ cursor: "pointer", marginTop: "10px", borderTop: "1px solid #f0f0f0", paddingTop: "10px" }}
+                  >
+                    <Col span={4}>
+                      <Avatar src={player.playerImage} size={64} />
                     </Col>
-                    <Col span={12}>
-                      <h3 className="player-name">{bet.player.playerName}</h3>
-                      <p className="date">{bet.player.soldDate.split("T")[0]}</p>
+                    <Col span={14}>
+                      <h3 className="player-name">{player.playerName}</h3>
+                      <p className="date">{player.soldDate?.split("T")[0]}</p>
                     </Col>
                     <Col span={6} style={{ textAlign: "right" }}>
-                      <div className="amount">₹ {bet.player.soldPrice}</div>
-                      <div className={`status ${bet.status === "Loss" ? "loss" : "win"}`}>
-                        {bet.status}
+                      <div className="amount">₹ {player.soldPrice}</div>
+                      <div className={`status ${status === "Loss" ? "loss" : "win"}`}>
+                        {status}
                       </div>
                     </Col>
                   </Row>
-                </Col>
-              </Row>
-            </Card>
-          )}
+                ))}
+              </Card>
+            );
+          }}
           split={false}
           className="player-list"
         />

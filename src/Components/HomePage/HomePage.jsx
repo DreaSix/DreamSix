@@ -63,16 +63,15 @@ const HomePage = () => {
 
   const getAllMatches = () => {
     matchDetailsService
-      .getMatches()
+      .getAllMatches()
       .then((response) => {
         const currentDate = new Date();
         
-        // Filter matches where countdownEndTime is still valid
         const validMatches = response?.data?.filter((match) => {
           const matchEndTime = new Date(match.countdownEndTime);
-          matchEndTime.setDate(matchEndTime.getDate() + 1); // Shift by one day
+          matchEndTime.setDate(matchEndTime.getDate() + 1);
   
-          return matchEndTime > currentDate; // Display if still valid
+          return matchEndTime > currentDate;
         });
   
         setMatches(validMatches);

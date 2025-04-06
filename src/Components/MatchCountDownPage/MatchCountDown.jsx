@@ -16,6 +16,7 @@ const CountdownPage = () => {
     minutes: 0,
     seconds: 0,
   });
+  const [nextPlayers, setNextPlayers] = useState([]);
 
   useEffect(() => {
     if (matchId) {
@@ -82,6 +83,14 @@ const CountdownPage = () => {
 
         setPlayersTeam1(flattenedPlayers1);
         setPlayersTeam2(flattenedPlayers2);
+
+        const unsoldPlayers = response.data.flatMap((match) =>
+          Object.values(match?.playersDtoMap || {}).filter(
+            (player) => player?.status === "UNSOLD"
+          )
+        );
+
+        setNextPlayers(unsoldPlayers);
       })
       .catch((error) => {
         console.log("Error fetching player details:", error);
@@ -90,6 +99,8 @@ const CountdownPage = () => {
 
   const isBiddingInProgress =
     timeLeft.hours === 0 && timeLeft.minutes === 0 && timeLeft.seconds === 0;
+
+  const isBiddingAllowed = isBiddingInProgress && nextPlayers.leng;
 
   const handleImageClick = () => {
     navigate(`/user-auctionpage/${matchId}`);
@@ -113,14 +124,21 @@ const CountdownPage = () => {
             <div className="top-sixer">🔥 Top Sixer Bidding 🔥</div>
 
             {isBiddingInProgress ? (
-              <div className="bidding-in-progress">
-                <h2>🎯Bidding is LIVE!🎯</h2>
-                <p>Place your bids now and stay ahead in the game! 🚀</p>
+              isBiddingAllowed ? (
+                <div className="bidding-in-progress">
+                  <h2>🎯 Bidding is LIVE! 🎯</h2>
+                  <p>Place your bids now and stay ahead in the game! 🚀</p>
 
-                <Button onClick={handleImageClick} className="start-button">
-                  Enter Bidding Zone 🚀
-                </Button>
-              </div>
+                  <Button onClick={handleImageClick} className="start-button">
+                    Enter Bidding Zone 🚀
+                  </Button>
+                </div>
+              ) : (
+                <div className="bidding-in-progress">
+                  <h2>🛑 No More Players Available</h2>
+                  <p>Bidding has ended as all players are sold.</p>
+                </div>
+              )
             ) : (
               <div className="countdown-container">
                 <h4>⏳ Get Ready! Bidding Starts Soon</h4>

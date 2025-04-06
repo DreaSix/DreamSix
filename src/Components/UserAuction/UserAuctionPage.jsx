@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from "react";
 import "../UserAuction/UserAuctionPage.scss";
 import Footer from "../Footer/Footer";
-import { Badge, Button, Card } from "antd";
+import { Badge, Button, Card, Modal } from "antd";
 import ChatBox from "../Chatbox/Chatbox";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { matchDetailsService } from "../../Service/MatchDetailsService";
 import { userService } from "../../Service/UserService";
 import Cookies from "js-cookie";
 
 const USerAuctionPage = () => {
+  const navigate = useNavigate();
+
   const { matchId } = useParams();
   const [showNextPlayers, setShowNextPlayers] = useState(false);
   const [matchData, setMatchDetails] = useState(null);
   const [nextPlayers, setNextPlayers] = useState({});
   const [soldPlayers, setSoldPlayers] = useState({});
-  const [unSoldPlayers, setUnSoldPlayers] = useState({})
+  const [unSoldPlayers, setUnSoldPlayers] = useState({});
   const [selectedPlayer, setSelectedPlayer] = useState();
   const [currentBidId, setCurrentBidId] = useState();
+  const [biddingOverModal, setBiddingOverModal] = useState(false);
 
   const [userData, setUserData] = useState(0);
 
@@ -37,19 +40,16 @@ const USerAuctionPage = () => {
 
   useEffect(() => {
     let interval;
-  
-    if (!selectedPlayer) {
+
+    if (!selectedPlayer && !biddingOverModal) {
       interval = setInterval(() => {
         console.log("Fetching player details...");
         getPlayerDetailsByMatchId();
       }, 5000);
-    } else {
-      clearInterval(interval);
     }
-  
-    return () => clearInterval(interval);
-  }, [selectedPlayer]);
 
+    return () => clearInterval(interval);
+  }, [selectedPlayer, biddingOverModal]);
 
   useEffect(() => {
     if (matchId) {
@@ -95,7 +95,6 @@ const USerAuctionPage = () => {
           )
         );
 
-
         const soldPlayers = response.data.flatMap((match) =>
           Object.values(match?.playersDtoMap || {}).filter(
             (player) => player?.status === "SOLD"
@@ -108,10 +107,17 @@ const USerAuctionPage = () => {
           )
         );
 
+        if (nextPlayers.length === 0 && biddingPlayer.length === 0) {
+          setBiddingOverModal(true);
+          setSelectedPlayer(null);
+          setCurrentBidId(null);
+          return;
+        }
+
         setCurrentBidId(biddingPlayer[0]?.bidId);
         setSelectedPlayer(biddingPlayer[0]);
-        
-        setUnSoldPlayers(unSoldPlayers)
+
+        setUnSoldPlayers(unSoldPlayers);
         setNextPlayers(nextPlayers);
         setSoldPlayers(soldPlayers);
       })
@@ -120,127 +126,154 @@ const USerAuctionPage = () => {
       });
   };
 
+  const handleGoToPlayersList = () => {
+    navigate(`/players-final-list/${matchId}`); // Change the path as per your route
+  };
+
   return (
     <main>
-    <div className="player-page">
-      <div className="header">
-        <div className="header-left">
-          <img
-            src={matchData?.matchImage}
-            alt="team logo"
-            className="team-logo"
-          />
-          {/* <div>
+      <div className="player-page">
+        <div className="header">
+          <div className="header-left">
+            <img
+              src={matchData?.matchImage}
+              alt="team logo"
+              className="team-logo"
+            />
+            {/* <div>
             <h2>Narasimha</h2>
             <p className="status">Online</p>
           </div> */}
+          </div>
+          <button className="top-sixer-btn">Top Sixer</button>
+          <button className="top-sixer-btn">
+            {userData?.balance ? userData?.balance : 0}
+          </button>
         </div>
-        <button className="top-sixer-btn">Top Sixer</button>
-        <button className="top-sixer-btn">
-          {userData?.balance ? userData?.balance : 0}
-        </button>
-      </div>
 
-      <div className="players-section">
-        <Button
-          className="dropdown-btn"
-          onClick={() => setShowNextPlayers(!showNextPlayers)}
+        <div className="players-section">
+          <Button
+            className="dropdown-btn"
+            onClick={() => setShowNextPlayers(!showNextPlayers)}
+          >
+            {showNextPlayers ? "Hide Players" : "Players List"}
+          </Button>
+
+          {showNextPlayers && (
+            <div className="next-players">
+              <h3>Next Players</h3>
+              <div className="players">
+                {nextPlayers?.map((player) => (
+                  <div className="player-card" key={player.playerName}>
+                    <img
+                      src={player?.playerImage}
+                      alt={player.playerName}
+                      className="player-img"
+                    />
+                    <div className="player-name">{player.playerName}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="players-section">
+          {showNextPlayers && (
+            <div className="next-players">
+              <h3>Sold Players</h3>
+              <div className="players">
+                {soldPlayers?.map((player) => (
+                  <div className="player-card" key={player.playerName}>
+                    <img
+                      src={player?.playerImage}
+                      alt={player.playerName}
+                      className="player-img"
+                    />
+                    <div className="player-name">{player.playerName}</div>
+                    <div>{player?.soldPrice}</div>
+                    <div>Buyer: {player?.userResponseVO?.name}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="players-section">
+          {showNextPlayers && (
+            <div className="next-players">
+              <h3>Un Sold Players</h3>
+              <div className="players">
+                {unSoldPlayers?.map((player) => (
+                  <div className="player-card" key={player.playerName}>
+                    <img
+                      src={player?.playerImage}
+                      alt={player.playerName}
+                      className="player-img"
+                    />
+                    <div className="player-name">{player.playerName}</div>
+                    <div>{player?.soldPrice}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {selectedPlayer && (
+          <div className="player-info">
+            <img
+              src={selectedPlayer?.playerImage}
+              alt={selectedPlayer?.playerName}
+              className="selected-player-img"
+            />
+            <div className="player-details">
+              <span className="selected-player-name">
+                {selectedPlayer?.playerName}
+              </span>
+              <span className="starting-price">
+                Starting Price: <strong>Rs. {selectedPlayer?.basePrice}</strong>
+              </span>
+            </div>
+          </div>
+        )}
+
+        <ChatBox
+          currentBidId={currentBidId}
+          selectedPlayer={selectedPlayer}
+          userData={userData}
+          matchId={matchId}
+          getPlayerDetailsByMatchId={getPlayerDetailsByMatchId}
+          setSelectedPlayer={setSelectedPlayer}
+          getUserDetails={getUserDetails}
+        />
+
+        <Modal
+          open={biddingOverModal}
+          // onCancel={onClose}
+          footer={null}
+          className="biddingOverModal"
         >
-          {showNextPlayers ? "Hide Players" : "Players List"}
-        </Button>
-
-        {showNextPlayers && (
-          <div className="next-players">
-            <h3>Next Players</h3>
-            <div className="players">
-              {nextPlayers?.map((player) => (
-                <div className="player-card" key={player.playerName}>
-                  <img
-                    src={player?.playerImage}
-                    alt={player.playerName}
-                    className="player-img"
-                  />
-                  <div className="player-name">{player.playerName}</div>
-                </div>
-              ))}
+          <Card className="biddingCard">
+            <div className="stampContainer">
+              <div className="biddingOverStamp">BIDDING OVER</div>
             </div>
-          </div>
-        )}
+            <p className="finalListMessage">
+              ✅ Go to <strong>Players List</strong> to see the final list of
+              bid players!
+            </p>
+            <Button
+              className="playersListButton"
+              onClick={handleGoToPlayersList}
+            >
+              👉 Click here to go to Players List
+            </Button>
+          </Card>
+        </Modal>
+
+        <Footer />
       </div>
-
-      <div className="players-section">
-        {showNextPlayers && (
-          <div className="next-players">
-            <h3>Sold Players</h3>
-            <div className="players">
-              {soldPlayers?.map((player) => (
-                <div className="player-card" key={player.playerName}>
-                  <img
-                    src={player?.playerImage}
-                    alt={player.playerName}
-                    className="player-img"
-                  />
-                  <div className="player-name">{player.playerName}</div>
-                  <div>{player?.soldPrice}</div>
-                  <div>Buyer: {player?.userResponseVO?.name}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-
-      <div className="players-section">
-        {showNextPlayers && (
-          <div className="next-players">
-            <h3>Un Sold Players</h3>
-            <div className="players">
-              {unSoldPlayers?.map((player) => (
-                <div className="player-card" key={player.playerName}>
-                  <img
-                    src={player?.playerImage}
-                    alt={player.playerName}
-                    className="player-img"
-                  />
-                  <div className="player-name">{player.playerName}</div>
-                  <div>{player?.soldPrice}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-
-      {selectedPlayer && (
-        <div className="player-info">
-          <img
-            src={selectedPlayer?.playerImage}
-            alt={selectedPlayer?.playerName}
-            className="selected-player-img"
-          />
-          <div className="player-details">
-            <span className="selected-player-name">
-              {selectedPlayer?.playerName}
-            </span>
-            <span className="starting-price">
-              Starting Price: <strong>Rs. {selectedPlayer?.basePrice}</strong>
-            </span>
-          </div>
-        </div>
-      )}
-
-      <ChatBox
-        currentBidId={currentBidId}
-        selectedPlayer={selectedPlayer}
-        userData={userData}
-        matchId={matchId}
-        getPlayerDetailsByMatchId={getPlayerDetailsByMatchId}
-        setSelectedPlayer={setSelectedPlayer}
-        getUserDetails={getUserDetails}
-      />
-
-      <Footer />
-    </div>
     </main>
   );
 };

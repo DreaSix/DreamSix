@@ -15,6 +15,7 @@ const ChatBox = ({
   matchId,
   getPlayerDetailsByMatchId,
   setSelectedPlayer,
+  getUserDetails
 }) => {
   const navigate = useNavigate();
   const [messages, setMessages] = useState([]);
@@ -140,6 +141,7 @@ const ChatBox = ({
       setVisible(false);
       getPlayerDetailsByMatchId();
       setSelectedPlayer();
+      getUserDetails()
       setMessages([]);
     } else if (lastMessage === "UnSold") {
       setMessages((prevMessages) =>
@@ -308,7 +310,7 @@ const ChatBox = ({
         <Card className="playerCard">
           <div className="cardContent">
             <img
-              src={`data:image/jpeg;base64,${selectedPlayer?.playerImage}`}
+              src={selectedPlayer?.playerImage}
               alt={selectedPlayer?.playerName}
               className="playeImage"
             />
@@ -337,7 +339,7 @@ const ChatBox = ({
         <Card className="playerCard">
           <div className="cardContent">
             <img
-              src={`data:image/jpeg;base64,${selectedPlayer?.playerImage}`}
+              src={selectedPlayer?.playerImage}
               alt={selectedPlayer?.playerName}
               className="playeImage"
             />
