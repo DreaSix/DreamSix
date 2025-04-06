@@ -100,8 +100,6 @@ const CountdownPage = () => {
   const isBiddingInProgress =
     timeLeft.hours === 0 && timeLeft.minutes === 0 && timeLeft.seconds === 0;
 
-  const isBiddingAllowed = isBiddingInProgress && nextPlayers.leng;
-
   const handleImageClick = () => {
     navigate(`/user-auctionpage/${matchId}`);
   };
@@ -124,21 +122,14 @@ const CountdownPage = () => {
             <div className="top-sixer">🔥 Top Sixer Bidding 🔥</div>
 
             {isBiddingInProgress ? (
-              isBiddingAllowed ? (
-                <div className="bidding-in-progress">
-                  <h2>🎯 Bidding is LIVE! 🎯</h2>
-                  <p>Place your bids now and stay ahead in the game! 🚀</p>
+              <div className="bidding-in-progress">
+                <h2>🎯Bidding is LIVE!🎯</h2>
+                <p>Place your bids now and stay ahead in the game! 🚀</p>
 
-                  <Button onClick={handleImageClick} className="start-button">
-                    Enter Bidding Zone 🚀
-                  </Button>
-                </div>
-              ) : (
-                <div className="bidding-in-progress">
-                  <h2>🛑 No More Players Available</h2>
-                  <p>Bidding has ended as all players are sold.</p>
-                </div>
-              )
+                <Button onClick={handleImageClick} className="start-button">
+                  Enter Bidding Zone 🚀
+                </Button>
+              </div>
             ) : (
               <div className="countdown-container">
                 <h4>⏳ Get Ready! Bidding Starts Soon</h4>

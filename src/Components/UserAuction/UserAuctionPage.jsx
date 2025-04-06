@@ -252,19 +252,79 @@ const USerAuctionPage = () => {
         <Modal
           open={biddingOverModal}
           // onCancel={onClose}
+          closable={false}
           footer={null}
           className="biddingOverModal"
+          style={{
+            borderRadius: "12px",
+            backgroundColor: "#1C3A56",
+            textAlign: "center",
+            padding: "20px",
+          }}
         >
-          <Card className="biddingCard">
-            <div className="stampContainer">
-              <div className="biddingOverStamp">BIDDING OVER</div>
+          <Card
+            className="biddingCard"
+            style={{
+              backgroundColor: "#1C3A56",
+              borderRadius: "12px",
+              padding: "20px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textAlign: "center",
+            }}
+          >
+            <div
+              className="stampContainer"
+              style={{
+                position: "relative",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                marginBottom: "16px",
+              }}
+            >
+              <div
+                className="biddingOverStamp"
+                style={{
+                  background: "rgba(255, 0, 0, 0.8)",
+                  color: "white",
+                  fontWeight: "bold",
+                  fontSize: "20px",
+                  padding: "10px 16px",
+                  borderRadius: "8px",
+                  textTransform: "uppercase",
+                  boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
+                }}
+              >
+                BIDDING OVER
+              </div>
             </div>
-            <p className="finalListMessage">
+            <p
+              className="finalListMessage"
+              style={{
+                color: "#ccee22",
+                fontSize: "16px",
+                fontWeight: "bold",
+                marginBottom: "20px",
+              }}
+            >
               ✅ Go to <strong>Players List</strong> to see the final list of
               bid players!
             </p>
             <Button
               className="playersListButton"
+              style={{
+                backgroundColor: "#f4c430",
+                color: "#1C3A56",
+                fontSize: "16px",
+                fontWeight: "bold",
+                padding: "10px 16px",
+                borderRadius: "8px",
+                border: "none",
+                cursor: "pointer",
+                transition: "all 0.3s ease-in-out",
+              }}
               onClick={handleGoToPlayersList}
             >
               👉 Click here to go to Players List
